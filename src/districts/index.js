@@ -68,7 +68,7 @@ const Districts = props => {
                             <List>
                                 { districts.map((i, index) => (
                                     <ListItem button key={index} onClick={() => {
-                                        props.history.push(`/app/restaurants?districtId=${i.id}`)
+                                        props.history.push(`/app/restaurants?districtId=${i.district.id}`)
                                     }}>
                                         <ListItemText>
                                             { i.district.name || 'Unknown' }

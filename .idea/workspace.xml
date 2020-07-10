@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4c1cc787-1446-497d-a874-fac755bc5a71" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/restaurants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/restaurants.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/districts/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/districts/index.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -91,7 +90,7 @@
       <workItem from="1594300457586" duration="1382000" />
       <workItem from="1594351783156" duration="4232000" />
       <workItem from="1594367080410" duration="10335000" />
-      <workItem from="1594397922770" duration="8224000" />
+      <workItem from="1594397922770" duration="8350000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <created>1593888871329</created>
@@ -121,7 +120,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594405942775</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="register url">
+      <created>1594407603693</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1594407603693</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
