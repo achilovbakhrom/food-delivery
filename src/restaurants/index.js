@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { withRouter } from 'react-router-dom';
-import { Grid, Typography, GridList, GridListTile, GridListTileBar, IconButton, withWidth, isWidthUp } from '@material-ui/core';
+import { Grid, Typography, GridList, GridListTile, GridListTileBar, IconButton, withWidth, isWidthUp, CircularProgress, Button, Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
+import {fetchRestaurants} from "../api/restaurants";
+const queryString = require('query-string');
 
 const useStyles = makeStyles((theme) => ({
     title: {
@@ -19,24 +21,61 @@ const useStyles = makeStyles((theme) => ({
         width: '300px',
         height: '300px'
     },
+
     gridItem: {
         display: 'flex',
         flexFlow: 'row'
 
     }
 }));
+const size = 40;
 
 const Restaurants = props => {
 
     const classes = useStyles();
 
+    const [restaurants, setRestaurants] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [page, setPage] = useState(0);
+
+    const [isEnd, setIsEnd] = useState(false);
+
+    useEffect(() => {
+        const parsed = queryString.parse(props.location.search);
+        setIsLoading(true);
+        fetchRestaurants({regionId: parsed ? parsed["regionId"] : undefined, districtId: parsed ? parsed["districtId"] : undefined, size, page})
+            .then(response => {
+                // console.log(response.data)
+                setIsLoading(false);
+                setRestaurants([...restaurants, ...response.data.content]);
+                setIsEnd(response.data.content.length < size)
+            })
+            .catch(error => {
+                setIsLoading(false);
+                props.history.push('/app/address')
+            })
+    }, []);
+
+
+    useEffect(() => {
+        const parsed = queryString.parse(props.location.search);
+        setIsLoading(true);
+        fetchRestaurants({regionId: parsed ? parsed["regionId"] : undefined, districtId: parsed ? parsed["districtId"] : undefined, size, page})
+            .then(response => {
+                setIsLoading(false);
+                setRestaurants([...restaurants, ...response.data.content]);
+                setIsEnd(response.data.content.length < size)
+            })
+            .catch(error => {
+                setIsLoading(false);
+                props.history.push('/app/address')
+            })
+    }, [page]);
+
     const getGridListCols = () => {
         // if (isWidthUp('lg', props.width)) {
         //     return 3;
         // }
-
-
-
         if (isWidthUp('md', props.width)) {
             return 2;
         }
@@ -44,33 +83,55 @@ const Restaurants = props => {
         if (isWidthUp('xs', props.width)) {
             return 1;
         }
-
         return 1;
     };
 
     return (
-        <Grid container >
+        <Grid container justify='center'>
             <Grid item className={classes.title} xs={12}>
                 <div> Рестораны </div>
             </Grid>
-            <Grid item>
-                <GridList spacing={15} cellHeight={200} cols={getGridListCols()}>
-                    {
-                        new Array(20).fill(0).map((item, index) => (
-                            <ListItem key={index} cols={1} style={{pointer: 'cursor'}} onClick={() => {
-                                props.history.push('/app/menu')
-                            }}>
-                                <ListItemIcon>
-                                    <img src={require("../assets/img/burgers.jpg")} alt="burger" width={250} height={200} style={{borderBottomLeftRadius: 10, borderTopLeftRadius: 10}} />
-                                </ListItemIcon>
-                                <div style={{height: '100%', backgroundColor: 'white', flexGrow: 1, borderTopRightRadius: 10, borderBottomRightRadius: 10, padding: 20}}>
-                                    <Typography variant='inherit' style={{color: '#555', fontSize: 20}}><strong>Название: </strong> Ресторан {index}</Typography> <br />
-                                    <Typography variant='inherit' style={{color: '#555', fontSize: 20}}><strong>Адрес: </strong>Адрес {index}</Typography> <br />
-                                </div>
-                            </ListItem>
-                        ))
-                    }
-                </GridList>
+            <Grid item xs={12}>
+                {
+                    isLoading ? undefined : (
+                        <GridList spacing={15} cellHeight={200} cols={getGridListCols()}>
+                            {
+                                restaurants && restaurants.length ? restaurants.map((item, index) => (
+                                    <ListItem key={index} cols={1} style={{pointer: 'cursor'}} onClick={() => {
+                                        props.history.push(`/app/categories?restaurantId=${item.id}`)
+                                    }}>
+                                        <ListItemIcon>
+                                            <img src={require("../assets/img/burgers.jpg")} alt="burger" width={250} height={200} style={{borderBottomLeftRadius: 10, borderTopLeftRadius: 10}} />
+                                        </ListItemIcon>
+                                        <div style={{height: '100%', backgroundColor: 'white', flexGrow: 1, borderTopRightRadius: 10, borderBottomRightRadius: 10, padding: 20}}>
+                                            <Typography variant='inherit' style={{color: '#555', fontSize: 20}}><strong>Название: </strong> {item.name}</Typography> <br />
+                                            {/*<Typography variant='inherit' style={{color: '#555', fontSize: 20}}><strong>Адрес: </strong>Адрес {index}</Typography> <br />*/}
+                                        </div>
+                                    </ListItem>
+                                )) : (
+                                    <Grid container>
+                                        <Grid xs={12}>
+                                            <Paper style={{ width: '100%', padding: 20, textAlign: 'center', color: '#555', backgroundColor: 'white'}}>
+                                                Нет ресторанов в этом регионе!
+                                            </Paper>
+                                        </Grid>
+                                    </Grid>
+                                )
+                            }
+                        </GridList>
+                    )
+                }
+            </Grid>
+            <Grid container justify="center">
+                {isEnd ? undefined : (
+                    isLoading ? (
+                        <CircularProgress color="primary" variant="indeterminate" />
+                    ) : (
+                        <Button variant="contained" fullWidth onClick={() => {
+                            setPage(page + 1)
+                        }}> Показать еще </Button>
+                    )
+                )}
             </Grid>
         </Grid>
     )

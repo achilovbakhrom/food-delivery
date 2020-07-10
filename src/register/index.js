@@ -1,8 +1,13 @@
-import React, { useState } from "react";
-import { Grid, TextField, Button, FormControl, InputLabel, Select, MenuItem } from "@material-ui/core";
+import React, { useState, useEffect } from "react";
+import { Grid, TextField, Button, FormControl, InputLabel, OutlinedInput, IconButton, InputAdornment } from "@material-ui/core";
+import { Autocomplete } from '@material-ui/lab';
 import { makeStyles } from '@material-ui/core/styles';
 import { green } from "@material-ui/core/colors";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { Link } from 'react-router-dom';
+import {fetchCountries, fetchCurrencies, login, register} from "../api/auth";
+import Cookie from 'js-cookie';
+import { store } from 'react-notifications-component';
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -28,13 +33,56 @@ const useStyles = makeStyles(() => ({
 const Register = () => {
 
     const [phonePrefix, setPhonePrefix] = useState(0);
+    const [countryId, setCountryId] = useState();
+    const [countryList, setCountryList] = useState([]);
+    const [currencyList, setCurrencyList] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [phoneNumber, setPhoneNumber] = useState();
+    const [currencyId, setCurrencyId] = useState();
+    const [showPassword, setShowPassword] = useState(false);
+    const [password, setPassword] = useState();
+    const [firstName, setFirstName] = useState();
+    const [lastName, setLastName] = useState();
+    const [email, setEmail] = useState();
+    const [username, setUsername] = useState();
+
+    useEffect(() => {
+
+        setIsLoading(true);
+
+        login({username: 'admin', password: 'admin'})
+            .then(response => {
+                let token = response.data["id_token"];
+                Cookie.set('token', token);
+                setIsLoading(false);
+                fetchCountries({page: 0, size: 10000})
+                    .then(response => {
+                        setCountryList(response.data);
+                    });
+                fetchCurrencies({page: 0, size: 10000})
+                    .then(response => {
+                        setCurrencyList(response.data)
+                    });
+
+            })
+
+
+    }, []);
 
     const classes = useStyles();
+
+    const validateEmail = (email) => {
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    };
+
+    const isActionDisabled = () => {
+        return isLoading || !firstName || !lastName || !email || !validateEmail(email) || !phonePrefix || !currencyId || !username || !password || password.length <= 5
+    };
 
     return (
         <Grid
             container
-
             className={classes.root}
             alignItems='center'
             justify='center'
@@ -44,54 +92,159 @@ const Register = () => {
                     variant="outlined"
                     label="Имя"
                     fullWidth
+                    value={firstName}
+                    onChange={(e) => { setFirstName(e.target.value) }}
                 />
                 <TextField
                     variant="outlined"
-
                     label="Фамилия"
                     fullWidth
+                    value={lastName}
                     className={classes.mt20}
+                    onChange={(e) => { setLastName(e.target.value) }}
+                />
+                <TextField
+                    placeholder="E-mail"
+                    variant="outlined"
+                    fullWidth
+                    value={email}
+                    className={classes.mt20}
+                    onChange={(e) => { setEmail(e.target.value) }}
                 />
 
                 <Grid container className={classes.phone} direction="row">
-                    <Grid item xs={3}>
-                        <FormControl variant="outlined" fullWidth>
-                            <InputLabel id="demo-simple-select-outlined-label">Phone</InputLabel>
-                            <Select
-                                labelId="demo-simple-select-outlined-label"
-                                id="demo-simple-select-outlined"
-                                value={phonePrefix}
-                                onChange={(e) => { setPhonePrefix(e.target.value) }}
-                                label="Age"
-                            >
-                                <MenuItem value={0}>+1</MenuItem>
-                                <MenuItem value={1}>+998</MenuItem>
-                                <MenuItem value={2}>+850</MenuItem>
-                            </Select>
-                        </FormControl>
+                    <Grid item xs={4}>
+
+                        <Autocomplete
+                            id="combo-box-demo"
+                            options={countryList.map(c => ({
+                                title: `+${c.telCode} (${c.code})`,
+                                value: c.id
+                            }))}
+                            getOptionLabel={(option) => option.title}
+                            onChange={(event, newInputValue) => {
+                                let f = countryList.find(c => c.id === newInputValue.value);
+                                setCountryId(newInputValue.value);
+                                setPhonePrefix(f.telCode);
+                            }}
+                            fullWidth
+                            renderInput={(params) => <TextField
+                                {...params}
+                                label="Код"
+                                variant="outlined"
+
+                            />}
+                        />
                     </Grid>
-                    <Grid item xs={9} style={{paddingLeft: 10}}>
+                    <Grid item xs={8} style={{paddingLeft: 10}}>
                         <TextField
                             placeholder="Phone Number"
                             variant="outlined"
                             fullWidth
+                            value={phoneNumber}
+                            onChange={(e) => {
+                                let value = e.target.value;
+                                let pn = isNaN(value) ? "" : value;
+                                setPhoneNumber(pn);
+                            }}
                         />
                     </Grid>
                 </Grid>
 
-                <Grid container className={classes.phone} direction="row">
-                    <TextField
-                        placeholder="E-mail"
-                        variant="outlined"
+                <Grid container className={classes.mt20} direction="row">
+                    <Autocomplete
+                        id="combo-box-currency"
+                        options={currencyList.map(c => ({
+                            title: `${c.symbol} (${c.code}, ${c.name})`,
+                            value: c.id
+                        }))}
+                        getOptionLabel={(option) => option.title}
+                        onChange={(event, newInputValue) => {
+                            setCurrencyId(newInputValue.value);
+                        }}
                         fullWidth
+                        renderInput={(params) => <TextField
+                            {...params}
+                            label="Валюта"
+                            variant="outlined"
+
+                        />}
                     />
                 </Grid>
+                <TextField
+                    placeholder="Логин"
+                    variant="outlined"
+                    fullWidth
+                    className={classes.mt20}
+                    onChange={(event) => { setUsername(event.target.value) }}
+                />
+
+                <FormControl className={classes.mt20} variant="outlined" fullWidth>
+                    <InputLabel htmlFor="outlined-adornment-password">Пароль</InputLabel>
+                    <OutlinedInput
+                        id="outlined-adornment-password"
+                        type={showPassword ? 'text' : 'password'}
+                        value={password}
+                        fullWidth
+                        onChange={(e) => { setPassword(e.target.value) }}
+                        endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={() => {
+                                        setShowPassword(!showPassword)
+                                    }}
+                                    onMouseDown={(event) => {event.preventDefault();}}
+                                    edge="end"
+                                >
+                                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                                </IconButton>
+                            </InputAdornment>
+                        }
+                        labelWidth={70}
+                    />
+                </FormControl>
+
 
                 <Button
                     variant="contained"
                     fullWidth
                     className={classes.button}
-                > Регистрация </Button>
+                    disabled={isActionDisabled()}
+                    onClick={() => {
+                        setIsLoading(true)
+                        register({
+                            countryId,
+                            currencyId,
+                            email,
+                            firstName,
+                            lastName,
+                            password,
+                            phone: `${phonePrefix}${phoneNumber}`,
+                            username
+                        })
+                            .then(response => {
+                                setIsLoading(false);
+                                window.location = "/login"
+                            })
+                            .catch(error => {
+                                setIsLoading(false);
+                                store.addNotification({
+                                    title: "Ошибка при регистрации!",
+                                    message: `${error}`,
+                                    type: "danger",
+                                    insert: "top",
+                                    container: "top-right",
+                                    animationIn: ["animated", "fadeIn"],
+                                    animationOut: ["animated", "fadeOut"],
+                                    dismiss: {
+                                        duration: 5000,
+                                        onScreen: true
+                                    }
+                                });
+                            })
+                    }}
+                > {isLoading ? 'Идет загрузка...' : 'Регистрация'} </Button>
 
                 <div style={{marginTop: 30, color: 'white', textAlign: 'center'}}>
                     Есть аккаунт? <Link to="/login">Войти</Link>

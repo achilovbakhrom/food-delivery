@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -15,14 +15,18 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import Badge from "@material-ui/core/Badge";
 import { Switch, Route, withRouter } from 'react-router-dom';
 import { Restaurant, LocationCity, Memory, Contacts, Language, Person, ExitToApp, ShoppingBasket } from '@material-ui/icons';
 import Restaurants from "../restaurants";
 import Categories from '../categories';
 import Menu from '../menu';
-import Address from '../addresses';
+import Address from '../regions';
 import Basket from '../basket';
 import Payment from '../payment';
+import District from '../districts';
+import useBus from 'use-bus';
+import Cookies from 'js-cookie';
 
 const drawerWidth = 240;
 
@@ -90,6 +94,8 @@ const Main = props => {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = useState(false);
+    const [count, setCount] = useState(0);
+    const [price, setPrice] = useState(0);
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -98,6 +104,32 @@ const Main = props => {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
+    useEffect(() => {
+        let orderString = Cookies.get('orders') || '[]';
+        let orders = JSON.parse(orderString);
+        let counter = 0;
+        let acc = 0;
+        orders.forEach(o => { if (o.count) {
+            acc = acc + parseFloat(o.count)*parseFloat(o.food.price);
+            counter++
+        } });
+        setCount(counter);
+        setPrice(acc);
+    }, []);
+
+    useBus('order_changed', () => {
+        let orderString = Cookies.get('orders') || '[]';
+        let orders = JSON.parse(orderString);
+        let counter = 0;
+        let acc = 0;
+        orders.forEach(o => { if (o.count) {
+            acc = acc + parseFloat(o.count)*parseFloat(o.food.price);
+            counter++
+        } });
+        setCount(counter);
+        setPrice(acc);
+    }, [count]);
 
     return (
         <div className={classes.root}>
@@ -126,9 +158,33 @@ const Main = props => {
                     >
                         Уз Шеф
                     </Typography>
-                    <IconButton onClick={() => {
-                        props.history.push('/app/basket')
-                    }}><ShoppingBasket /></IconButton>
+                    {
+                        price > 0 ? (
+                            <Typography
+                                variant="h6"
+                                noWrap
+                                color="inherit" style={{color: 'white', marginRight: 10}}
+
+                            >
+                                {price}$
+                            </Typography>
+                        ) : undefined
+
+                    }
+                    { count ? (
+                        <IconButton onClick={() => {
+                            props.history.push('/app/basket')
+                        }}>
+                            <Badge badgeContent={count} color="secondary">
+                                <ShoppingBasket />
+                            </Badge>
+                        </IconButton>
+
+                    ) : (
+                        <IconButton onClick={() => {
+                            props.history.push('/app/basket')
+                        }}><ShoppingBasket /></IconButton>
+                    )}
 
                 </Toolbar>
             </AppBar>
@@ -158,7 +214,7 @@ const Main = props => {
                         {name: 'Профиль', icon: <Person />},
                         {name: 'Выйти', icon: <ExitToApp />}].map((obj, index) => (
                         <ListItem button key={obj.name} onClick={() => {
-                            setOpen(false)
+                            setOpen(false);
                             switch (index) {
                                 case 0:
                                     props.history.push('/app/address');
@@ -173,9 +229,13 @@ const Main = props => {
                                 case 4:
                                     break;
                                 case 5:
+                                    Cookies.remove('token');
+                                    Cookies.remove('orders');
                                     props.history.push('/login');
                                     break;
                                 case 6:
+                                    Cookies.remove('token');
+                                    Cookies.remove('orders');
                                     props.history.push('/login');
                                     break;
                                 default:
@@ -191,6 +251,7 @@ const Main = props => {
             <main className={classes.content}>
                 <Switch>
                     <Route path="/app/address" component={Address}/>
+                    <Route path="/app/districts" component={District}/>
                     <Route path="/app/restaurants" component={Restaurants}/>
                     <Route path="/app/categories" component={Categories}/>
                     <Route path="/app/menu" component={Menu}/>

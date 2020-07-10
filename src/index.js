@@ -6,7 +6,6 @@ import * as serviceWorker from './serviceWorker';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import {green, indigo} from "@material-ui/core/colors";
 import { BrowserRouter } from 'react-router-dom';
-import { createBrowserHistory } from 'history';
 
 const theme = createMuiTheme({
     palette: {

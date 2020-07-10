@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
-import {Button, Grid, GridList, Typography, ListItem, ListItemIcon, isWidthUp} from '@material-ui/core';
+import {Button, Grid, GridList, Typography, ListItem, ListItemIcon, isWidthUp, Paper} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import {green} from "@material-ui/core/colors";
+import Cookies from 'js-cookie';
+import {dispatch} from "use-bus";
 
 const useStyles = makeStyles((theme) => ({
     title: {
@@ -33,6 +35,14 @@ const useStyles = makeStyles((theme) => ({
 const Basket = props => {
 
     const classes = useStyles();
+    const [foods, setFoods] = useState([]);
+
+    useEffect(() => {
+        let orderString = Cookies.get('orders') || '[]';
+        let orders = JSON.parse(orderString);
+        setFoods(orders);
+
+    }, []);
 
     const getGridListCols = () => {
         if (isWidthUp('md', props.width)) {
@@ -50,10 +60,13 @@ const Basket = props => {
     return (
         <Grid container>
             <Grid item xs={12} className={classes.title}> Мои заказы - Корзина </Grid>
+            <Grid container className={classes.footer} justify="flex-end">
+                Общая сумма:&nbsp;<strong style={{color: green.A700, fontSize: 32}}>{ foods.reduce((acc, o) => acc + parseFloat(o.count)*parseFloat(o.food.price), 0) } $</strong>&nbsp;
+            </Grid>
             <Grid item xs={12}>
                 <GridList spacing={15} cellHeight={200} cols={getGridListCols()}>
                     {
-                        new Array(20).fill(0).map((item, index) => (
+                        foods.length ? foods.map((item, index) => (
                             <ListItem key={index} cols={1} >
                                 <ListItemIcon>
                                     <img
@@ -96,24 +109,76 @@ const Basket = props => {
 
                                 }}>
                                     <div style={{flexGrow: 1}}>
-                                        <Typography variant='inherit' style={{color: 'white', fontSize: 20}}><strong>ОШ</strong></Typography> <br />
-                                        <Typography variant='inherit' style={{fontSize: 24, color: green.A700, marginTop: 30}}><strong>35 000 сум</strong></Typography> <br />
+                                        <Typography variant='inherit' style={{color: 'white', fontSize: 20}}><strong>{item.food.name}</strong></Typography> <br />
+                                        <Typography variant='inherit' style={{fontSize: 24, color: green.A700, marginTop: 30}}><strong>{item.food.price}$</strong></Typography> <br />
                                     </div>
                                     <div style={{display: 'flex', flexFlow: 'column', width: 50, alignItems: 'center'}}>
-                                        <Button variant='outlined' color="primary" style={{fontSize: 25}}> + </Button>
-                                        <div style={{flexGrow: 1, display: 'flex', alignItems: 'center', fontSize: 25, fontWeight: 'bold'}}>0</div>
-                                        <Button variant='outlined' color="secondary" style={{fontSize: 25}}> - </Button>
+                                        <Button
+                                            variant='outlined'
+                                            color="primary"
+                                            style={{fontSize: 25}}
+                                            onClick={() => {
+                                                foods.forEach((i) => {
+                                                    if (i.food.id === item.food.id) {
+                                                        i.count = i.count + 1;
+                                                    }
+                                                });
+                                                Cookies.set('orders', foods);
+                                                setFoods([...foods]);
+                                                dispatch('order_changed');
+                                            }}
+                                        > + </Button>
+                                        <div style={{flexGrow: 1, display: 'flex', alignItems: 'center', fontSize: 25, fontWeight: 'bold'}}>{item.count}</div>
+                                        <Button
+                                            variant='outlined'
+                                            color="secondary"
+                                            style={{fontSize: 25}}
+                                            onClick={() => {
+                                                foods.forEach((i, index) => {
+                                                    if (i.food.id === item.food.id) {
+                                                        if (i.count > 1) {
+                                                            i.count = i.count - 1;
+                                                        } else {
+                                                            foods.splice(index, 1);
+                                                        }
+                                                    }
+                                                });
+                                                Cookies.set('orders', foods);
+                                                setFoods([...foods]);
+                                                dispatch('order_changed');
+                                            }}
+
+                                        > - </Button>
                                     </div>
                                 </div>
                             </ListItem>
-                        ))
+                        )) : (
+                            <Grid container>
+                                <Paper style={{width: '100%', padding: 20, textAlign: 'center', backgroundColor: 'white', color: '#555'}}>
+                                    Список пуст!
+                                </Paper>
+                            </Grid>
+                        )
                     }
                 </GridList>
+                { foods.length ? (
+                    <Grid container style={{marginTop: 20, height: 50}}>
+                        <Button
+                            color="primary"
+                            variant="contained"
+                            fullWidth
+                            style={{color: 'white', fontWeight: 'bold'}}
+                            onClick={() => {
+                                props.history.push('/app/payment')
+                            }}
+                        >
+                            Перейти к оплате ({foods.reduce((acc, o) => acc + parseFloat(o.count)*parseFloat(o.food.price), 0)}$)
+                        </Button>
+                    </Grid>
+                ) : undefined }
 
             </Grid>
-            <Grid container className={classes.footer} justify="flex-end">
-                Общая сумма:&nbsp;<strong>250 000</strong>&nbsp;сум
-            </Grid>
+
         </Grid>
     )
 };

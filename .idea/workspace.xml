@@ -2,26 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4c1cc787-1446-497d-a874-fac755bc5a71" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/addresses/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/img/burgers.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/img/food-delivery-bg.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/basket/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/categories/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/login/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/menu/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/payment/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/register/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/restaurants/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/api/auth.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/api/instance.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/api/restaurants.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/img/american_express.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/img/mastercard.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/img/visa.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/districts/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/regions/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/addresses/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/basket/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/basket/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/categories/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/categories/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/login/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/login/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/menu/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/menu/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/payment/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/payment/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/register/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/register/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/restaurants/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/restaurants/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -102,8 +103,23 @@
       <workItem from="1593672701812" duration="9753000" />
       <workItem from="1593697787303" duration="251000" />
       <workItem from="1593751565202" duration="548000" />
-      <workItem from="1593886091356" duration="375000" />
+      <workItem from="1593886091356" duration="1361000" />
+      <workItem from="1593928897292" duration="560000" />
+      <workItem from="1594013161548" duration="481000" />
+      <workItem from="1594227802393" duration="2260000" />
+      <workItem from="1594300457586" duration="1382000" />
+      <workItem from="1594351783156" duration="4232000" />
+      <workItem from="1594367080410" duration="10335000" />
+      <workItem from="1594397922770" duration="6864000" />
     </task>
+    <task id="LOCAL-00001" summary="init commit">
+      <created>1593888871329</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1593888871329</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -121,5 +137,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="init commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="init commit" />
   </component>
 </project>
