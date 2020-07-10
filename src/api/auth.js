@@ -4,15 +4,15 @@
 import instance from './instance';
 
 export const fetchCountries = (params) => {
-    return instance.get('/countries', { params });
+    return instance.get('/api/countries', { params });
 };
 
 export const fetchCurrencies = (params) => {
-    return instance.get('/currencies', { params });
+    return instance.get('/api/currencies', { params });
 };
 
 export const login = ({username, password}) => {
-    return instance.post('/authenticate', {
+    return instance.post('/api/authenticate', {
         username, password, rememberMe: true,
     });
 };

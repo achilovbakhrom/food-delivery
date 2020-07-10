@@ -2,28 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4c1cc787-1446-497d-a874-fac755bc5a71" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/api/auth.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/api/instance.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/api/restaurants.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/img/american_express.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/img/mastercard.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/img/visa.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/districts/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/regions/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/addresses/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/basket/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/basket/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/categories/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/categories/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/login/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/login/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/menu/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/menu/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/payment/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/payment/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/register/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/register/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/restaurants/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/restaurants/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/restaurants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/restaurants.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -110,7 +92,7 @@
       <workItem from="1594300457586" duration="1382000" />
       <workItem from="1594351783156" duration="4232000" />
       <workItem from="1594367080410" duration="10335000" />
-      <workItem from="1594397922770" duration="6864000" />
+      <workItem from="1594397922770" duration="7328000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <created>1593888871329</created>
@@ -119,7 +101,14 @@
       <option name="project" value="LOCAL" />
       <updated>1593888871329</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="almost done">
+      <created>1594405085786</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1594405085786</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -140,6 +129,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="init commit" />
+    <MESSAGE value="almost done" />
+    <option name="LAST_COMMIT_MESSAGE" value="almost done" />
   </component>
 </project>

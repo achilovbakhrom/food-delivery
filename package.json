@@ -31,7 +31,7 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "proxy": "http://api.uzchef.com/api",
+  "proxy": "http://api.uzchef.com",
   "browserslist": {
     "production": [
       ">0.2%",
