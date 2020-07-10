@@ -5,7 +5,7 @@ export const fetchRestaurantsByRegions = () => {
 };
 
 export const fetchDistrictsByRegionId = (regionId) => {
-    return instance.get(`/api/districts/${regionId}`)
+    return instance.get(`/api/restaurants/by-districts/${regionId}`)
 };
 
 export const fetchRestaurants = (filter) => {

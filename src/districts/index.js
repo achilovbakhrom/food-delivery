@@ -71,9 +71,9 @@ const Districts = props => {
                                         props.history.push(`/app/restaurants?districtId=${i.id}`)
                                     }}>
                                         <ListItemText>
-                                            { i.name || 'Unknown' }
+                                            { i.district.name || 'Unknown' }
                                         </ListItemText>
-                                        <ListItemSecondaryAction> {i.code}  </ListItemSecondaryAction>
+                                        <ListItemSecondaryAction> {i.restaurantCount}  </ListItemSecondaryAction>
                                     </ListItem>
                                 )) }
                             </List>
