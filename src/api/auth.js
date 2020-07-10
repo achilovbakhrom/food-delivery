@@ -18,7 +18,7 @@ export const login = ({username, password}) => {
 };
 
 export const register = ({ countryId, currencyId, email, firstName, lastName, password, phone, username }) => {
-    return instance.post('/clients/register', {
+    return instance.post('/api/clients/register', {
         countryId,
         currencyId,
         email,
