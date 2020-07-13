@@ -2,56 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4c1cc787-1446-497d-a874-fac755bc5a71" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/admin/ImageUpload/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin/addEditFood/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin/addEditRestaurant/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin/foods/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin/menu/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin/restaurants/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/api/admin.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/img/bg1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/img/bg10.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/img/bg11.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/img/bg12.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/img/bg13.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/img/bg2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/img/bg3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/img/bg4.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/img/bg5.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/img/bg6.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/img/bg7.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/img/bg8.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/img/bg9.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/img/russian-flag.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/img/usa-flag.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/img/uzb-flag.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/contacts/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/i18/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/i18/locales/en.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/i18/locales/ru.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/i18/locales/uz.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/languages/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/profile/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/instance.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/instance.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/restaurants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/restaurants.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/basket/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/basket/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/categories/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/categories/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/districts/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/districts/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/login/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/login/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/menu/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/menu/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/payment/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/payment/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/regions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/regions/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/register/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/register/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/restaurants/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/restaurants/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -149,7 +101,7 @@
       <workItem from="1594488650055" duration="12555000" />
       <workItem from="1594537901604" duration="8503000" />
       <workItem from="1594565214235" duration="70000" />
-      <workItem from="1594639917735" duration="15396000" />
+      <workItem from="1594639917735" duration="15775000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <created>1593888871329</created>
@@ -193,7 +145,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594407786702</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="register url">
+      <created>1594667798835</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1594667798835</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

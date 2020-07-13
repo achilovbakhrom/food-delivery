@@ -254,8 +254,7 @@ const Main = props => {
                     )) : [
                         {name: props.t('main.address'), icon: <LocationCity />},
                         {name: props.t('main.restaurants'), icon: <Restaurant />},
-                        // {name: 'Отправленные', icon: <Memory />},
-                        {name: props.t('main.contacts'), icon: <Contacts />},
+                        {name: props.t('main.contacts'), icon: <ContactIcon />},
                         {name: props.t('main.login'), icon: <Language />}].map((obj, index) => (
                         <ListItem button key={obj.name} onClick={() => {
                             setOpen(false);
@@ -267,7 +266,7 @@ const Main = props => {
                                     props.history.push('/app/restaurants');
                                     break;
                                 case 2:
-                                    //contacts
+                                    props.history.push('/app/contacts');
                                     break;
                                 case 3:
                                     Cookies.remove('token');
