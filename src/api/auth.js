@@ -17,6 +17,11 @@ export const login = ({username, password}) => {
     });
 };
 
+export const currentUser = () => {
+    return instance.get('/api/users/current')
+}
+
+
 export const register = ({ countryId, currencyId, email, firstName, lastName, password, phone, username }) => {
     return instance.post('/api/clients/register', {
         countryId,

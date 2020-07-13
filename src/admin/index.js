@@ -15,22 +15,15 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Badge from "@material-ui/core/Badge";
 import { Switch, Route, withRouter } from 'react-router-dom';
-import { Restaurant, LocationCity, Memory, Contacts as ContactIcon, Language, Person, ExitToApp, ShoppingBasket } from '@material-ui/icons';
-import Restaurants from "../restaurants";
-import Categories from '../categories';
-import Menu from '../menu';
-import Address from '../regions';
-import Basket from '../basket';
-import Payment from '../payment';
-import District from '../districts';
-import useBus from 'use-bus';
+import { Restaurant, MenuBook, ExitToApp, Fastfood } from '@material-ui/icons';
+import AdminRestaurants from "../admin/restaurants";
+import AddEditRestaurants from '../admin/addEditRestaurant';
+import AdminFoods from '../admin/foods';
+import AddEditFoods from '../admin/addEditFood';
+import AdminMenu from '../admin/menu';
+
 import Cookies from 'js-cookie';
-import Languages from '../languages';
-import {withTranslation} from "react-i18next";
-import Profile from "../profile";
-import Contacts  from '../contacts';
 
 const drawerWidth = 240;
 
@@ -92,9 +85,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-
-const Main = props => {
-
+const AdminRoot = props => {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = useState(false);
@@ -122,22 +113,6 @@ const Main = props => {
         setPrice(acc);
     }, []);
 
-    useBus('order_changed', () => {
-        let orderString = Cookies.get('orders') || '[]';
-        let orders = JSON.parse(orderString);
-        let counter = 0;
-        let acc = 0;
-        orders.forEach(o => { if (o.count) {
-            acc = acc + parseFloat(o.count)*parseFloat(o.food.price);
-            counter++
-        } });
-        setCount(counter);
-        setPrice(acc);
-    }, [count]);
-
-    const hasToken = () => {
-        return Cookies.get('token') !== undefined
-    };
 
     return (
         <div className={classes.root}>
@@ -164,36 +139,8 @@ const Main = props => {
                             props.history.push('/app/address')
                         }}
                     >
-                        {props.t('main.uzchef')}
+                        Уз Шеф - Админ
                     </Typography>
-                    {
-                        price > 0 ? (
-                            <Typography
-                                variant="h6"
-                                noWrap
-                                color="inherit" style={{color: 'white', marginRight: 10}}
-
-                            >
-                                {price}$
-                            </Typography>
-                        ) : undefined
-
-                    }
-                    { count ? (
-                        <IconButton onClick={() => {
-                            props.history.push('/app/basket')
-                        }}>
-                            <Badge badgeContent={count} color="secondary">
-                                <ShoppingBasket />
-                            </Badge>
-                        </IconButton>
-
-                    ) : (
-                        <IconButton onClick={() => {
-                            props.history.push('/app/basket')
-                        }}><ShoppingBasket /></IconButton>
-                    )}
-
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -213,64 +160,37 @@ const Main = props => {
                 </div>
                 <Divider />
                 <List>
-                    {hasToken() ? [
-                        {name: props.t('main.address'), icon: <LocationCity />},
-                        {name: props.t('main.restaurants'), icon: <Restaurant />},
-                        // {name: props.t('main.history'), icon: <Memory />},
-                        {name: props.t('main.contacts'), icon: <ContactIcon />},
-                        {name: props.t('main.languages'), icon: <Language />},
-                        {name: props.t('main.profile'), icon: <Person />},
-                        {name: props.t('main.signOut'), icon: <ExitToApp />}].map((obj, index) => (
+                    {[
+
+                        {name: 'Рестораны', icon: <Restaurant />},
+                        {name: 'Блюда', icon: <Fastfood />},
+                        {name: 'Меню', icon: <MenuBook />},
+                        {name: 'Выйти', icon: <ExitToApp />}].map((obj, index) => (
                         <ListItem button key={obj.name} onClick={() => {
                             setOpen(false);
                             switch (index) {
                                 case 0:
-                                    props.history.push('/app/address');
+                                    props.history.push('/admin/restaurants');
                                     break;
                                 case 1:
-                                    props.history.push('/app/restaurants');
+                                    props.history.push('/admin/foods');
                                     break;
                                 case 2:
-                                    props.history.push('/app/contacts');
+                                    props.history.push('/admin/menu');
                                     break;
                                 case 3:
-                                    props.history.push('/app/languages');
+
                                     break;
                                 case 4:
-                                    props.history.push('/app/profile');
                                     break;
                                 case 5:
                                     Cookies.remove('token');
                                     Cookies.remove('orders');
                                     props.history.push('/login');
                                     break;
-                                default:
-                                    break
-                            }
-                        }}>
-                            <ListItemIcon>{obj.icon}</ListItemIcon>
-                            <ListItemText primary={obj.name} />
-                        </ListItem>
-                    )) : [
-                        {name: props.t('main.address'), icon: <LocationCity />},
-                        {name: props.t('main.restaurants'), icon: <Restaurant />},
-                        // {name: 'Отправленные', icon: <Memory />},
-                        {name: props.t('main.contacts'), icon: <Contacts />},
-                        {name: props.t('main.login'), icon: <Language />}].map((obj, index) => (
-                        <ListItem button key={obj.name} onClick={() => {
-                            setOpen(false);
-                            switch (index) {
-                                case 0:
-                                    props.history.push('/app/address');
-                                    break;
-                                case 1:
-                                    props.history.push('/app/restaurants');
-                                    break;
-                                case 2:
-                                    //contacts
-                                    break;
-                                case 3:
+                                case 6:
                                     Cookies.remove('token');
+                                    Cookies.remove('orders');
                                     props.history.push('/login');
                                     break;
                                 default:
@@ -285,20 +205,16 @@ const Main = props => {
             </Drawer>
             <main className={classes.content}>
                 <Switch>
-                    <Route path="/app/address" component={Address}/>
-                    <Route path="/app/districts" component={District}/>
-                    <Route path="/app/restaurants" component={Restaurants}/>
-                    <Route path="/app/categories" component={Categories}/>
-                    <Route path="/app/menu" component={Menu}/>
-                    <Route path="/app/basket" component={Basket}/>
-                    <Route path="/app/payment" component={Payment}/>
-                    <Route path="/app/languages" component={Languages}/>
-                    <Route path="/app/profile" component={Profile}/>
-                    <Route path="/app/contacts" component={Contacts}/>
+                    <Route path="/admin/restaurants" component={AdminRestaurants}/>
+                    <Route path="/admin/restaurant-add-edit" component={AddEditRestaurants}/>
+                    <Route path="/admin/foods" component={AdminFoods}/>
+                    <Route path="/admin/food-add-edit" component={AddEditFoods}/>
+                    <Route path="/admin/menu" component={AdminMenu}/>
+                    <Route path="/admin/menu-add-edit" component={AdminFoods}/>
                 </Switch>
             </main>
         </div>
-    );
+    )
 };
 
-export default withRouter(withTranslation()(Main));
+export default withRouter(AdminRoot);

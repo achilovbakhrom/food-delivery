@@ -8,7 +8,8 @@ import { Link } from 'react-router-dom';
 import {fetchCountries, fetchCurrencies, login, register} from "../api/auth";
 import Cookie from 'js-cookie';
 import { store } from 'react-notifications-component';
-
+import { withTranslation } from "react-i18next";
+import { withRouter } from 'react-router-dom';
 const useStyles = makeStyles(() => ({
     root: {
         height: '100%',
@@ -30,7 +31,7 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-const Register = () => {
+const Register = (props) => {
 
     const [phonePrefix, setPhonePrefix] = useState(0);
     const [countryId, setCountryId] = useState();
@@ -90,14 +91,14 @@ const Register = () => {
             <Grid item xs={10} md={6} lg={4}>
                 <TextField
                     variant="outlined"
-                    label="Имя"
+                    label={props.t('register.firstName')}
                     fullWidth
                     value={firstName}
                     onChange={(e) => { setFirstName(e.target.value) }}
                 />
                 <TextField
                     variant="outlined"
-                    label="Фамилия"
+                    label={props.t('register.lastName')}
                     fullWidth
                     value={lastName}
                     className={classes.mt20}
@@ -130,7 +131,7 @@ const Register = () => {
                             fullWidth
                             renderInput={(params) => <TextField
                                 {...params}
-                                label="Код"
+                                label={props.t('register.code')}
                                 variant="outlined"
 
                             />}
@@ -165,14 +166,14 @@ const Register = () => {
                         fullWidth
                         renderInput={(params) => <TextField
                             {...params}
-                            label="Валюта"
+                            label={props.t('register.currency')}
                             variant="outlined"
 
                         />}
                     />
                 </Grid>
                 <TextField
-                    placeholder="Логин"
+                    placeholder={props.t('auth.login')}
                     variant="outlined"
                     fullWidth
                     className={classes.mt20}
@@ -244,10 +245,10 @@ const Register = () => {
                                 });
                             })
                     }}
-                > {isLoading ? 'Идет загрузка...' : 'Регистрация'} </Button>
+                > {isLoading ? `${props.t('auth.loading')}...` : props.t('auth.register')} </Button>
 
                 <div style={{marginTop: 30, color: 'white', textAlign: 'center'}}>
-                    Есть аккаунт? <Link to="/login">Войти</Link>
+                    {props.t('register.have_account')} <Link to="/login">{props.t('auth.login')}</Link>
                 </div>
             </Grid>
         </Grid>
@@ -255,4 +256,4 @@ const Register = () => {
 
 };
 
-export default Register;
+export default withRouter(withTranslation()(Register));

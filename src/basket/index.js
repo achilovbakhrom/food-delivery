@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import {green} from "@material-ui/core/colors";
 import Cookies from 'js-cookie';
 import {dispatch} from "use-bus";
+import {withTranslation} from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({
     title: {
@@ -54,6 +55,8 @@ const Basket = props => {
         return 1;
     };
 
+
+
     let borderColor = '#fff3';
 
 
@@ -61,7 +64,7 @@ const Basket = props => {
         <Grid container>
             <Grid item xs={12} className={classes.title}> Мои заказы - Корзина </Grid>
             <Grid container className={classes.footer} justify="flex-end">
-                Общая сумма:&nbsp;<strong style={{color: green.A700, fontSize: 32}}>{ foods.reduce((acc, o) => acc + parseFloat(o.count)*parseFloat(o.food.price), 0) } $</strong>&nbsp;
+                {props.t('basket.total')}&nbsp;<strong style={{color: green.A700, fontSize: 32}}>{ foods.reduce((acc, o) => acc + parseFloat(o.count)*parseFloat(o.food.price), 0) } $</strong>&nbsp;
             </Grid>
             <Grid item xs={12}>
                 <GridList spacing={15} cellHeight={200} cols={getGridListCols()}>
@@ -120,7 +123,7 @@ const Basket = props => {
                                             onClick={() => {
                                                 foods.forEach((i) => {
                                                     if (i.food.id === item.food.id) {
-                                                        i.count = i.count + 1;
+                                                        i.count = i.count + 0.5;
                                                     }
                                                 });
                                                 Cookies.set('orders', foods);
@@ -136,8 +139,8 @@ const Basket = props => {
                                             onClick={() => {
                                                 foods.forEach((i, index) => {
                                                     if (i.food.id === item.food.id) {
-                                                        if (i.count > 1) {
-                                                            i.count = i.count - 1;
+                                                        if (i.count > 0.5) {
+                                                            i.count = i.count - 0.5;
                                                         } else {
                                                             foods.splice(index, 1);
                                                         }
@@ -155,13 +158,14 @@ const Basket = props => {
                         )) : (
                             <Grid container>
                                 <Paper style={{width: '100%', padding: 20, textAlign: 'center', backgroundColor: 'white', color: '#555'}}>
-                                    Список пуст!
+                                    {props.t('common.empty')}
                                 </Paper>
                             </Grid>
                         )
                     }
                 </GridList>
-                { foods.length ? (
+
+                { Cookies.get('token') ? (foods.length ? (
                     <Grid container style={{marginTop: 20, height: 50}}>
                         <Button
                             color="primary"
@@ -172,15 +176,27 @@ const Basket = props => {
                                 props.history.push('/app/payment')
                             }}
                         >
-                            Перейти к оплате ({foods.reduce((acc, o) => acc + parseFloat(o.count)*parseFloat(o.food.price), 0)}$)
+                            {props.t('basket.pay')} ({foods.reduce((acc, o) => acc + parseFloat(o.count)*parseFloat(o.food.price), 0)}$)
                         </Button>
                     </Grid>
-                ) : undefined }
-
+                ) : undefined) : (
+                    <Grid container style={{marginTop: 20, height: 50}}>
+                        <Button
+                            color="primary"
+                            variant="contained"
+                            fullWidth
+                            style={{color: 'white', fontWeight: 'bold'}}
+                            onClick={() => {
+                                props.history.push('/login')
+                            }}
+                        >
+                            {props.t('auth.login')}
+                        </Button>
+                    </Grid>
+                )}
             </Grid>
-
         </Grid>
     )
 };
 
-export default withRouter(Basket)
+export default withRouter(withTranslation()(Basket))

@@ -9,6 +9,7 @@ instance.interceptors.request.use(function (config) {
     if (token) {
         config.headers.Authorization = `Bearer ${token}`;
     }
+    config.headers.language = Cookies.get('language') || 'en';
     return config
 });
 
@@ -17,7 +18,7 @@ instance.interceptors.response.use(function (response) {
 }, async (error) => {
     let status = (error.response && error.response.status) || 0;
     if (status === 401) {
-        window.location = "/app/auth/login";
+        window.location = "/login";
     } else {
         throw error;
     }

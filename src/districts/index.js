@@ -3,6 +3,8 @@ import { withRouter } from 'react-router-dom';
 import { Grid, Paper, List, ListItem, ListItemText, ListItemSecondaryAction, CircularProgress, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import {fetchDistrictsByRegionId} from "../api/restaurants";
+import {withTranslation} from "react-i18next";
+
 const queryString = require('query-string');
 
 const useStyles = makeStyles((theme) => ({
@@ -59,7 +61,7 @@ const Districts = props => {
     return (
         <Grid container>
             <Grid container justify="center">
-                <Grid className={classes.title} xs={12} md={6}> Регион - <span style={{fontWeight: 500, fontSize: 14}}>(Выберите ваш регион для доставки)</span> </Grid>
+                <Grid className={classes.title} xs={12} md={6}> {props.t("district.district")} - <span style={{fontWeight: 500, fontSize: 14}}>({props.t("district.district_desc")})</span> </Grid>
             </Grid>
             <Grid container justify="center">
                 <Grid item xs={12} md={6}>
@@ -103,7 +105,7 @@ const Districts = props => {
                                                 props.history.push('/app/address');
                                             }
                                         }}
-                                    > Перезагрузить </Button>
+                                    > {props.t('districts.reload')} </Button>
                                 )}
                             </Grid>
                         )}
@@ -115,4 +117,4 @@ const Districts = props => {
     )
 };
 
-export default withRouter(Districts);
+export default withRouter(withTranslation()(Districts));

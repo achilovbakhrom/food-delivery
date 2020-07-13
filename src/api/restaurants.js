@@ -19,3 +19,7 @@ export const fetchCategories = (filter) => {
 export const fetchFoods = (filter) => {
     return instance.get('/api/foods', { params: filter })
 };
+
+export const order = (order) => {
+    return instance.post('/api/admin/orders', order);
+};

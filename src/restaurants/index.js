@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { withRouter } from 'react-router-dom';
-import { Grid, Typography, GridList, GridListTile, GridListTileBar, IconButton, withWidth, isWidthUp, CircularProgress, Button, Paper } from '@material-ui/core';
+import { Grid, Typography, GridList, withWidth, isWidthUp, CircularProgress, Button, Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import {fetchRestaurants} from "../api/restaurants";
+import {withTranslation} from "react-i18next";
+import Cookies from 'js-cookie';
 const queryString = require('query-string');
 
 const useStyles = makeStyles((theme) => ({
@@ -89,7 +91,7 @@ const Restaurants = props => {
     return (
         <Grid container justify='center'>
             <Grid item className={classes.title} xs={12}>
-                <div> Рестораны </div>
+                <div> {props.t("restaurants.restaurants")} </div>
             </Grid>
             <Grid item xs={12}>
                 {
@@ -98,6 +100,7 @@ const Restaurants = props => {
                             {
                                 restaurants && restaurants.length ? restaurants.map((item, index) => (
                                     <ListItem key={index} cols={1} style={{pointer: 'cursor'}} onClick={() => {
+                                        Cookies.set('restaurantId', item.id);
                                         props.history.push(`/app/categories?restaurantId=${item.id}`)
                                     }}>
                                         <ListItemIcon>
@@ -112,7 +115,7 @@ const Restaurants = props => {
                                     <Grid container>
                                         <Grid xs={12}>
                                             <Paper style={{ width: '100%', padding: 20, textAlign: 'center', color: '#555', backgroundColor: 'white'}}>
-                                                Нет ресторанов в этом регионе!
+                                                {props.t("restaurants.empty")}
                                             </Paper>
                                         </Grid>
                                     </Grid>
@@ -129,7 +132,7 @@ const Restaurants = props => {
                     ) : (
                         <Button variant="contained" fullWidth onClick={() => {
                             setPage(page + 1)
-                        }}> Показать еще </Button>
+                        }}> {props.t("restaurants.more")} </Button>
                     )
                 )}
             </Grid>
@@ -137,4 +140,4 @@ const Restaurants = props => {
     )
 };
 
-export default withRouter(withWidth()(Restaurants));
+export default withRouter(withTranslation()(withWidth()(Restaurants)));

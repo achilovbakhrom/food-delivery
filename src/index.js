@@ -6,8 +6,11 @@ import * as serviceWorker from './serviceWorker';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import {green, indigo} from "@material-ui/core/colors";
 import { BrowserRouter } from 'react-router-dom';
+import {I18nextProvider} from 'react-i18next';
+import i18n from './i18';
 
 const theme = createMuiTheme({
+
     palette: {
         type: 'dark',
         primary: {
@@ -17,7 +20,6 @@ const theme = createMuiTheme({
         secondary: {
             main: '#d63d3d',
         },
-
     },
 
     overrides: {
@@ -27,14 +29,11 @@ const theme = createMuiTheme({
                 color: 'white',
 
             }
-
-
         },
         MuiInputBase: {
             root: {
                 backgroundColor: '#ffffff33'
             }
-
         }
     },
 
@@ -47,7 +46,9 @@ ReactDOM.render(
   <React.StrictMode>
       <MuiThemeProvider theme={theme}>
           <BrowserRouter>
-              <App />
+              <I18nextProvider i18n={i18n}>
+                  <App />
+              </I18nextProvider>
           </BrowserRouter>
       </MuiThemeProvider>
   </React.StrictMode>,

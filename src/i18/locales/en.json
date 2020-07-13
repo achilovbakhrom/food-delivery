@@ -1,0 +1,93 @@
+{
+  "translations": {
+    "auth": {
+      "login": "Login",
+      "password": "Password",
+      "invalid_credentials": "Invalid credentials",
+      "error": "Error",
+      "loading": "Loading",
+      "register": "Register",
+      "no_account": "No account yet?",
+      "forgot": "Forgot password?",
+      "restore": "Restore account!"
+    },
+    "register": {
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "code": "Code",
+      "phoneNumber": "Phone Number",
+      "currency": "Currency",
+      "have_account": "Have account?"
+    },
+    "main": {
+      "address": "Address",
+      "restaurants": "Restaurants",
+      "history": "Order history",
+      "contacts": "Contacts",
+      "languages": "Language",
+      "profile": "Profile",
+      "signOut": "Logout",
+      "login": "Login",
+      "uzchef": "Welcome to UZCHEF.COM"
+    },
+    "basket": {
+      "total": "Total:",
+      "pay": "Purchase order"
+    },
+    "common": {
+      "empty": "Empty List!"
+    },
+    "categories": {
+      "categories": "Categories"
+    },
+    "districts":{
+      "district": "District",
+      "district_desc": "Choose your delivery district",
+      "reload": "Reload"
+    },
+    "menu": {
+      "menu": "Menu"
+    },
+    "payment": {
+      "order": "Order",
+      "recipient_data": "Recipient data",
+      "name": "Name",
+      "phone": "Phone",
+      "delivery_address": "Delivery address",
+      "street": "Street",
+      "house": "House",
+      "porch": "Porch",
+      "floor": "Floor",
+      "flat": "Flat",
+      "purchase_order": "Purchase Order",
+      "region": "Region",
+      "district": "District",
+      "cardNo": "Card Number",
+      "expiry": "Expiry date"
+    },
+    "regions": {
+      "region": "Region",
+      "region_desc": "Choose your delivery region",
+      "reload": "Reload"
+    },
+    "restaurants": {
+      "restaurants": "Restaurants",
+      "more": "Show more...",
+      "empty": "No restaurants found"
+    },
+    "profile": {
+      "profile": "Profile",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "E-mail",
+      "phone": "Phone"
+    },
+    "contacts": {
+      "contacts": "Our contacts",
+      "phone": "Our Phone number",
+      "email": "Our E-mail"
+    }
+
+
+  }
+}

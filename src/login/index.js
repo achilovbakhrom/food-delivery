@@ -13,9 +13,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import { green } from "@material-ui/core/colors";
 import { Link, withRouter } from 'react-router-dom';
 import {Visibility, VisibilityOff} from "@material-ui/icons";
-import {login} from "../api/auth";
+import {currentUser, login} from "../api/auth";
 import Cookie from 'js-cookie';
 import { store } from 'react-notifications-component';
+import {withTranslation} from "react-i18next";
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -57,14 +58,14 @@ const Login = props => {
             <Grid item xs={10} md={6} lg={4}>
                 <TextField
                     variant="outlined"
-                    label="Логин"
+                    label={props.t("auth.login")}
                     fullWidth
                     onChange={(e) => {
                         setUsername(e.target.value);
                     }}
                 />
                 <FormControl className={classes.mt20} variant="outlined" fullWidth>
-                    <InputLabel htmlFor="outlined-adornment-password">Пароль</InputLabel>
+                    <InputLabel htmlFor="outlined-adornment-password">{props.t("auth.password")}</InputLabel>
                     <OutlinedInput
                         id="outlined-adornment-password"
                         type={showPassword ? 'text' : 'password'}
@@ -97,17 +98,47 @@ const Login = props => {
                         setIsLoading(true);
                         login({username, password})
                             .then(response => {
-                                setIsLoading(false);
+
                                 if (response.data["id_token"]) {
                                     Cookie.set('token', response.data["id_token"]);
-                                    props.history.push('/app/address')
+                                    currentUser()
+                                        .then(response => {
+                                            if (response.data.roles.indexOf('ROLE_ADMIN') >= 0) {
+                                                props.history.push('/admin/restaurants')
+                                            } else {
+                                                let orderString = Cookie.get('orders') || '[]';
+                                                let orders = JSON.parse(orderString);
+                                                console.log(orders)
+                                                if (orders && orders.length) {
+                                                    props.history.push('/app/basket')
+                                                } else {
+                                                    props.history.push('/app/address')
+                                                }
+                                            }
+                                        })
+                                        .catch(e => {
+                                            setIsLoading(false);
+                                            store.addNotification({
+                                                title: "Ошибка!",
+                                                message: e,
+                                                type: "danger",
+                                                insert: "top",
+                                                container: "top-right",
+                                                animationIn: ["animated", "fadeIn"],
+                                                animationOut: ["animated", "fadeOut"],
+                                                dismiss: {
+                                                    duration: 5000,
+                                                    onScreen: true
+                                                }
+                                            });
+                                        });
                                 }
                             })
                             .catch(response => {
                                 setIsLoading(false);
                                 store.addNotification({
-                                    title: "Ошибка!",
-                                    message: `Неправильный логин или пароль`,
+                                    title: props.t("auth.error"),
+                                    message: props.t("auth.invalid_credentials"),
                                     type: "danger",
                                     insert: "top",
                                     container: "top-right",
@@ -120,13 +151,13 @@ const Login = props => {
                                 });
                             })
                     }}
-                > { isLoading ? 'Идет загрузка...' : 'Войти' } </Button>
+                > { isLoading ? `${props.t("auth.register")}...` : props.t("auth.login") } </Button>
                 <div style={{marginTop: 30, color: 'white', textAlign: 'center'}}>
-                    Нет аккаунта? <Link to="/register">Зарегистрируйтесь!</Link>
+                    {props.t("auth.no_account")} <Link to="/register">{props.t("auth.register")}</Link>
                 </div>
 
                 <div style={{marginTop: 10, color: 'white', textAlign: 'center'}}>
-                    Забыли Пароль? <Link to="/forgot" >Восстановите аккаут!</Link>
+                    {props.t("auth.forgot")} <Link to="/forgot" >{props.t("auth.restore")}</Link>
                 </div>
             </Grid>
 
@@ -136,4 +167,4 @@ const Login = props => {
 
 };
 
-export default withRouter(Login);
+export default withRouter(withTranslation()(Login));

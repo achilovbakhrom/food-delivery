@@ -1,0 +1,15 @@
+{
+  "translations": {
+    "auth": {
+      "login": "Войти",
+      "password": "Пароль",
+      "invalid_credentials": "Неправильный логин или пароль",
+      "error": "Ошибка",
+      "loading": "Загрузка",
+      "register": "Регистрация",
+      "no_account": "Еще нет аккаунта?",
+      "forgot": "Забыли пароль?",
+      "restore": "Восстановите аккаунт!"
+    }
+  }
+}

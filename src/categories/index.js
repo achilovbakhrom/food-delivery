@@ -14,6 +14,8 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import { Info } from '@material-ui/icons';
 import {fetchCategories} from "../api/restaurants";
+import {withTranslation} from "react-i18next";
+
 const queryString = require('query-string');
 
 const useStyles = makeStyles((theme) => ({
@@ -71,7 +73,7 @@ const Menu = props => {
     return (
         <Grid container >
             <Grid item className={classes.title} xs={12}>
-                <Typography> Категории </Typography>
+                <Typography> {props.t('categories.categories')} </Typography>
             </Grid>
             <Grid item>
                 <GridList spacing={15} cellHeight={300} cols={(() => {
@@ -149,4 +151,4 @@ const Menu = props => {
     )
 };
 
-export default withRouter(withWidth()(Menu));
+export default withRouter(withTranslation()(withWidth()(Menu)));

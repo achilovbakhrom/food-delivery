@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { Grid, Paper, List, ListItem, ListItemText, ListItemSecondaryAction, CircularProgress, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import {fetchRestaurantsByRegions} from "../api/restaurants";
+import {withTranslation} from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({
     title: {
@@ -48,7 +49,7 @@ const Regions = props => {
     return (
         <Grid container>
             <Grid container justify="center">
-                <Grid className={classes.title} xs={12} md={6}> Регион - <span style={{fontWeight: 500, fontSize: 14}}>(Выберите ваш регион для доставки)</span> </Grid>
+                <Grid className={classes.title} xs={12} md={6}> {props.t('regions.region')} - <span style={{fontWeight: 500, fontSize: 14}}>({props.t('regions.region_desc')})</span> </Grid>
             </Grid>
             <Grid container justify="center">
                 <Grid item xs={12} md={6}>
@@ -83,7 +84,7 @@ const Regions = props => {
                                                     setRegions(response.data);
                                                 })
                                         }}
-                                    > Перезагрузить </Button>
+                                    > {props.t('regions.reload')} </Button>
                                 )}
                             </Grid>
                         )}
@@ -95,4 +96,4 @@ const Regions = props => {
     )
 };
 
-export default withRouter(Regions);
+export default withRouter(withTranslation()(Regions));

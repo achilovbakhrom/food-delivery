@@ -1,0 +1,15 @@
+{
+  "translations": {
+    "auth": {
+      "login": "Login",
+      "password": "Parol",
+      "invalid_credentials": "Noto'g'ri login yoki parol",
+      "error": "Xato",
+      "loading": "Yuklash",
+      "register": "Ro'yhatdan o'tish",
+      "no_account": "Hali ro'yhatdan o'tmadingizmi?",
+      "forgot": "Parolni unutdingizmi?",
+      "restore": "Akkauntni tiklash!"
+    }
+  }
+}

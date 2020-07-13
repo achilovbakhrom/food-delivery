@@ -8,6 +8,7 @@ import {green} from "@material-ui/core/colors";
 import {fetchFoods} from "../api/restaurants";
 import Cookies from 'js-cookie';
 import { dispatch } from 'use-bus'
+import { withTranslation } from "react-i18next";
 
 const queryString = require('query-string');
 
@@ -72,7 +73,7 @@ const Menu = props => {
     return (
         <Grid container >
             <Grid item className={classes.title} xs={12}>
-                <div> Меню </div>
+                <div> {props.t('menu.menu')} </div>
             </Grid>
             <Grid item>
                 <GridList spacing={15} cellHeight={200} cols={getGridListCols()}>
@@ -137,7 +138,7 @@ const Menu = props => {
                                                     let found = false;
                                                     cookieOrders.forEach((i) => {
                                                         if (i.food.id === item.id) {
-                                                            i.count = i.count + 1;
+                                                            i.count = i.count + 0.5;
                                                             found = true
                                                         }
                                                     });
@@ -161,19 +162,17 @@ const Menu = props => {
 
                                                     cookieOrders.forEach((i, index) => {
                                                         if (i.food.id === item.id) {
-                                                            if (i.count > 1) {
-                                                                i.count = i.count - 1;
+                                                            if (i.count > 0.5) {
+                                                                i.count = i.count - 0.5;
                                                             } else {
                                                                 i.count = 0;
                                                                 removeIndex = index;
                                                             }
                                                         }
                                                     });
-                                                    console.log(removeIndex)
                                                     if (removeIndex !== -1) {
                                                         cookieOrders.splice(removeIndex, 1);
                                                     }
-                                                    console.log(cookieOrders)
                                                     Cookies.set('orders', cookieOrders);
                                                     setOrders([...cookieOrders]);
                                                     dispatch('order_changed');
@@ -198,4 +197,4 @@ const Menu = props => {
     )
 };
 
-export default withRouter(withWidth()(Menu));
+export default withRouter(withTranslation()(withWidth()(Menu)));
