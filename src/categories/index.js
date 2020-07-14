@@ -105,7 +105,7 @@ const Menu = props => {
 
                                         return 1;
                                     })()}>
-                                        <img src={require('../assets/img/burgers.jpg')} alt={"f1"} />
+                                        <img src={cat.photo ? cat.photo.url : require('../assets/img/burgers.jpg')} alt={"f1"} />
                                         <GridListTileBar
                                             title={cat.name}
                                             actionIcon={

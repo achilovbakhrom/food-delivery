@@ -3,13 +3,97 @@
     "auth": {
       "login": "Login",
       "password": "Parol",
-      "invalid_credentials": "Noto'g'ri login yoki parol",
+      "invalid_credentials": "Login yoki parol xato",
       "error": "Xato",
       "loading": "Yuklash",
       "register": "Ro'yhatdan o'tish",
-      "no_account": "Hali ro'yhatdan o'tmadingizmi?",
+      "no_account": "Akkaunt yo'qmi?",
       "forgot": "Parolni unutdingizmi?",
       "restore": "Akkauntni tiklash!"
+    },
+    "register": {
+      "firstName": "Ism",
+      "lastName": "Familiya",
+      "code": "Kod",
+      "phoneNumber": "Telefon",
+      "currency": "Valyuta",
+      "have_account": "Akkaunt bormi?"
+    },
+    "main": {
+      "address": "Adres",
+      "restaurants": "Restoran",
+      "history": "Buyurtmalar",
+      "contacts": "Kontaktlar",
+      "languages": "Til",
+      "profile": "Profil",
+      "signOut": "Chiqish",
+      "login": "Login",
+      "uzchef": "UZCHEF.COM ga xush kelibsiz!"
+    },
+    "basket": {
+      "total": "Umumiy:",
+      "pay": "Buyurtma berish",
+      "my": "Korzina"
+    },
+    "common": {
+      "empty": "List bo'sh!"
+    },
+    "categories": {
+      "categories": "Bo'limlar"
+    },
+    "district":{
+      "district": "Rayon",
+      "district_desc": "Yetqazib berish rayonini tanlang",
+      "reload": "Qayta yuklash"
+    },
+    "menu": {
+      "menu": "Menyu"
+    },
+    "payment": {
+      "order": "Buyurtma",
+      "recipient_data": "Qabul qiluvchi",
+      "name": "Ism",
+      "phone": "Telefon",
+      "delivery_address": "Yetkazib berish manzili",
+      "street": "Koçha",
+      "house": "Uy",
+      "porch": "Podyezd",
+      "floor": "Etaj",
+      "flat": "Xonadon",
+      "purchase_order": "Buyurtmani tasdiqlash",
+      "region": "Region",
+      "district": "Rayon",
+      "cardNo": "Karta nomeri",
+      "expiry": "Tugash muddati"
+    },
+    "regions": {
+      "region": "Region",
+      "region_desc": "Yetkazib berish regionini tanlang",
+      "reload": "Qayta yuklash"
+    },
+    "restaurants": {
+      "restaurants": "Restoranlar",
+      "more": "Yana...",
+      "empty": "Restoran topilmadi"
+    },
+    "profile": {
+      "profile": "Profil",
+      "firstName": "Ism",
+      "lastName": "Familiya",
+      "email": "E-mail",
+      "phone": "Telefon"
+    },
+    "contacts": {
+      "contacts": "Biz bilan aloqa",
+      "phone": "telefon",
+      "email": "E-mail"
+    },
+    "history": {
+      "desc": "Mening buyurtmalarim",
+      "orderNo": "Buyurtma raqami:",
+      "name": "Ism:",
+      "address": "Adres:",
+      "restaraunt": "Restoran"
     }
   }
 }

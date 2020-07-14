@@ -1,15 +1,99 @@
 {
   "translations": {
     "auth": {
-      "login": "Войти",
+      "login": "Логин",
       "password": "Пароль",
-      "invalid_credentials": "Неправильный логин или пароль",
+      "invalid_credentials": "Неравильный логин или пароль",
       "error": "Ошибка",
       "loading": "Загрузка",
-      "register": "Регистрация",
+      "register": "Регистрацния",
       "no_account": "Еще нет аккаунта?",
       "forgot": "Забыли пароль?",
-      "restore": "Восстановите аккаунт!"
+      "restore": "Восстановить аккаунт!"
+    },
+    "register": {
+      "firstName": "Имя",
+      "lastName": "Фамилия",
+      "code": "Код",
+      "phoneNumber": "Телефон номер",
+      "currency": "Валюта",
+      "have_account": "Есть аккаунт?"
+    },
+    "main": {
+      "address": "Адрес",
+      "restaurants": "Рестораны",
+      "history": "История заказов",
+      "contacts": "Контакты",
+      "languages": "Язык",
+      "profile": "Профиль",
+      "signOut": "Выйти",
+      "login": "Логин",
+      "uzchef": "Добро пожаловать в UZCHEF.COM"
+    },
+    "basket": {
+      "total": "Общ.:",
+      "pay": "Заказать",
+      "my": "Корзина"
+    },
+    "common": {
+      "empty": "Список пуст!"
+    },
+    "categories": {
+      "categories": "Категории"
+    },
+    "district":{
+      "district": "Район",
+      "district_desc": "Выберите район доставки",
+      "reload": "Перезагрузить"
+    },
+    "menu": {
+      "menu": "Меню"
+    },
+    "payment": {
+      "order": "Заказ",
+      "recipient_data": "Получатель",
+      "name": "Имя",
+      "phone": "Телефон",
+      "delivery_address": "Адреес доставки",
+      "street": "Улица",
+      "house": "Дом",
+      "porch": "Подъезд",
+      "floor": "Этаж",
+      "flat": "Квартира",
+      "purchase_order": "Оформить заказ",
+      "region": "Регион",
+      "district": "Район",
+      "cardNo": "Номер карты",
+      "expiry": "Адреес истечения"
+    },
+    "regions": {
+      "region": "Регион",
+      "region_desc": "Выберите регион доставки",
+      "reload": "Перезагрузить"
+    },
+    "restaurants": {
+      "restaurants": "Рестораны",
+      "more": "Показать еще...",
+      "empty": "Рестораны не найдены"
+    },
+    "profile": {
+      "profile": "Профиль",
+      "firstName": "Имя",
+      "lastName": "Фамилия",
+      "email": "E-mail",
+      "phone": "Телефон"
+    },
+    "contacts": {
+      "contacts": "Наши контакты",
+      "phone": "Телефон",
+      "email": "E-mail"
+    },
+    "history": {
+      "desc": "Мои заказы",
+      "orderNo": "Номер заказа:",
+      "name": "Имя:",
+      "address": "Адрес:",
+      "restaraunt": "Ресторан"
     }
   }
 }

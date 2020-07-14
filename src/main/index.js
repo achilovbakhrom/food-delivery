@@ -31,6 +31,7 @@ import Languages from '../languages';
 import {withTranslation} from "react-i18next";
 import Profile from "../profile";
 import Contacts  from '../contacts';
+import History from '../history';
 
 const drawerWidth = 240;
 
@@ -297,7 +298,7 @@ const Main = props => {
                     <Route path="/app/languages" component={Languages}/>
                     <Route path="/app/profile" component={Profile}/>
                     <Route path="/app/contacts" component={Contacts}/>
-                    <Route path="/app/history" component={Contacts}/>
+                    <Route path="/app/history" component={History}/>
                 </Switch>
             </main>
         </div>

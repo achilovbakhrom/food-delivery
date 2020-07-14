@@ -119,8 +119,7 @@ const AdminFoods = props => {
                 }}
                 title="Блюда"
                 columns={[
-                    { title: 'Название блюда', field: 'name' },
-                    { title: 'Цена', field: 'price' },
+                    { title: 'Название блюда', field: 'name' }
                 ]}
                 isLoading={isLoading}
                 data={data}

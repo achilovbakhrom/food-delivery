@@ -23,6 +23,7 @@ import AdminFoods from '../admin/foods';
 import AddEditFoods from '../admin/addEditFood';
 import AdminMenu from '../admin/menu';
 import AddEditMenu from '../admin/addEditMenu';
+import AdminHistory from '../admin/history';
 
 import Cookies from 'js-cookie';
 
@@ -180,7 +181,7 @@ const AdminRoot = props => {
                                     props.history.push('/admin/menu');
                                     break;
                                 case 3:
-
+                                    props.history.push('/admin/history');
                                     break;
                                 case 4:
                                     Cookies.remove('token');
@@ -205,6 +206,7 @@ const AdminRoot = props => {
                     <Route path="/admin/food-add-edit" component={AddEditFoods}/>
                     <Route path="/admin/menu" component={AdminMenu}/>
                     <Route path="/admin/menu-add-edit" component={AddEditMenu}/>
+                    <Route path="/admin/history" component={AdminHistory}/>
                 </Switch>
             </main>
         </div>

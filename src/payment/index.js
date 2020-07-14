@@ -8,6 +8,7 @@ import {order} from "../api/restaurants";
 import {fetchDistricts, fetchRegions} from "../api/admin";
 import Select from "@material-ui/core/Select/Select";
 import MenuItem from "@material-ui/core/MenuItem";
+import CreditCardInput from 'react-credit-card-input';
 
 const useStyles = makeStyles((theme) => ({
     title: {
@@ -60,12 +61,38 @@ const Payment = props => {
     const [regionId, setRegionId] = useState('');
     const [districtList, setDistrictList] = useState([]);
     const [districtId, setDistrictId] = useState('');
-    const [cardNumber, setCardNumber] = useState();
-    const [expiryDate, setExpiryDate] = useState();
+
+    const [cvc, setCvc] = useState('');
+    const [expiry, setExpiry] = useState('');
+    const [number, setNumber] = useState('');
+
 
     const isDisabled = () => {
+        let type = cardType() || '';
+        console.log(type);
         return !fio || !phone || !street || !houseNo || !door || !floor || !flatNo ||
-            regionId === undefined || districtId === undefined || !cardNumber || !expiryDate
+            regionId === undefined || districtId === undefined || !cvc || !expiry || (type.toUpperCase() !== 'VISA' && type.toUpperCase() !== 'MASTERCARD' && type.toUpperCase() !== 'AMERICAN_EXPRESS')
+    };
+
+    const cardType = () => {
+        var cards = {
+            electron: /^(4026|417500|4405|4508|4844|4913|4917)\d+$/,
+            maestro: /^(5018|5020|5038|5612|5893|6304|6759|6761|6762|6763|0604|6390)\d+$/,
+            dankort: /^(5019)\d+$/,
+            interpayment: /^(636)\d+$/,
+            unionpay: /^(62|88)\d+$/,
+            visa: /^4[0-9]{12}(?:[0-9]{3})?$/,
+            mastercard: /^5[1-5][0-9]{14}$/,
+            american_express: /^3[47][0-9]{13}$/,
+            diners: /^3(?:0[0-5]|[68][0-9])[0-9]{11}$/,
+            discover: /^6(?:011|5[0-9]{2})[0-9]{12}$/,
+            jcb: /^(?:2131|1800|35\d{3})\d{11}$/
+        };
+        for (let card in cards) {
+            if (cards[card].test(number.replace(/ /g,''))) {
+                return card;
+            }
+        }
     };
 
     return (
@@ -190,43 +217,38 @@ const Payment = props => {
                     />
                 </Grid>
             </Grid>
-            <Grid container style={{marginTop: 20}}>
-                <Grid item xs={12} md={9}>
-                    <FormControl component="fieldset">
-                        <FormLabel component="legend">Форма оплаты</FormLabel>
-                        <RadioGroup value={value} onChange={(e) => { setValue(e.target.value) }}>
-                            <FormControlLabel value="MASTERCARD" control={<Radio color="primary" />} label={
-                                <img alt="matercard" src={require('../assets/img/mastercard.png')} width={200} height={100} style={{
-                                    objectFit: 'contain'
-                                }} />} />
-                            <FormControlLabel value="VISA" control={<Radio color="primary" />} label={
-                                <img alt="visa" src={require('../assets/img/visa.png')} width={200} height={100} style={{
-                                    objectFit: 'contain'
-                                }}/>
-                            } />
-                            <FormControlLabel value="AMERICAN_EXPRESS" control={<Radio color="primary" />} label={
-                                <img alt="american_express" src={require('../assets/img/american_express.png')} width={200} height={100} style={{
-                                    objectFit: 'contain'
-                                }} />
-                            } />
+            {/*<Grid container style={{marginTop: 20}}>*/}
+            {/*    <Grid item xs={12} md={9}>*/}
+            {/*        <FormControl component="fieldset">*/}
+            {/*            <FormLabel component="legend">Форма оплаты</FormLabel>*/}
+            {/*            <RadioGroup value={value} onChange={(e) => { setValue(e.target.value) }}>*/}
+            {/*                <FormControlLabel value="MASTERCARD" control={<Radio color="primary" />} label={*/}
+            {/*                    <img alt="matercard" src={require('../assets/img/mastercard.png')} width={200} height={100} style={{*/}
+            {/*                        objectFit: 'contain'*/}
+            {/*                    }} />} />*/}
+            {/*                <FormControlLabel value="VISA" control={<Radio color="primary" />} label={*/}
+            {/*                    <img alt="visa" src={require('../assets/img/visa.png')} width={200} height={100} style={{*/}
+            {/*                        objectFit: 'contain'*/}
+            {/*                    }}/>*/}
+            {/*                } />*/}
+            {/*                <FormControlLabel value="AMERICAN_EXPRESS" control={<Radio color="primary" />} label={*/}
+            {/*                    <img alt="american_express" src={require('../assets/img/american_express.png')} width={200} height={100} style={{*/}
+            {/*                        objectFit: 'contain'*/}
+            {/*                    }} />*/}
+            {/*                } />*/}
 
-                        </RadioGroup>
-                    </FormControl>
-                </Grid>
-            </Grid>
-            <Grid container direction="row" style={{marginTop: 8}}>
-                <Grid item xs={4} md={6}>
-                    <TextField variant="outlined" fullWidth label={props.t('payment.cardNo')}
-                               onChange={(e) => {
-                                   setCardNumber(e.target.value)
-                               }}
-                    />
-                </Grid>
-                <Grid item xs={4} md={3} style={{paddingLeft: 10}}>
-                    <TextField variant="outlined" fullWidth label={props.t('payment.expiry')}
-                               onChange={(e) => {
-                                   setExpiryDate(e.target.value)
-                               }}
+            {/*            </RadioGroup>*/}
+            {/*        </FormControl>*/}
+            {/*    </Grid>*/}
+            {/*</Grid>*/}
+            <Grid container direction="row" style={{marginTop: 20}}>
+                <Grid item xs={12} md={9}>
+                    <CreditCardInput
+                        cardNumberInputProps={{ value: number, onChange: (e) => { setNumber(e.target.value) } }}
+                        cardExpiryInputProps={{ value: expiry, onChange: (e) => { setExpiry(e.target.value) } }}
+                        cardCVCInputProps={{ value: cvc, onChange: (e) => { setCvc(e.target.value) } }}
+
+                        fieldClassName="input"
                     />
                 </Grid>
 
@@ -242,12 +264,12 @@ const Payment = props => {
                             let orders = JSON.parse(orderString);
                             order({
                                 card: {
-                                    cardNumber: cardNumber,
+                                    cardNumber: number,
                                     cardType: value,
-                                    expiryDate: expiryDate
+                                    expiryDate: expiry
 
                                 },
-                                items: orders.map(o => ({ id: o.food.id, price: o.food.price, count: o.count })),
+                                items: orders.map(o => ({ id: o.food.id, price: o.food.price, quantity: o.count })),
                                 receiver: {
                                     address: {
                                         apartment: flatNo,

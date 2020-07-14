@@ -156,9 +156,9 @@ const Login = props => {
                     {props.t("auth.no_account")} <Link to="/register">{props.t("auth.register")}</Link>
                 </div>
 
-                <div style={{marginTop: 10, color: 'white', textAlign: 'center'}}>
-                    {props.t("auth.forgot")} <Link to="/forgot" >{props.t("auth.restore")}</Link>
-                </div>
+                {/*<div style={{marginTop: 10, color: 'white', textAlign: 'center'}}>*/}
+                {/*    {props.t("auth.forgot")} <Link to="/forgot" >{props.t("auth.restore")}</Link>*/}
+                {/*</div>*/}
             </Grid>
 
 

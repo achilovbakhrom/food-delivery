@@ -104,11 +104,10 @@ const Restaurants = props => {
                                         props.history.push(`/app/categories?restaurantId=${item.id}`)
                                     }}>
                                         <ListItemIcon>
-                                            <img src={require("../assets/img/burgers.jpg")} alt="burger" width={250} height={200} style={{borderBottomLeftRadius: 10, borderTopLeftRadius: 10}} />
+                                            <img src={ item.photo ? item.photo.url : require("../assets/img/burgers.jpg")} alt="burger" width={250} height={200} style={{borderBottomLeftRadius: 10, borderTopLeftRadius: 10}} />
                                         </ListItemIcon>
                                         <div style={{height: '100%', backgroundColor: 'white', flexGrow: 1, borderTopRightRadius: 10, borderBottomRightRadius: 10, padding: 20}}>
-                                            <Typography variant='inherit' style={{color: '#555', fontSize: 20}}><strong>Название: </strong> {item.name}</Typography> <br />
-                                            {/*<Typography variant='inherit' style={{color: '#555', fontSize: 20}}><strong>Адрес: </strong>Адрес {index}</Typography> <br />*/}
+                                            <Typography variant='inherit' style={{color: '#555', fontSize: 20}}>{item.name}</Typography> <br />
                                         </div>
                                     </ListItem>
                                 )) : (

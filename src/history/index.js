@@ -54,7 +54,7 @@ const History = props => {
     return (
         <Grid container>
             <Grid container justify="center">
-                <Grid className={classes.title} xs={12} md={6}> {props.t('regions.region')} - <span style={{fontWeight: 500, fontSize: 14}}>({props.t('regions.region_desc')})</span> </Grid>
+                <Grid className={classes.title} xs={12} md={6}> {props.t('history.desc')}</Grid>
             </Grid>
             <Grid container justify="center">
                 <Grid item xs={12} md={6}>
@@ -64,10 +64,12 @@ const History = props => {
                                 { orders.map((i, index) => (
                                     <ListItem button key={index}>
                                         <ListItemText>
-                                            <span>{ i.clent ? i.client.name : 'Unkonwn' }</span>&nbsp;
-                                            <span>{ i.address ? `${i.address.regionId}, ${i.address.districtId}, ${i.address.house}, ${i.address.porch}, ${i.address.apartment}` : 'Unkonwn' }</span>&nbsp;
+                                            <span>{props.t('history.orderNo')}&nbsp;#{ i.id}</span>&nbsp; <br />
+                                            <span>{props.t('history.name')}&nbsp;{ i.client ? i.client.name : 'Unkonwn' }</span>&nbsp; <br />
+                                            <span>{props.t('history.address')}&nbsp;{ i.address ? `${i.address.region.name}, ${i.address.district.name}, ${i.address.house}, ${i.address.porch}, ${i.address.apartment}` : 'Unkonwn' }</span>&nbsp; <br />
+                                            <span>{props.t('history.restaraunt')}&nbsp;{ i.restaurant ? `${i.restaurant.name}` : 'Unkonwn' }</span>&nbsp; <br />
                                         </ListItemText>
-                                        <ListItemSecondaryAction> 200 000 sum  </ListItemSecondaryAction>
+                                        <ListItemSecondaryAction> {i.status}  </ListItemSecondaryAction>
                                     </ListItem>
                                 )) }
                             </List>

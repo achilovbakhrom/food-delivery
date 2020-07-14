@@ -41,7 +41,7 @@
     "categories": {
       "categories": "Categories"
     },
-    "districts":{
+    "district":{
       "district": "District",
       "district_desc": "Choose your delivery district",
       "reload": "Reload"
@@ -87,6 +87,13 @@
       "contacts": "Our contacts",
       "phone": "Our Phone number",
       "email": "Our E-mail"
+    },
+    "history": {
+      "desc": "My Orders",
+      "orderNo": "Order Number:",
+      "name": "Name:",
+      "address": "Address:",
+      "restaraunt": "Restaurant"
     }
 
 
