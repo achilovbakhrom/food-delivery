@@ -34,3 +34,6 @@ a {
   cursor: pointer;
 }
 
+.MuiGrid-item {
+  width: 100%!important;
+}

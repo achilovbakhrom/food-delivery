@@ -11,7 +11,7 @@ import {
     DialogContentText,
     DialogTitle
 } from '@material-ui/core';
-import {deleteRestaurant, fetchRestaurants} from "../../api/admin";
+import {deleteRestaurant, deleteRestaurantFoodsById, fetchRestaurantFoods, fetchRestaurants} from "../../api/admin";
 
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
@@ -50,11 +50,12 @@ const AdminMenu = props => {
 
     const updateList = () => {
         setIsLoading(true);
-        fetchRestaurants({page, size})
+        fetchRestaurantFoods({page, size})
             .then(response => {
+                console.log(response.data)
                 setIsLoading(false);
                 setData(response.data.content);
-                setTotal(response.data.numberOfElements);
+                setTotal(response.data.totalElements);
             })
             .catch(e => {
                 setIsLoading(false);
@@ -89,7 +90,7 @@ const AdminMenu = props => {
                     <Button onClick={() => {
                         if (deleteId !== undefined) {
                             setDeleteOpen(false);
-                            deleteRestaurant(deleteId)
+                            deleteRestaurantFoodsById(deleteId)
                                 .then(response => {
                                     updateList()
                                 })
@@ -121,11 +122,17 @@ const AdminMenu = props => {
                 }}
                 title="Меню"
                 columns={[
-                    { title: 'Блюдо', field: 'name' },
-                    { title: 'Цена', field: 'description' },
+                    { title: 'Блюдо', field: 'food' },
+                    { title: 'Ресторан', field: 'restaurant' },
+                    { title: 'Цена', field: 'price' },
                 ]}
                 isLoading={isLoading}
-                data={data}
+                data={data.map(m => ({
+                    food: m.food.name,
+                    restaurant: m.restaurant.name,
+                    price: m.price,
+                    id: m.id
+                }))}
                 actions={[
                     {
                         icon: () => <AddBox />,
@@ -141,7 +148,7 @@ const AdminMenu = props => {
                         tooltip: 'Редактировать',
                         onClick: (e, r) => {
                             // localStorage.setItem('restaurant', JSON.stringify(r));
-                            props.history.push(`/admin/menu-add-edit?food_id=${r.id}`);
+                            props.history.push(`/admin/menu-add-edit?menu_id=${r.id}`);
                         }
                     },
                     {
@@ -164,9 +171,8 @@ const AdminMenu = props => {
 
                 style={{width: '100%'}}
                 options={{
-                    pageSizeOptions: [10, 20, 40],
-                    pageSize: 10
-
+                    pageSizeOptions: [10, 20, 40, 80],
+                    pageSize: size
                 }}
             />
         </Grid>

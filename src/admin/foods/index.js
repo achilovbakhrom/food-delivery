@@ -52,7 +52,7 @@ const AdminFoods = props => {
             .then(response => {
                 setIsLoading(false);
                 setData(response.data.content);
-                setTotal(response.data.numberOfElements);
+                setTotal(response.data.totalElements);
             })
             .catch(e => {
                 setIsLoading(false);
@@ -163,7 +163,7 @@ const AdminFoods = props => {
                 style={{width: '100%'}}
                 options={{
                     pageSizeOptions: [10, 20, 40],
-                    pageSize: 10
+                    pageSize: size
 
                 }}
             />

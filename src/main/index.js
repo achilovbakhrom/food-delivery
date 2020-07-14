@@ -216,7 +216,7 @@ const Main = props => {
                     {hasToken() ? [
                         {name: props.t('main.address'), icon: <LocationCity />},
                         {name: props.t('main.restaurants'), icon: <Restaurant />},
-                        // {name: props.t('main.history'), icon: <Memory />},
+                        {name: props.t('main.history'), icon: <Memory />},
                         {name: props.t('main.contacts'), icon: <ContactIcon />},
                         {name: props.t('main.languages'), icon: <Language />},
                         {name: props.t('main.profile'), icon: <Person />},
@@ -231,15 +231,18 @@ const Main = props => {
                                     props.history.push('/app/restaurants');
                                     break;
                                 case 2:
-                                    props.history.push('/app/contacts');
+                                    props.history.push('/app/history');
                                     break;
                                 case 3:
-                                    props.history.push('/app/languages');
+                                    props.history.push('/app/contacts');
                                     break;
                                 case 4:
-                                    props.history.push('/app/profile');
+                                    props.history.push('/app/languages');
                                     break;
                                 case 5:
+                                    props.history.push('/app/profile');
+                                    break;
+                                case 6:
                                     Cookies.remove('token');
                                     Cookies.remove('orders');
                                     props.history.push('/login');
@@ -294,6 +297,7 @@ const Main = props => {
                     <Route path="/app/languages" component={Languages}/>
                     <Route path="/app/profile" component={Profile}/>
                     <Route path="/app/contacts" component={Contacts}/>
+                    <Route path="/app/history" component={Contacts}/>
                 </Switch>
             </main>
         </div>

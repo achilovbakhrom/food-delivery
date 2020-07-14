@@ -62,7 +62,7 @@ const Basket = props => {
 
     return (
         <Grid container>
-            <Grid item xs={12} className={classes.title}> Мои заказы - Корзина </Grid>
+            <Grid item xs={12} className={classes.title}> {props.t('basket.my')} </Grid>
             <Grid container className={classes.footer} justify="flex-end">
                 {props.t('basket.total')}&nbsp;<strong style={{color: green.A700, fontSize: 32}}>{ foods.reduce((acc, o) => acc + parseFloat(o.count)*parseFloat(o.food.price), 0) } $</strong>&nbsp;
             </Grid>

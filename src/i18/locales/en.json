@@ -32,7 +32,8 @@
     },
     "basket": {
       "total": "Total:",
-      "pay": "Purchase order"
+      "pay": "Purchase order",
+      "my": "My Orders - Basket"
     },
     "common": {
       "empty": "Empty List!"

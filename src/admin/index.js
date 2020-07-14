@@ -16,12 +16,13 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { Switch, Route, withRouter } from 'react-router-dom';
-import { Restaurant, MenuBook, ExitToApp, Fastfood } from '@material-ui/icons';
+import { Restaurant, MenuBook, ExitToApp, Fastfood, History } from '@material-ui/icons';
 import AdminRestaurants from "../admin/restaurants";
 import AddEditRestaurants from '../admin/addEditRestaurant';
 import AdminFoods from '../admin/foods';
 import AddEditFoods from '../admin/addEditFood';
 import AdminMenu from '../admin/menu';
+import AddEditMenu from '../admin/addEditMenu';
 
 import Cookies from 'js-cookie';
 
@@ -161,10 +162,10 @@ const AdminRoot = props => {
                 <Divider />
                 <List>
                     {[
-
                         {name: 'Рестораны', icon: <Restaurant />},
                         {name: 'Блюда', icon: <Fastfood />},
                         {name: 'Меню', icon: <MenuBook />},
+                        {name: 'Заказы', icon: <History />},
                         {name: 'Выйти', icon: <ExitToApp />}].map((obj, index) => (
                         <ListItem button key={obj.name} onClick={() => {
                             setOpen(false);
@@ -182,13 +183,6 @@ const AdminRoot = props => {
 
                                     break;
                                 case 4:
-                                    break;
-                                case 5:
-                                    Cookies.remove('token');
-                                    Cookies.remove('orders');
-                                    props.history.push('/login');
-                                    break;
-                                case 6:
                                     Cookies.remove('token');
                                     Cookies.remove('orders');
                                     props.history.push('/login');
@@ -210,7 +204,7 @@ const AdminRoot = props => {
                     <Route path="/admin/foods" component={AdminFoods}/>
                     <Route path="/admin/food-add-edit" component={AddEditFoods}/>
                     <Route path="/admin/menu" component={AdminMenu}/>
-                    <Route path="/admin/menu-add-edit" component={AdminFoods}/>
+                    <Route path="/admin/menu-add-edit" component={AddEditMenu}/>
                 </Switch>
             </main>
         </div>

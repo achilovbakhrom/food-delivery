@@ -5,10 +5,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import {green} from "@material-ui/core/colors";
-import {fetchFoods} from "../api/restaurants";
 import Cookies from 'js-cookie';
 import { dispatch } from 'use-bus'
 import { withTranslation } from "react-i18next";
+import {fetchRestaurantFoods} from "../api/restaurants";
 
 const queryString = require('query-string');
 
@@ -45,18 +45,19 @@ const Menu = props => {
         if (parsed['categoryId'] && parsed['restaurantId']) {
             // fetchFoods({categoryId: parsed['categoryId'], restaurantId: parsed['restaurantId'], page: 0, size: 500})
             setIsLoading(true);
-            fetchFoods({categoryId: 4, restaurantId: 1, page: 0, size: 500})
+            fetchRestaurantFoods({categoryId: parsed['categoryId'], restaurantId: parsed['restaurantId'], page: 0, size: 500})
                 .then(response => {
                     setIsLoading(false);
+                    // setFoods([...response.data.content, ...response.data.content, ...response.data.content]);
                     setFoods(response.data.content);
                     let orderString = Cookies.get('orders') || '[]';
                     let cookieOrders = JSON.parse(orderString);
                     setOrders([...cookieOrders]);
                 })
         } else {
-            // props.history.push('/app/address');
+            props.history.push('/app/address');
         }
-    }, [])
+    }, []);
 
     const getGridListCols = () => {
         if (isWidthUp('md', props.width)) {
@@ -76,18 +77,18 @@ const Menu = props => {
                 <div> {props.t('menu.menu')} </div>
             </Grid>
             <Grid item>
-                <GridList spacing={15} cellHeight={200} cols={getGridListCols()}>
+                <GridList spacing={10} cellHeight={200} cols={getGridListCols()}>
                     {
                         foods.map((item, index) => {
                             let f = orders.find(o => item.id === o.food.id);
                             let count = f ? f.count : 0;
                             return (
-                                <ListItem key={index} cols={1} >
+                                <ListItem key={index} cols={1}>
                                     <ListItemIcon>
                                         <img
-                                            src={require("../assets/img/burgers.jpg")}
+                                            src={item.photo ? item.photo.url : require("../assets/img/burgers.jpg")}
                                             alt="burger"
-                                            width={250}
+                                            width={220}
                                             height={200}
                                             style={{
                                                 borderBottomLeftRadius: 10,
@@ -109,7 +110,7 @@ const Menu = props => {
                                         flexGrow: 1,
                                         borderTopRightRadius: 10,
                                         borderBottomRightRadius: 10,
-                                        padding: 20,
+                                        padding: 15,
                                         display: 'flex',
                                         flexFlow: 'row',
                                         borderRightColor: borderColor,
@@ -124,7 +125,7 @@ const Menu = props => {
 
                                     }}>
                                         <div style={{flexGrow: 1}}>
-                                            <Typography variant='inherit' style={{color: 'white', fontSize: 20}}><strong>{item.name}</strong></Typography> <br />
+                                            <Typography variant='inherit' style={{color: 'white', fontSize: 20}}><strong>{item.food.name}</strong></Typography> <br />
                                             <Typography variant='inherit' style={{fontSize: 24, color: green.A700, marginTop: 30}}><strong>{item.price}$</strong></Typography> <br />
                                         </div>
                                         <div style={{display: 'flex', flexFlow: 'column', width: 50, alignItems: 'center'}}>
@@ -143,7 +144,7 @@ const Menu = props => {
                                                         }
                                                     });
                                                     if (!found) {
-                                                        cookieOrders.push({ food: item, count: 1});
+                                                        cookieOrders.push({ food: item, count: 0.5});
                                                     }
                                                     Cookies.set('orders', cookieOrders);
                                                     setOrders([...cookieOrders]);
