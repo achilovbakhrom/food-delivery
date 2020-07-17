@@ -65,7 +65,7 @@ const Payment = props => {
     const [cvc, setCvc] = useState('');
     const [expiry, setExpiry] = useState('');
     const [number, setNumber] = useState('');
-
+    const [description, setDescription] = [];
 
     const isDisabled = () => {
         let type = cardType() || '';
@@ -254,7 +254,7 @@ const Payment = props => {
             </Grid>
 
             <Grid container direction="row" style={{marginTop: 15}}>
-                <Grid item xs={12}>
+                <Grid item xs={9}>
 
                     <TextField
                         variant="outlined"
@@ -263,7 +263,7 @@ const Payment = props => {
                         rows={4}
                         multiline
                         onChange={(e) => {
-                            setDoor(e.target.value)
+                            setDescription(e.target.value)
                         }}
                     />
                 </Grid>
@@ -285,7 +285,8 @@ const Payment = props => {
                                     expiryDate: expiry
 
                                 },
-                                items: orders.map(o => ({ id: o.food.id, price: o.food.price, quantity: o.count })),
+                                items: orders.map(o => ({ id: o.food.food.id, price: o.food.price, quantity: o.count })),
+                                description,
                                 receiver: {
                                     address: {
                                         apartment: flatNo,

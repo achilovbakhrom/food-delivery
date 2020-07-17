@@ -13,7 +13,7 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Info } from '@material-ui/icons';
-import {fetchCategories} from "../api/restaurants";
+import {fetchRestaurantCategories} from "../api/restaurants";
 import {withTranslation} from "react-i18next";
 
 const queryString = require('query-string');
@@ -47,7 +47,8 @@ const Menu = props => {
 
     useEffect(() => {
         setIsLoading(true)
-        fetchCategories({page: 0, size: 100})
+        const parsed = queryString.parse(props.location.search);
+        fetchRestaurantCategories({page: 0, size: 100, restaurantId: parsed['restaurantId']})
             .then(response => {
                 setIsLoading(false)
                 setCategoryList(response.data.content);
@@ -87,7 +88,7 @@ const Menu = props => {
                                     }}
                                     key={1}
                                     cols={1}>
-                                    <img src={require('../assets/img/burgers.jpg')} alt={"f1"} />
+                                    <img src={cat.photo ? cat.photo.url : require('../assets/img/burgers.jpg')} alt={"f1"} />
                                     <GridListTileBar
                                         title={cat.name}
                                         actionIcon={

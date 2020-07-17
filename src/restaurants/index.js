@@ -54,7 +54,7 @@ const Restaurants = props => {
             })
             .catch(error => {
                 setIsLoading(false);
-                props.history.push('/app/address')
+                props.history.push('/app/restaurants')
             })
     }, []);
 
@@ -70,7 +70,7 @@ const Restaurants = props => {
             })
             .catch(error => {
                 setIsLoading(false);
-                props.history.push('/app/address')
+                props.history.push('/app/restaurants')
             })
     }, [page]);
 

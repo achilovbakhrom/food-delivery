@@ -88,3 +88,54 @@ export const updateRestaurantFoods = (food) => {
 export const deleteRestaurantFoodsById = (id) => {
     return instance.delete(`/api/admin/restaurant/foods/${id}`)
 };
+
+
+export const fetchCategories = (filter) => {
+    return instance.get('/api/admin/categories', { params: filter })
+};
+
+export const createCategory = (food) => {
+    return instance.post('/api/admin/categories', food);
+};
+
+export const updateCategory = (category) => {
+    return instance.put('/api/admin/categories', category);
+};
+
+export const fetchCategoryById = (id) => {
+    return instance.get(`/api/admin/categories/${id}`);
+};
+
+export const deleteCategory = (id) => {
+    return instance.delete(`/api/admin/categories/${id}`);
+};
+
+export const uploadPhotoCategory = (id, photo) => {
+    let formData = new FormData();
+    formData.append('file', photo);
+    return instance.post(`/api/admin/categories/${id}/upload`, formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    })
+};
+
+export const fetchUsers = (filter) => {
+    return instance.get('/api/users/list', { params: filter })
+};
+
+export const createUser = (user) => {
+    return instance.post('/api/users/create', user);
+};
+
+export const updateUser = (user) => {
+    return instance.put('/api/users/update', user);
+};
+
+export const fetchUserById = (id) => {
+    return instance.get(`/api/admin/users/${id}`);
+};
+
+export const deleteUser = (id) => {
+    return instance.delete(`/api/users/${id}`);
+};

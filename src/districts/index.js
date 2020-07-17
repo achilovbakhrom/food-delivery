@@ -50,10 +50,10 @@ const Districts = props => {
                     setDistricts(response.data);
                 })
                 .catch(() => {
-                    props.history.push('/app/address');
+                    props.history.push('/app/restaurants');
                 })
         } else {
-            props.history.push('/app/address');
+            props.history.push('/app/restaurants');
         }
 
     }, []);
@@ -99,10 +99,10 @@ const Districts = props => {
                                                         setDistricts(response.data);
                                                     })
                                                     .catch(() => {
-                                                        props.history.push('/app/address');
+                                                        props.history.push('/app/restaurants');
                                                     })
                                             } else {
-                                                props.history.push('/app/address');
+                                                props.history.push('/app/restaurants');
                                             }
                                         }}
                                     > {props.t('districts.reload')} </Button>

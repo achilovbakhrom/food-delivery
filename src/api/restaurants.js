@@ -16,6 +16,10 @@ export const fetchCategories = (filter) => {
     return instance.get('/api/categories', { params: filter })
 };
 
+export const fetchRestaurantCategories = filter => {
+    return instance.get('/api/restaurant/categories', { params: filter })
+};
+
 export const fetchFoods = (filter) => {
     return instance.get('/api/foods', { params: filter })
 };

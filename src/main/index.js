@@ -162,7 +162,7 @@ const Main = props => {
                         noWrap
                         color="inherit" style={{color: 'white', flex: 1, cursor: 'pointer'}}
                         onClick={() => {
-                            props.history.push('/app/address')
+                            props.history.push('/app/restaurants')
                         }}
                     >
                         {props.t('main.uzchef')}
@@ -215,7 +215,7 @@ const Main = props => {
                 <Divider />
                 <List>
                     {hasToken() ? [
-                        {name: props.t('main.address'), icon: <LocationCity />},
+                        // {name: props.t('main.address'), icon: <LocationCity />},
                         {name: props.t('main.restaurants'), icon: <Restaurant />},
                         {name: props.t('main.history'), icon: <Memory />},
                         {name: props.t('main.contacts'), icon: <ContactIcon />},
@@ -225,25 +225,25 @@ const Main = props => {
                         <ListItem button key={obj.name} onClick={() => {
                             setOpen(false);
                             switch (index) {
+                                // case 0:
+                                //     props.history.push('/app/address');
+                                //     break;
                                 case 0:
-                                    props.history.push('/app/address');
-                                    break;
-                                case 1:
                                     props.history.push('/app/restaurants');
                                     break;
-                                case 2:
+                                case 1:
                                     props.history.push('/app/history');
                                     break;
-                                case 3:
+                                case 2:
                                     props.history.push('/app/contacts');
                                     break;
-                                case 4:
+                                case 3:
                                     props.history.push('/app/languages');
                                     break;
-                                case 5:
+                                case 4:
                                     props.history.push('/app/profile');
                                     break;
-                                case 6:
+                                case 5:
                                     Cookies.remove('token');
                                     Cookies.remove('orders');
                                     props.history.push('/login');
@@ -256,7 +256,7 @@ const Main = props => {
                             <ListItemText primary={obj.name} />
                         </ListItem>
                     )) : [
-                        {name: props.t('main.address'), icon: <LocationCity />},
+                        // {name: props.t('main.address'), icon: <LocationCity />},
                         {name: props.t('main.restaurants'), icon: <Restaurant />},
                         {name: props.t('main.contacts'), icon: <ContactIcon />},
                         {name: props.t('main.languages'), icon: <Language />},
@@ -264,19 +264,19 @@ const Main = props => {
                         <ListItem button key={obj.name} onClick={() => {
                             setOpen(false);
                             switch (index) {
+                                // case 0:
+                                //     props.history.push('/app/address');
+                                //     break;
                                 case 0:
-                                    props.history.push('/app/address');
-                                    break;
-                                case 1:
                                     props.history.push('/app/restaurants');
                                     break;
-                                case 2:
+                                case 1:
                                     props.history.push('/app/contacts');
                                     break;
-                                case 3:
+                                case 2:
                                     props.history.push('/app/languages');
                                     break;
-                                case 4:
+                                case 3:
                                     Cookies.remove('token');
                                     props.history.push('/login');
                                     break;
@@ -292,8 +292,8 @@ const Main = props => {
             </Drawer>
             <main className={classes.content}>
                 <Switch>
-                    <Route path="/app/address" component={Address}/>
-                    <Route path="/app/districts" component={District}/>
+                    {/*<Route path="/app/address" component={Address}/>*/}
+                    {/*<Route path="/app/districts" component={District}/>*/}
                     <Route path="/app/restaurants" component={Restaurants}/>
                     <Route path="/app/categories" component={Categories}/>
                     <Route path="/app/menu" component={Menu}/>

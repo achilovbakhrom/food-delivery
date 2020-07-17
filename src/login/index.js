@@ -112,7 +112,7 @@ const Login = props => {
                                                 if (orders && orders.length) {
                                                     props.history.push('/app/basket')
                                                 } else {
-                                                    props.history.push('/app/address')
+                                                    props.history.push('/app/restaurants')
                                                 }
                                             }
                                         })

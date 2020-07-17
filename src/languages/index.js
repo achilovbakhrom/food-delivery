@@ -20,7 +20,7 @@ const Languages = props => {
                             onClick={() => {
                                 Cookie.set('language', 'en');
                                 i18n.changeLanguage('en').then(_ => {
-                                    props.history.push('/app/address')
+                                    props.history.push('/app/restaurants')
                                 })
 
                             }}
@@ -44,7 +44,7 @@ const Languages = props => {
                             onClick={() => {
                                 Cookie.set('language', 'ru');
                                 i18n.changeLanguage('ru').then(_ => {
-                                    props.history.push('/app/address')
+                                    props.history.push('/app/restaurants')
                                 });
                             }}
                         />
@@ -65,7 +65,7 @@ const Languages = props => {
                             onClick={() => {
                                 Cookie.set('language', 'uz');
                                 i18n.changeLanguage('uz').then(_ => {
-                                    props.history.push('/app/address')
+                                    props.history.push('/app/restaurants')
                                 });
                             }}
                         />

@@ -16,7 +16,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { Switch, Route, withRouter } from 'react-router-dom';
-import { Restaurant, MenuBook, ExitToApp, Fastfood, History } from '@material-ui/icons';
+import { Restaurant, MenuBook, ExitToApp, Fastfood, History, Category, People } from '@material-ui/icons';
 import AdminRestaurants from "../admin/restaurants";
 import AddEditRestaurants from '../admin/addEditRestaurant';
 import AdminFoods from '../admin/foods';
@@ -24,6 +24,10 @@ import AddEditFoods from '../admin/addEditFood';
 import AdminMenu from '../admin/menu';
 import AddEditMenu from '../admin/addEditMenu';
 import AdminHistory from '../admin/history';
+import AdminCategory from '../admin/category';
+import AddEditCategory from '../admin/addEditCategory';
+import AdminUsers from '../admin/users';
+import AddEditUsers from '../admin/addEditUser';
 
 import Cookies from 'js-cookie';
 
@@ -138,7 +142,7 @@ const AdminRoot = props => {
                         noWrap
                         color="inherit" style={{color: 'white', flex: 1, cursor: 'pointer'}}
                         onClick={() => {
-                            props.history.push('/app/address')
+                            props.history.push('/admin/restaurants')
                         }}
                     >
                         Уз Шеф - Админ
@@ -164,9 +168,11 @@ const AdminRoot = props => {
                 <List>
                     {[
                         {name: 'Рестораны', icon: <Restaurant />},
+                        {name: 'Категории', icon: <Category />},
                         {name: 'Блюда', icon: <Fastfood />},
                         {name: 'Меню', icon: <MenuBook />},
                         {name: 'Заказы', icon: <History />},
+                        {name: 'Пользователи', icon: <People />},
                         {name: 'Выйти', icon: <ExitToApp />}].map((obj, index) => (
                         <ListItem button key={obj.name} onClick={() => {
                             setOpen(false);
@@ -175,15 +181,21 @@ const AdminRoot = props => {
                                     props.history.push('/admin/restaurants');
                                     break;
                                 case 1:
-                                    props.history.push('/admin/foods');
+                                    props.history.push('/admin/categories');
                                     break;
                                 case 2:
-                                    props.history.push('/admin/menu');
+                                    props.history.push('/admin/foods');
                                     break;
                                 case 3:
-                                    props.history.push('/admin/history');
+                                    props.history.push('/admin/menu');
                                     break;
                                 case 4:
+                                    props.history.push('/admin/history');
+                                    break;
+                                case 5:
+                                    props.history.push('/admin/users');
+                                    break;
+                                case 6:
                                     Cookies.remove('token');
                                     Cookies.remove('orders');
                                     props.history.push('/login');
@@ -201,9 +213,13 @@ const AdminRoot = props => {
             <main className={classes.content}>
                 <Switch>
                     <Route path="/admin/restaurants" component={AdminRestaurants}/>
+                    <Route path="/admin/categories" component={AdminCategory}/>
+                    <Route path="/admin/category-add-edit" component={AddEditCategory}/>
                     <Route path="/admin/restaurant-add-edit" component={AddEditRestaurants}/>
                     <Route path="/admin/foods" component={AdminFoods}/>
                     <Route path="/admin/food-add-edit" component={AddEditFoods}/>
+                    <Route path="/admin/users" component={AdminUsers}/>
+                    <Route path="/admin/user-add-edit" component={AddEditUsers}/>
                     <Route path="/admin/menu" component={AdminMenu}/>
                     <Route path="/admin/menu-add-edit" component={AddEditMenu}/>
                     <Route path="/admin/history" component={AdminHistory}/>

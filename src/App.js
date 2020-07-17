@@ -57,7 +57,7 @@ function App(props) {
     <div className="App">
       <ReactNotification />
       <Switch>
-          <Route exact path="/" render={() => <Redirect to="/app/address" />} />
+          <Route exact path="/" render={() => <Redirect to="/app/restaurants" />} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/app" component={Main}/>

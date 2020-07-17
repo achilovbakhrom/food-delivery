@@ -133,7 +133,7 @@ const Basket = props => {
 
                                 }}>
                                     <div style={{flexGrow: 1}}>
-                                        <Typography variant='inherit' style={{color: 'white', fontSize: 20}}><strong>{item.food.name}</strong></Typography> <br />
+                                        <Typography variant='inherit' style={{color: 'white', fontSize: 20}}><strong>{item.food.food.name}</strong></Typography> <br />
                                         <Typography variant='inherit' style={{fontSize: 24, color: green.A700, marginTop: 30}}><strong>{item.food.price}$</strong></Typography> <br />
                                     </div>
                                     <div style={{display: 'flex', flexFlow: 'column', width: 50, alignItems: 'center'}}>
@@ -213,7 +213,7 @@ const Basket = props => {
                                 props.history.push('/app/payment')
                             }}
                         >
-                            {props.t('basket.pay')} ({foods.reduce((acc, o) => acc + parseFloat(o.count)*parseFloat(o.food.price), 0)}$)
+                            {props.t('basket.pay')} ({foods.reduce((acc, o) => acc + parseFloat(o.count)*parseFloat(o.food.price), 0).toFixed(2)}$)
                         </Button>
                     </Grid>
                 ) : undefined) : (
