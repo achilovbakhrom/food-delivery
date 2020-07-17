@@ -17,10 +17,11 @@
       "code": "Kod",
       "phoneNumber": "Telefon",
       "currency": "Valyuta",
-      "have_account": "Akkaunt bormi?"
+      "have_account": "Akkaunt bormi?",
+      "language": "Til"
     },
     "main": {
-      "address": "Adres",
+      "address": "Manzil",
       "restaurants": "Restoran",
       "history": "Buyurtmalar",
       "contacts": "Kontaktlar",
@@ -64,7 +65,8 @@
       "region": "Region",
       "district": "Rayon",
       "cardNo": "Karta nomeri",
-      "expiry": "Tugash muddati"
+      "expiry": "Tugash muddati",
+      "description": "Qo'shimcha Ma'lumot"
     },
     "regions": {
       "region": "Region",

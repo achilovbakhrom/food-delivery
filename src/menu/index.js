@@ -111,7 +111,8 @@ const Menu = props => {
                                                 borderTopStyle: "solid",
                                                 borderBottomColor: borderColor,
                                                 borderBottomWidth: 1,
-                                                borderBottomStyle: "solid"
+                                                borderBottomStyle: "solid",
+                                                objectFit: "cover"
                                             }} />
                                     </ListItemIcon>
                                     <div style={{
@@ -141,7 +142,7 @@ const Menu = props => {
                                         <div style={{display: 'flex', flexFlow: 'column', width: 50, alignItems: 'center'}}>
                                             <Button
                                                 variant='outlined'
-                                                color="primary"
+                                                color="inherit"
                                                 style={{fontSize: 25, height: (() => {
                                                         if (isWidthUp('md', props.width)) {
                                                             return 60;
@@ -150,7 +151,7 @@ const Menu = props => {
                                                             return 30;
                                                         }
                                                         return 1;
-                                                    })()}}
+                                                    })(), color: green.A700}}
                                                 onClick={() => {
                                                     let orderString = Cookies.get('orders') || '[]';
                                                     let cookieOrders = JSON.parse(orderString);

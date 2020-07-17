@@ -17,7 +17,8 @@
       "code": "Code",
       "phoneNumber": "Phone Number",
       "currency": "Currency",
-      "have_account": "Have account?"
+      "have_account": "Have account?",
+      "language": "Language"
     },
     "main": {
       "address": "Address",
@@ -64,7 +65,8 @@
       "region": "Region",
       "district": "District",
       "cardNo": "Card Number",
-      "expiry": "Expiry date"
+      "expiry": "Expiry date",
+      "description": "Additional information"
     },
     "regions": {
       "region": "Region",

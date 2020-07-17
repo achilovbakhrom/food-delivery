@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
-import {Button, Grid, GridList, Typography, ListItem, ListItemIcon, isWidthUp, Paper} from '@material-ui/core';
+import {
+    Button,
+    Grid,
+    GridList,
+    Typography,
+    ListItem,
+    ListItemIcon,
+    isWidthUp,
+    Paper,
+    withWidth
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import {green} from "@material-ui/core/colors";
 import Cookies from 'js-cookie';
@@ -41,6 +51,7 @@ const Basket = props => {
     useEffect(() => {
         let orderString = Cookies.get('orders') || '[]';
         let orders = JSON.parse(orderString);
+        console.log(orders)
         setFoods(orders);
 
     }, []);
@@ -59,24 +70,33 @@ const Basket = props => {
 
     let borderColor = '#fff3';
 
+    let height = (() => {
+        if (isWidthUp('md', props.width)) {
+            return 250;
+        }
+        if (isWidthUp('xs', props.width)) {
+            return 120;
+        }
+        return 1;
+    })();
 
     return (
         <Grid container>
             <Grid item xs={12} className={classes.title}> {props.t('basket.my')} </Grid>
             <Grid container className={classes.footer} justify="flex-end">
-                {props.t('basket.total')}&nbsp;<strong style={{color: green.A700, fontSize: 32}}>{ foods.reduce((acc, o) => acc + parseFloat(o.count)*parseFloat(o.food.price), 0) } $</strong>&nbsp;
+                {props.t('basket.total')}&nbsp;<strong style={{color: green.A700, fontSize: 32}}>{ foods.reduce((acc, o) => acc + parseFloat(o.count)*parseFloat(o.food.price), 0).toFixed(2) } $</strong>&nbsp;
             </Grid>
             <Grid item xs={12}>
-                <GridList spacing={15} cellHeight={200} cols={getGridListCols()}>
+                <GridList spacing={15} cellHeight={height} cols={getGridListCols()}>
                     {
                         foods.length ? foods.map((item, index) => (
                             <ListItem key={index} cols={1} >
                                 <ListItemIcon>
                                     <img
-                                        src={require("../assets/img/burgers.jpg")}
+                                        src={item.food.photo ? item.food.photo.url : require("../assets/img/burgers.jpg")}
                                         alt="burger"
-                                        width={250}
-                                        height={200}
+                                        width={height*1.1}
+                                        height={height}
                                         style={{
                                             borderBottomLeftRadius: 10,
                                             borderTopLeftRadius: 10,
@@ -88,7 +108,8 @@ const Basket = props => {
                                             borderTopStyle: "solid",
                                             borderBottomColor: borderColor,
                                             borderBottomWidth: 1,
-                                            borderBottomStyle: "solid"
+                                            borderBottomStyle: "solid",
+                                            objectFit: "cover"
                                         }} />
                                 </ListItemIcon>
                                 <div style={{
@@ -97,7 +118,7 @@ const Basket = props => {
                                     flexGrow: 1,
                                     borderTopRightRadius: 10,
                                     borderBottomRightRadius: 10,
-                                    padding: 20,
+                                    padding: 10,
                                     display: 'flex',
                                     flexFlow: 'row',
                                     borderRightColor: borderColor,
@@ -118,8 +139,16 @@ const Basket = props => {
                                     <div style={{display: 'flex', flexFlow: 'column', width: 50, alignItems: 'center'}}>
                                         <Button
                                             variant='outlined'
-                                            color="primary"
-                                            style={{fontSize: 25}}
+                                            color="inherit"
+                                            style={{fontSize: 25, height: (() => {
+                                                    if (isWidthUp('md', props.width)) {
+                                                        return 60;
+                                                    }
+                                                    if (isWidthUp('xs', props.width)) {
+                                                        return 30;
+                                                    }
+                                                    return 1;
+                                                })(), color: green.A700}}
                                             onClick={() => {
                                                 foods.forEach((i) => {
                                                     if (i.food.id === item.food.id) {
@@ -135,7 +164,15 @@ const Basket = props => {
                                         <Button
                                             variant='outlined'
                                             color="secondary"
-                                            style={{fontSize: 25}}
+                                            style={{fontSize: 25, height: (() => {
+                                                    if (isWidthUp('md', props.width)) {
+                                                        return 60;
+                                                    }
+                                                    if (isWidthUp('xs', props.width)) {
+                                                        return 30;
+                                                    }
+                                                    return 1;
+                                                })()}}
                                             onClick={() => {
                                                 foods.forEach((i, index) => {
                                                     if (i.food.id === item.food.id) {
@@ -158,7 +195,7 @@ const Basket = props => {
                         )) : (
                             <Grid container>
                                 <Paper style={{width: '100%', padding: 20, textAlign: 'center', backgroundColor: 'white', color: '#555'}}>
-                                    {props.t('common.empty')}
+                                    { props.t('common.empty') }
                                 </Paper>
                             </Grid>
                         )
@@ -199,4 +236,4 @@ const Basket = props => {
     )
 };
 
-export default withRouter(withTranslation()(Basket))
+export default withRouter(withTranslation()(withWidth()(Basket)))

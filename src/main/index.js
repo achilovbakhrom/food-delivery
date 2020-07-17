@@ -175,7 +175,7 @@ const Main = props => {
                                 color="inherit" style={{color: 'white', marginRight: 10}}
 
                             >
-                                {price}$
+                                {price.toFixed(2)}$
                             </Typography>
                         ) : undefined
 

@@ -17,7 +17,8 @@
       "code": "Код",
       "phoneNumber": "Телефон номер",
       "currency": "Валюта",
-      "have_account": "Есть аккаунт?"
+      "have_account": "Есть аккаунт?",
+      "language": "Язык"
     },
     "main": {
       "address": "Адрес",
@@ -64,7 +65,8 @@
       "region": "Регион",
       "district": "Район",
       "cardNo": "Номер карты",
-      "expiry": "Адреес истечения"
+      "expiry": "Адрес истечения",
+      "description": "Дополнительная информация"
     },
     "regions": {
       "region": "Регион",

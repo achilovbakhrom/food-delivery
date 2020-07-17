@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import {green, indigo} from "@material-ui/core/colors";
+import {green, indigo, red} from "@material-ui/core/colors";
 import { BrowserRouter } from 'react-router-dom';
 import {I18nextProvider} from 'react-i18next';
 import i18n from './i18';
@@ -14,7 +14,7 @@ const theme = createMuiTheme({
     palette: {
         type: 'dark',
         primary: {
-            main: green.A700,
+            main: red.A700,
             dark: indigo
         },
         secondary: {
@@ -25,7 +25,7 @@ const theme = createMuiTheme({
     overrides: {
         MuiButton: {
             contained: {
-                backgroundColor: green.A700,
+                backgroundColor: red.A700,
                 color: 'white',
 
             }

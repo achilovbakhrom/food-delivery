@@ -97,7 +97,7 @@ const Restaurants = props => {
             return 140;
         }
         return 1;
-    }
+    };
 
     return (
         <Grid container justify='center'>
@@ -115,7 +115,12 @@ const Restaurants = props => {
                                         props.history.push(`/app/categories?restaurantId=${item.id}`)
                                     }}>
                                         <ListItemIcon>
-                                            <img src={ item.photo ? item.photo.url : require("../assets/img/burgers.jpg")} alt="burger" width={imageSize()} height={imageSize()*1.1} style={{borderBottomLeftRadius: 10, borderTopLeftRadius: 10}} />
+                                            <img
+                                                src={ item.photo ? item.photo.url : require("../assets/img/burgers.jpg")}
+                                                alt="burger"
+                                                width={imageSize()}
+                                                height={imageSize()*1.1}
+                                                style={{borderBottomLeftRadius: 10, borderTopLeftRadius: 10, objectFit: 'cover'}} />
                                         </ListItemIcon>
                                         <div style={{height: '100%', backgroundColor: 'white', flexGrow: 1, borderTopRightRadius: 10, borderBottomRightRadius: 10, padding: 20}}>
                                             <Typography variant='inherit' style={{color: '#555', fontSize: 20}}>{item.name}</Typography> <br />

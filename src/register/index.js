@@ -10,6 +10,10 @@ import Cookie from 'js-cookie';
 import { store } from 'react-notifications-component';
 import { withTranslation } from "react-i18next";
 import { withRouter } from 'react-router-dom';
+import Select from "@material-ui/core/Select/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import i18n from "../i18";
+
 const useStyles = makeStyles(() => ({
     root: {
         height: '100%',
@@ -46,6 +50,7 @@ const Register = (props) => {
     const [lastName, setLastName] = useState();
     const [email, setEmail] = useState();
     const [username, setUsername] = useState();
+    const [language, setLanguage] = useState();
 
     useEffect(() => {
 
@@ -172,6 +177,28 @@ const Register = (props) => {
                         />}
                     />
                 </Grid>
+                <Grid item xs={12} className={classes.mt20} >
+                    <Select
+                        id="language"
+                        labelId="language-label"
+                        variant="outlined"
+                        value={language}
+                        labelWidth={80}
+                        fullWidth
+                        label={props.t('register.language')}
+                        onChange={(e) => {
+                            setLanguage(e.target.value);
+                            Cookie.set('language', 'uz');
+                            i18n.changeLanguage(e.target.value).then();
+                        }}
+                    >
+                        {
+                            [{id: 'en', name: 'English'}, {id: 'uz', name: "O'zbek"}, {id: 'ru', name: 'Русский'}].map((d) => (
+                                <MenuItem value={d.id} key={d.id}>{d.name}</MenuItem>
+                            ))
+                        }
+                    </Select>
+                </Grid>
                 <TextField
                     placeholder={props.t('auth.login')}
                     variant="outlined"
@@ -213,7 +240,7 @@ const Register = (props) => {
                     className={classes.button}
                     disabled={isActionDisabled()}
                     onClick={() => {
-                        setIsLoading(true)
+                        setIsLoading(true);
                         register({
                             countryId,
                             currencyId,

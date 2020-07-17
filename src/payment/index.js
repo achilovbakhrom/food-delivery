@@ -69,8 +69,7 @@ const Payment = props => {
 
     const isDisabled = () => {
         let type = cardType() || '';
-        console.log(type);
-        return !fio || !phone || !street || !houseNo || !door || !floor || !flatNo ||
+        return !fio || !phone || !street || !houseNo ||
             regionId === undefined || districtId === undefined || !cvc || !expiry || (type.toUpperCase() !== 'VISA' && type.toUpperCase() !== 'MASTERCARD' && type.toUpperCase() !== 'AMERICAN_EXPRESS')
     };
 
@@ -253,6 +252,23 @@ const Payment = props => {
                 </Grid>
 
             </Grid>
+
+            <Grid container direction="row" style={{marginTop: 15}}>
+                <Grid item xs={12}>
+
+                    <TextField
+                        variant="outlined"
+                        fullWidth
+                        label={props.t('payment.description')}
+                        rows={4}
+                        multiline
+                        onChange={(e) => {
+                            setDoor(e.target.value)
+                        }}
+                    />
+                </Grid>
+            </Grid>
+
             <Grid container style={{marginTop: 20}}>
                 <Grid item xs={12} md={9}>
                     <Button
@@ -293,7 +309,7 @@ const Payment = props => {
                                 alert(error);
                             })
                         }}
-                    > {props.t('payment.purchase_order')} ({cost}$) </Button>
+                    > {props.t('payment.purchase_order')} ({cost.toFixed(2)}$) </Button>
                 </Grid>
             </Grid>
         </Grid>

@@ -10,7 +10,7 @@ import {
     FormControl
 } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
-import { green } from "@material-ui/core/colors";
+import { red } from "@material-ui/core/colors";
 import { Link, withRouter } from 'react-router-dom';
 import {Visibility, VisibilityOff} from "@material-ui/icons";
 import {currentUser, login} from "../api/auth";
@@ -31,7 +31,7 @@ const useStyles = makeStyles(() => ({
         marginTop: '50px',
         height: '50px',
         '&:hover': {
-            backgroundColor: green.A700
+            backgroundColor: red.A700
         }
     }
 }));
