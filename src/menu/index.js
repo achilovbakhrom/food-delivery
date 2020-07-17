@@ -71,13 +71,23 @@ const Menu = props => {
 
     let borderColor = '#fff3';
 
+    let height = (() => {
+        if (isWidthUp('md', props.width)) {
+            return 250;
+        }
+        if (isWidthUp('xs', props.width)) {
+            return 120;
+        }
+        return 1;
+    })()
+
     return (
         <Grid container >
             <Grid item className={classes.title} xs={12}>
                 <div> {props.t('menu.menu')} </div>
             </Grid>
             <Grid item>
-                <GridList spacing={10} cellHeight={200} cols={getGridListCols()}>
+                <GridList spacing={10} cellHeight={height} cols={getGridListCols()}>
                     {
                         foods.map((item, index) => {
                             let f = orders.find(o => item.id === o.food.id);
@@ -88,8 +98,8 @@ const Menu = props => {
                                         <img
                                             src={item.photo ? item.photo.url : require("../assets/img/burgers.jpg")}
                                             alt="burger"
-                                            width={220}
-                                            height={200}
+                                            width={height*1.1}
+                                            height={height}
                                             style={{
                                                 borderBottomLeftRadius: 10,
                                                 borderTopLeftRadius: 10,
@@ -132,7 +142,15 @@ const Menu = props => {
                                             <Button
                                                 variant='outlined'
                                                 color="primary"
-                                                style={{fontSize: 25}}
+                                                style={{fontSize: 25, height: (() => {
+                                                        if (isWidthUp('md', props.width)) {
+                                                            return 60;
+                                                        }
+                                                        if (isWidthUp('xs', props.width)) {
+                                                            return 30;
+                                                        }
+                                                        return 1;
+                                                    })()}}
                                                 onClick={() => {
                                                     let orderString = Cookies.get('orders') || '[]';
                                                     let cookieOrders = JSON.parse(orderString);
@@ -155,7 +173,15 @@ const Menu = props => {
                                             <Button
                                                 variant='outlined'
                                                 color="secondary"
-                                                style={{fontSize: 25}}
+                                                style={{fontSize: 25, height: (() => {
+                                                        if (isWidthUp('md', props.width)) {
+                                                            return 60;
+                                                        }
+                                                        if (isWidthUp('xs', props.width)) {
+                                                            return 30;
+                                                        }
+                                                        return 1;
+                                                    })()}}
                                                 onClick={() => {
                                                     let orderString = Cookies.get('orders') || '[]';
                                                     let cookieOrders = JSON.parse(orderString);

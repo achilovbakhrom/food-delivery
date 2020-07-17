@@ -88,6 +88,17 @@ const Restaurants = props => {
         return 1;
     };
 
+    const imageSize = () => {
+        if (isWidthUp('md', props.width)) {
+            return 250;
+        }
+
+        if (isWidthUp('xs', props.width)) {
+            return 140;
+        }
+        return 1;
+    }
+
     return (
         <Grid container justify='center'>
             <Grid item className={classes.title} xs={12}>
@@ -96,7 +107,7 @@ const Restaurants = props => {
             <Grid item xs={12}>
                 {
                     isLoading ? undefined : (
-                        <GridList spacing={15} cellHeight={200} cols={getGridListCols()}>
+                        <GridList spacing={15} cellHeight={imageSize()*1.1} cols={getGridListCols()}>
                             {
                                 restaurants && restaurants.length ? restaurants.map((item, index) => (
                                     <ListItem key={index} cols={1} style={{pointer: 'cursor'}} onClick={() => {
@@ -104,7 +115,7 @@ const Restaurants = props => {
                                         props.history.push(`/app/categories?restaurantId=${item.id}`)
                                     }}>
                                         <ListItemIcon>
-                                            <img src={ item.photo ? item.photo.url : require("../assets/img/burgers.jpg")} alt="burger" width={250} height={200} style={{borderBottomLeftRadius: 10, borderTopLeftRadius: 10}} />
+                                            <img src={ item.photo ? item.photo.url : require("../assets/img/burgers.jpg")} alt="burger" width={imageSize()} height={imageSize()*1.1} style={{borderBottomLeftRadius: 10, borderTopLeftRadius: 10}} />
                                         </ListItemIcon>
                                         <div style={{height: '100%', backgroundColor: 'white', flexGrow: 1, borderTopRightRadius: 10, borderBottomRightRadius: 10, padding: 20}}>
                                             <Typography variant='inherit' style={{color: '#555', fontSize: 20}}>{item.name}</Typography> <br />

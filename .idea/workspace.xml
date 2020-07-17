@@ -3,21 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="4c1cc787-1446-497d-a874-fac755bc5a71" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin/foods/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/foods/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin/history/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/history/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/restaurants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/restaurants.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/categories/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/categories/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/history/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/history/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/i18/locales/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/i18/locales/en.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/i18/locales/ru.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/i18/locales/ru.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/i18/locales/uz.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/i18/locales/uz.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/login/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/login/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/payment/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/payment/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/menu/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/menu/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/restaurants/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/restaurants/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -118,7 +107,8 @@
       <workItem from="1594639917735" duration="17526000" />
       <workItem from="1594699297105" duration="326000" />
       <workItem from="1594705402550" duration="2395000" />
-      <workItem from="1594708630375" duration="10800000" />
+      <workItem from="1594708630375" duration="11139000" />
+      <workItem from="1594960282724" duration="1286000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <created>1593888871329</created>
@@ -183,7 +173,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594716223117</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="register url">
+      <created>1594726062436</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1594726062436</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

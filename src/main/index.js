@@ -259,7 +259,8 @@ const Main = props => {
                         {name: props.t('main.address'), icon: <LocationCity />},
                         {name: props.t('main.restaurants'), icon: <Restaurant />},
                         {name: props.t('main.contacts'), icon: <ContactIcon />},
-                        {name: props.t('main.login'), icon: <Language />}].map((obj, index) => (
+                        {name: props.t('main.languages'), icon: <Language />},
+                        {name: props.t('main.login'), icon: <ExitToApp />}].map((obj, index) => (
                         <ListItem button key={obj.name} onClick={() => {
                             setOpen(false);
                             switch (index) {
@@ -273,6 +274,9 @@ const Main = props => {
                                     props.history.push('/app/contacts');
                                     break;
                                 case 3:
+                                    props.history.push('/app/languages');
+                                    break;
+                                case 4:
                                     Cookies.remove('token');
                                     props.history.push('/login');
                                     break;

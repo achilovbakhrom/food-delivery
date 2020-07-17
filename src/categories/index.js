@@ -45,22 +45,6 @@ const Menu = props => {
     const [categoryList, setCategoryList] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
-    const getGridListCols = () => {
-        // if (isWidthUp('lg', props.width)) {
-        //     return 3;
-        // }
-
-        if (isWidthUp('md', props.width)) {
-            return 2;
-        }
-
-        if (isWidthUp('xs', props.width)) {
-            return 2;
-        }
-
-        return 2;
-    };
-
     useEffect(() => {
         setIsLoading(true)
         fetchCategories({page: 0, size: 100})
@@ -76,68 +60,44 @@ const Menu = props => {
                 <Typography> {props.t('categories.categories')} </Typography>
             </Grid>
             <Grid item>
-                <GridList spacing={15} cellHeight={300} cols={(() => {
+                <GridList spacing={15} cellHeight={(() => {
+                    if (isWidthUp('md', props.width)) {
+                        return 300;
+                    }
+                    if (isWidthUp('xs', props.width)) {
+                        return 200;
+                    }
+                    return 2;
+                })()} cols={(() => {
                     if (isWidthUp('md', props.width)) {
                         return 4;
                     }
                     if (isWidthUp('xs', props.width)) {
                         return 2;
                     }
-                    return 1;
+                    return 2;
                 })()}>
                     {
                         categoryList.map((cat, index) => {
-                            if (index%3 === 0) {
-                                return (
-                                    <GridListTile
-                                        onClick={() => {
-                                            const parsed = queryString.parse(props.location.search);
-                                            props.history.push(`/app/menu?restaurantId=${parsed['restaurantId']}&categoryId=${cat.id}`);
-                                        }}
-                                        key={1} cols={(() => {
-                                        if (isWidthUp('md', props.width)) {
-                                            return 1;
+                            return (
+                                <GridListTile
+                                    onClick={() => {
+                                        const parsed = queryString.parse(props.location.search);
+                                        props.history.push(`/app/menu?restaurantId=${parsed['restaurantId']}&categoryId=${cat.id}`);
+                                    }}
+                                    key={1}
+                                    cols={1}>
+                                    <img src={require('../assets/img/burgers.jpg')} alt={"f1"} />
+                                    <GridListTileBar
+                                        title={cat.name}
+                                        actionIcon={
+                                            <IconButton aria-label={`info about`} className={classes.icon}>
+                                                <Info />
+                                            </IconButton>
                                         }
-
-                                        if (isWidthUp('xs', props.width)) {
-                                            return 2;
-                                        }
-
-                                        return 1;
-                                    })()}>
-                                        <img src={cat.photo ? cat.photo.url : require('../assets/img/burgers.jpg')} alt={"f1"} />
-                                        <GridListTileBar
-                                            title={cat.name}
-                                            actionIcon={
-                                                <IconButton aria-label={`info about`} className={classes.icon}>
-                                                    <Info />
-                                                </IconButton>
-                                            }
-                                        />
-                                    </GridListTile>
-                                )
-                            } else {
-                                return (
-                                    <GridListTile
-                                        onClick={() => {
-                                            const parsed = queryString.parse(props.location.search);
-                                            props.history.push(`/app/menu?restaurantId=${parsed['restaurantId']}&categoryId=${cat.id}`);
-                                        }}
-                                        key={1}
-                                        cols={1}>
-                                        <img src={require('../assets/img/burgers.jpg')} alt={"f1"} />
-                                        <GridListTileBar
-                                            title={cat.name}
-                                            actionIcon={
-                                                <IconButton aria-label={`info about`} className={classes.icon}>
-                                                    <Info />
-                                                </IconButton>
-                                            }
-                                        />
-                                    </GridListTile>
-                                )
-                            }
-
+                                    />
+                                </GridListTile>
+                            )
                         })
                     }
                 </GridList>
