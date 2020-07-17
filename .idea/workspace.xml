@@ -1,22 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4c1cc787-1446-497d-a874-fac755bc5a71" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/basket/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/basket/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/i18/locales/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/i18/locales/en.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/i18/locales/ru.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/i18/locales/ru.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/i18/locales/uz.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/i18/locales/uz.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/languages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/languages/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/login/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/login/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/menu/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/menu/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/payment/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/payment/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/register/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/register/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/restaurants/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/restaurants/index.js" afterDir="false" />
-    </list>
+    <list default="true" id="4c1cc787-1446-497d-a874-fac755bc5a71" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,7 +103,7 @@
       <workItem from="1594705402550" duration="2395000" />
       <workItem from="1594708630375" duration="11139000" />
       <workItem from="1594960282724" duration="1619000" />
-      <workItem from="1594967457703" duration="3751000" />
+      <workItem from="1594967457703" duration="3837000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <created>1593888871329</created>
@@ -197,7 +182,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594961767469</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="register url">
+      <created>1594973681265</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1594973681265</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
