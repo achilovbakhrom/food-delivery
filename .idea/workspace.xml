@@ -110,7 +110,7 @@
       <workItem from="1594967457703" duration="3837000" />
       <workItem from="1594996970803" duration="9692000" />
       <workItem from="1595060164013" duration="7673000" />
-      <workItem from="1595074683296" duration="20000" />
+      <workItem from="1595074683296" duration="149000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <created>1593888871329</created>
@@ -224,7 +224,14 @@
       <option name="project" value="LOCAL" />
       <updated>1595073181470</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="search key">
+      <created>1595074715008</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1595074715008</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -249,6 +256,7 @@
     <MESSAGE value="url changed" />
     <MESSAGE value="register url" />
     <MESSAGE value="search" />
-    <option name="LAST_COMMIT_MESSAGE" value="search" />
+    <MESSAGE value="search key" />
+    <option name="LAST_COMMIT_MESSAGE" value="search key" />
   </component>
 </project>

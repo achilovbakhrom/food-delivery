@@ -49,7 +49,7 @@ const AdminFoods = props => {
 
     const updateList = () => {
         setIsLoading(true);
-        fetchFoods({page, size, searchKey: search})
+        fetchFoods({page, size, search})
             .then(response => {
                 setIsLoading(false);
                 setData(response.data.content);
