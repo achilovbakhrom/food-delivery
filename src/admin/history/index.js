@@ -169,7 +169,7 @@ const AdminHistory = props => {
                                                     updateList();
                                                     setDriverDialog(false);
                                                     setAssignId(undefined);
-                                                }).catch(e => { alert(e) })
+                                                }).catch(e => { alert(e.message) })
                                         }}>
                                             <ListItemText>{i.firstName} - {i.lastName}</ListItemText>
                                         </ListItem>

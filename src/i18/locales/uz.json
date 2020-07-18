@@ -9,7 +9,11 @@
       "register": "Ro'yhatdan o'tish",
       "no_account": "Akkaunt yo'qmi?",
       "forgot": "Parolni unutdingizmi?",
-      "restore": "Akkauntni tiklash!"
+      "restore": "Akkauntni tiklash!",
+      "enter_email": "Loginingizni kiriting",
+      "send": "Jo'natish",
+      "sent_success": "Pochtangizga ma'lumotlar jo'natildi, iltimos tekshiring!",
+      "wrong_email": "Noto'g'ri login!"
     },
     "register": {
       "firstName": "Ism",

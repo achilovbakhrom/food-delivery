@@ -10,8 +10,8 @@ const Contacts = props => {
                 <Paper style={{padding: 20, width: '100%', backgroundColor: 'white'}}>
                     <Grid container>
                         <Grid item xs={12} style={{fontSize: 18, fontWeight: 'bold', color: '#555'}}> {props.t('contacts.contacts')} </Grid>
-                        <Grid item xs={12} style={{fontSize: 15, color: '#555', marginTop: 20}}> {props.t('contacts.phone')}: <strong>(209)-733-7777</strong> </Grid>
-                        <Grid item xs={12} style={{fontSize: 15, color: '#555', marginTop: 20}}> {props.t('contacts.email')}: <strong>uzchef@gmail.com</strong> </Grid>
+                        <Grid item xs={12} style={{fontSize: 15, color: '#555', marginTop: 20}}> {props.t('contacts.phone')}: <strong><a href="tel:209-733-7777">(209)-733-7777</a></strong> </Grid>
+                        <Grid item xs={12} style={{fontSize: 15, color: '#555', marginTop: 20}}> {props.t('contacts.email')}: <strong><a href="mailto:uzchef@outlook.com">uzchef@outlook.com</a></strong> </Grid>
 
                     </Grid>
                 </Paper>

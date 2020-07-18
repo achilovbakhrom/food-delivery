@@ -9,7 +9,11 @@
       "register": "Register",
       "no_account": "No account yet?",
       "forgot": "Forgot password?",
-      "restore": "Restore account!"
+      "restore": "Restore account!",
+      "enter_email": "Enter username",
+      "send": "Send",
+      "sent_success": "We sent to your email your credentials, please check!",
+      "wrong_email": "Wrong username!"
     },
     "register": {
       "firstName": "First Name",

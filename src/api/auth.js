@@ -19,7 +19,11 @@ export const login = ({username, password}) => {
 
 export const currentUser = () => {
     return instance.get('/api/users/current')
-}
+};
+
+export const forgot = (username) => {
+    return instance.post('/api/users/forgot-password', {username})
+};
 
 
 export const register = ({ countryId, currencyId, email, firstName, lastName, password, phone, username }) => {

@@ -9,6 +9,7 @@ import ReactNotification from 'react-notifications-component';
 import Cookies from 'js-cookie';
 import AdminRoot from "./admin";
 import { withRouter } from 'react-router-dom';
+import Forgot from './forgot';
 
 function App(props) {
 
@@ -50,7 +51,6 @@ function App(props) {
                 break
         }
         document.getElementsByClassName('App')[0].style.backgroundImage = url;
-
     }, [props.history.location]);
 
   return (
@@ -59,6 +59,7 @@ function App(props) {
       <Switch>
           <Route exact path="/" render={() => <Redirect to="/app/restaurants" />} />
           <Route path="/login" component={Login} />
+          <Route path="/forgot" component={Forgot} />
           <Route path="/register" component={Register} />
           <Route path="/app" component={Main}/>
           <Route path="/admin" render={() => {

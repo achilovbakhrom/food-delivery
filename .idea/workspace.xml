@@ -2,15 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4c1cc787-1446-497d-a874-fac755bc5a71" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/forgot/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin/category/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/category/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin/foods/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/foods/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/admin/history/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/history/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin/menu/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/menu/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin/users/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/users/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/admin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/contacts/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/contacts/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/i18/locales/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/i18/locales/en.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/i18/locales/ru.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/i18/locales/ru.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/i18/locales/uz.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/i18/locales/uz.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/login/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/login/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/payment/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/payment/index.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -115,7 +116,7 @@
       <workItem from="1594960282724" duration="1619000" />
       <workItem from="1594967457703" duration="3837000" />
       <workItem from="1594996970803" duration="9692000" />
-      <workItem from="1595060164013" duration="3646000" />
+      <workItem from="1595060164013" duration="7296000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <created>1593888871329</created>
@@ -215,7 +216,14 @@
       <option name="project" value="LOCAL" />
       <updated>1595011749069</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="search">
+      <created>1595064518697</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1595064518697</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -239,6 +247,7 @@
     <MESSAGE value="almost done" />
     <MESSAGE value="url changed" />
     <MESSAGE value="register url" />
-    <option name="LAST_COMMIT_MESSAGE" value="register url" />
+    <MESSAGE value="search" />
+    <option name="LAST_COMMIT_MESSAGE" value="search" />
   </component>
 </project>
