@@ -50,7 +50,7 @@ const AdminMenu = props => {
 
     const updateList = () => {
         setIsLoading(true);
-        fetchRestaurantFoods({page, size, likeSearchKey: search})
+        fetchRestaurantFoods({page, size, searchKey: search})
             .then(response => {
                 console.log(response.data)
                 setIsLoading(false);
