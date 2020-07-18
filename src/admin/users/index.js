@@ -116,7 +116,7 @@ const AdminUsers = props => {
                     ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
                     ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
                 }}
-                title="Блюда"
+                title="Пользователи"
                 columns={[
                     { title: 'Имя', field: 'lastName' },
                     { title: 'Фамилия', field: 'firstName' },

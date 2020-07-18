@@ -7,7 +7,8 @@ import {
     DialogActions,
     DialogContent,
     DialogContentText,
-    DialogTitle
+    DialogTitle,
+    TextField
 } from '@material-ui/core';
 import {deleteFood, fetchFoods } from "../../api/admin";
 
@@ -38,17 +39,17 @@ const AdminFoods = props => {
     const [total, setTotal] = useState(0);
     const [deleteId, setDeleteId] = useState(false);
     const [deleteOpen, setDeleteOpen] = useState(false);
-
+    const [search, setSearch] = useState();
     useEffect(() => {
         localStorage.removeItem('restaurant');
         updateList()
-    }, [page, size]);
+    }, [page, size, search]);
 
 
 
     const updateList = () => {
         setIsLoading(true);
-        fetchFoods({page, size})
+        fetchFoods({page, size, likeSearchKey: search})
             .then(response => {
                 setIsLoading(false);
                 setData(response.data.content);
@@ -158,11 +159,15 @@ const AdminFoods = props => {
                     setSize(s)
                 }}
                 totalCount={total}
+                onSearchChange={text => {
+                    setSearch(text)
+                }}
 
                 style={{width: '100%'}}
                 options={{
                     pageSizeOptions: [10, 20, 40],
-                    pageSize: size
+                    pageSize: size,
+                    search: true
 
                 }}
             />

@@ -103,7 +103,8 @@ const Login = props => {
                                     Cookie.set('token', response.data["id_token"]);
                                     currentUser()
                                         .then(response => {
-                                            if (response.data.roles.indexOf('ROLE_ADMIN') >= 0) {
+                                            console.log('current user', response.data)
+                                            if (response.data.roles.indexOf('ADMIN') >= 0) {
                                                 props.history.push('/admin/restaurants')
                                             } else {
                                                 let orderString = Cookie.get('orders') || '[]';

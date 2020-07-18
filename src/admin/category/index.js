@@ -117,9 +117,9 @@ const AdminCategory = props => {
                     ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
                     ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
                 }}
-                title="Блюда"
+                title="Категории"
                 columns={[
-                    { title: 'Название блюда', field: 'name' }
+                    { title: 'Название категории', field: 'name' }
                 ]}
                 isLoading={isLoading}
                 data={data}

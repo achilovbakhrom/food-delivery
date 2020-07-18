@@ -139,3 +139,11 @@ export const fetchUserById = (id) => {
 export const deleteUser = (id) => {
     return instance.delete(`/api/users/${id}`);
 };
+
+export const assignDriver = (orderId, driverId) => {
+    return instance.put(`/api/admin/orders/assign`, { id: orderId, driverId });
+};
+
+export const changeStatus = (orderId, status) => {
+    return instance.put(`/api/admin/orders/status`, { id: orderId, status });
+};

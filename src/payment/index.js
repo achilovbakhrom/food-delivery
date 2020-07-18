@@ -65,7 +65,7 @@ const Payment = props => {
     const [cvc, setCvc] = useState('');
     const [expiry, setExpiry] = useState('');
     const [number, setNumber] = useState('');
-    const [description, setDescription] = [];
+    const [description, setDescription] = useState();
 
     const isDisabled = () => {
         let type = cardType() || '';

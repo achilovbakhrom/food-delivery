@@ -32,8 +32,43 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import Button from "@material-ui/core/Button";
+import { Assignment, DriveEta } from '@material-ui/icons';
 import {fetchMyOrders, fetchOrderById} from "../../api/restaurants";
+import {assignDriver, changeStatus, fetchUsers} from "../../api/admin";
 
+
+let status = [
+    {
+        "code": "NEW",
+        "name": "New",
+        "nameRu": "Новый",
+        "nameUz": "Yangi"
+    },
+    {
+        "code": "ACCEPT",
+        "name": "Order accepted",
+        "nameRu": "Заказ принят",
+        "nameUz": "Buyurtma qabul qilindi"
+    },
+    {
+        "code": "REJECT",
+        "name": "Order rejected",
+        "nameRu": "Заказ отклонен",
+        "nameUz": "Buyurtma rad qilindi"
+    },
+    {
+        "code": "TRANSIT",
+        "name": "Order in transit",
+        "nameRu": "Заказ в пути",
+        "nameUz": "Buyurtma yulda"
+    },
+    {
+        "code": "DELIVERED",
+        "name": "Order delivered",
+        "nameRu": "Заказ доставлен",
+        "nameUz": "Buyurtma yetkazildi"
+    }
+];
 
 const AdminHistory = props => {
 
@@ -45,16 +80,23 @@ const AdminHistory = props => {
 
     const [client, setClient] = useState();
     const [clientDialog, setClientDialog] = useState(false);
+    const [driverDialog, setDriverDialog] = useState(false);
+    const [statusDialog, setStatusDialog] = useState(false);
+    const [drivers, setDrivers] = useState([]);
+    const [assignId, setAssignId] = useState();
+
     useEffect(() => {
-        localStorage.removeItem('restaurant');
         updateList()
+        fetchUsers({page: 0, size: 10000000, role: 'DRIVER'})
+            .then(response => {
+                setDrivers(response.data.content);
+            })
     }, [page, size]);
 
     const updateList = () => {
         setIsLoading(true);
         fetchMyOrders({page, size})
             .then(response => {
-                console.log(response.data.content)
                 setIsLoading(false);
                 setData(response.data.content);
                 setTotal(response.data.totalElements);
@@ -67,6 +109,78 @@ const AdminHistory = props => {
 
     return (
         <Grid container style={{marginTop: 50}}>
+            <Dialog
+                open={statusDialog}
+                onClose={() => {
+                    setStatusDialog(false);
+                    setAssignId(undefined);
+                }}
+                fullWidth
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">{"Выберите статус"}</DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        <Grid container style={{padding: 10}}>
+                            <Grid item xs={12}>
+                                {status.map(s => (
+                                    <List>
+                                        <ListItem button onClick={() => {
+                                            changeStatus(assignId, s.code)
+                                                .then(_ => {
+                                                    updateList();
+                                                    setStatusDialog(false);
+                                                    setAssignId(undefined);
+                                                })
+                                                .catch(e => { alert(e) })
+                                        }}>
+                                            <ListItemText>{s.nameRu}</ListItemText>
+                                        </ListItem>
+                                    </List>
+                                ))}
+
+                            </Grid>
+                        </Grid>
+                    </DialogContentText>
+                </DialogContent>
+            </Dialog>
+            <Dialog
+                open={driverDialog}
+                onClose={() => {
+                    setDriverDialog(false);
+                    setAssignId(undefined);
+                }}
+                fullWidth
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">{"Выберите водителя"}</DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        <Grid container style={{padding: 10}}>
+
+                            <Grid item xs={12}>
+                                {drivers && drivers.map(i => (
+                                    <List>
+                                        <ListItem button onClick={() => {
+                                            assignDriver(assignId, i.id)
+                                                .then(_ => {
+                                                    updateList();
+                                                    setDriverDialog(false);
+                                                    setAssignId(undefined);
+                                                }).catch(e => { alert(e) })
+                                        }}>
+                                            <ListItemText>{i.firstName} - {i.lastName}</ListItemText>
+                                        </ListItem>
+                                    </List>
+                                ))}
+
+                            </Grid>
+                        </Grid>
+                    </DialogContentText>
+                </DialogContent>
+            </Dialog>
             <Dialog
                 open={clientDialog}
                 onClose={() => {
@@ -132,14 +246,17 @@ const AdminHistory = props => {
                     ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
                     ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
                 }}
-                title="Блюда"
+                title="Заказы"
                 columns={[
                     { title: 'Клиент', field: 'clientName' },
                     { title: 'Телефон', field: 'clientPhone' },
                     { title: 'Получатель', field: 'receiver' },
                     { title: 'Телефон Получателя', field: 'receiverPhone' },
                     { title: 'Ресторан', field: 'restaurant' },
-                    { title: 'Адрес', field: 'address' }
+                    { title: 'Адрес', field: 'address' },
+                    { title: 'Статус', field: 'status' },
+                    { title: 'Водитель', field: 'driver' },
+                    { title: 'Супервайзер', field: 'supervisor' }
                 ]}
                 isLoading={isLoading}
                 data={data.map(d => ({
@@ -149,8 +266,32 @@ const AdminHistory = props => {
                     receiver: d.receiver.name,
                     receiverPhone: d.receiver.phone,
                     restaurant: d.restaurant.name,
-                    address: `${d.address.street}`
+                    address: `${d.address.street}`,
+                    status: d.status,
+                    driver: d.driver ? `${d.driver.firstName} ${d.driver.lastName}` : 'Не назначен',
+                    supervisor: d.supervisor ? `${d.supervisor.firstName} ${d.supervisor.lastName}` : 'Не назначен'
                 }))}
+                actions={[
+                    {
+                        icon: () => <DriveEta />,
+                        position: 'row',
+                        tooltip: 'Назначить водителя',
+                        onClick: (e, r) => {
+                            setAssignId(r.id);
+                            setDriverDialog(true);
+                        }
+                    },
+                    {
+                        icon: () => <Assignment />,
+                        position: 'row',
+                        tooltip: 'Сменить статус',
+                        onClick: (e, r) => {
+                            setAssignId(r.id);
+                            setStatusDialog(true);
+                        }
+                    }
+
+                ]}
                 page={page}
                 onChangePage={p => {setPage(p)}}
                 onChangeRowsPerPage={(s) => {
@@ -160,7 +301,6 @@ const AdminHistory = props => {
                 onRowClick={(row, data) => {
                     fetchOrderById(data.id)
                         .then(response => {
-                            console.log(response.data)
                             setClient(response.data);
                             setClientDialog(true)
                         })

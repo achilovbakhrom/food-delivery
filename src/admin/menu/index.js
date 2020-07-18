@@ -40,17 +40,17 @@ const AdminMenu = props => {
     const [total, setTotal] = useState(0);
     const [deleteId, setDeleteId] = useState(false);
     const [deleteOpen, setDeleteOpen] = useState(false);
-
+    const [search, setSearch] = useState();
     useEffect(() => {
         localStorage.removeItem('restaurant');
         updateList()
-    }, [page, size]);
+    }, [page, size, search]);
 
 
 
     const updateList = () => {
         setIsLoading(true);
-        fetchRestaurantFoods({page, size})
+        fetchRestaurantFoods({page, size, likeSearchKey: search})
             .then(response => {
                 console.log(response.data)
                 setIsLoading(false);
@@ -168,7 +168,9 @@ const AdminMenu = props => {
                     setSize(s)
                 }}
                 totalCount={total}
-
+                onSearchChange={text => {
+                    setSearch(text)
+                }}
                 style={{width: '100%'}}
                 options={{
                     pageSizeOptions: [10, 20, 40, 80],
