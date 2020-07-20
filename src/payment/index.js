@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Grid, TextField, Button, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from '@material-ui/core';
+import {
+    Grid,
+    TextField,
+    Button,
+    FormControl,
+    FormLabel,
+    RadioGroup,
+    FormControlLabel,
+    Radio,
+    InputLabel
+} from '@material-ui/core';
 import {makeStyles} from "@material-ui/core/styles";
 import Cookies from "js-cookie";
 import {withTranslation} from "react-i18next";
@@ -9,6 +19,8 @@ import {fetchDistricts, fetchRegions} from "../api/admin";
 import Select from "@material-ui/core/Select/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import CreditCardInput from 'react-credit-card-input';
+import { dispatch } from 'use-bus'
+import i18n from "../i18";
 
 const useStyles = makeStyles((theme) => ({
     title: {
@@ -132,49 +144,56 @@ const Payment = props => {
 
             <Grid container style={{marginTop: 20}}>
                 <Grid item xs={6} md={4}>
-                    <Select
-                        id="region"
-                        labelId="region-label"
-                        labelWidth={80}
-                        variant="outlined"
-                        value={regionList ? regionId : ''}
-                        fullWidth
-                        label={props.t('payment.region')}
-                        onChange={(e) => {
-                            setRegionId(e.target.value);
-                            setDistrictList([]);
-                            fetchDistricts(e.target.value)
-                                .then(response => {
-                                    setDistrictList(response.data);
-                                })
-                        }}
-                    >
-                        {
-                            regionList.map((r) => (
-                                <MenuItem value={r.id} key={r.id}>{r.name}</MenuItem>
-                            ))
-                        }
-                    </Select>
+                    <FormControl variant="outlined" fullWidth className={classes.formControl}>
+                        <InputLabel id="region">{props.t('payment.region')}</InputLabel>
+                        <Select
+                            id="region"
+                            labelId="region-label"
+                            labelWidth={80}
+                            variant="outlined"
+                            value={regionList ? regionId : ''}
+                            fullWidth
+                            onChange={(e) => {
+                                setRegionId(e.target.value);
+                                setDistrictList([]);
+                                fetchDistricts(e.target.value)
+                                    .then(response => {
+                                        setDistrictList(response.data);
+                                    })
+                            }}
+                        >
+                            {
+                                regionList.map((r) => (
+                                    <MenuItem value={r.id} key={r.id}>{r.name}</MenuItem>
+                                ))
+                            }
+                        </Select>
+                    </FormControl>
+
                 </Grid>
                 <Grid item xs={6} md={5} style={{paddingLeft: 10}}>
-                    <Select
-                        id="district"
-                        labelId="district-label"
-                        variant="outlined"
-                        value={districtList.length ? districtId : ''}
-                        labelWidth={80}
-                        fullWidth
-                        label={props.t('payment.district')}
-                        onChange={(e) => {
-                            setDistrictId(e.target.value);
-                        }}
-                    >
-                        {
-                            districtList.map((d) => (
-                                <MenuItem value={d.id} key={d.id}>{d.name}</MenuItem>
-                            ))
-                        }
-                    </Select>
+                    <FormControl variant="outlined" fullWidth className={classes.formControl}>
+                        <InputLabel id="district">{props.t('payment.district')}</InputLabel>
+                        <Select
+                            id="district"
+                            labelId="district-label"
+                            variant="outlined"
+                            value={districtList.length ? districtId : ''}
+                            labelWidth={80}
+                            fullWidth
+                            label={props.t('payment.district')}
+                            onChange={(e) => {
+                                setDistrictId(e.target.value);
+                            }}
+                        >
+                            {
+                                districtList.map((d) => (
+                                    <MenuItem value={d.id} key={d.id}>{d.name}</MenuItem>
+                                ))
+                            }
+                        </Select>
+                    </FormControl>
+
                 </Grid>
             </Grid>
             <Grid container direction="row" style={{marginTop: 15}}>
@@ -305,6 +324,7 @@ const Payment = props => {
                             }).then(response => {
                                 Cookies.remove('orders');
                                 Cookies.remove('restaurantId');
+                                dispatch('order_changed');
                                 props.history.push('/app/history')
                             }).catch(error => {
                                 alert(error);

@@ -178,27 +178,31 @@ const Register = (props) => {
                     />
                 </Grid>
                 <Grid item xs={12} className={classes.mt20} >
-                    <Select
-                        id="language"
-                        labelId="language-label"
-                        variant="outlined"
-                        value={language}
-                        labelWidth={80}
-                        fullWidth
-                        label={props.t('register.language')}
-                        onChange={(e) => {
-                            setLanguage(e.target.value);
-                            Cookie.set('language', 'uz');
-                            i18n.changeLanguage(e.target.value).then();
-                        }}
-                    >
-                        {
-                            [{id: 'en', name: 'English'}, {id: 'uz', name: "O'zbek"}, {id: 'ru', name: 'Русский'}].map((d) => (
-                                <MenuItem value={d.id} key={d.id}>{d.name}</MenuItem>
-                            ))
-                        }
-                    </Select>
+                    <FormControl variant="outlined" fullWidth className={classes.formControl}>
+                        <InputLabel id="language">{props.t('register.language')}</InputLabel>
+                        <Select
+                            id="language"
+                            labelId="language-label"
+                            variant="outlined"
+                            value={language}
+                            fullWidth
+                            labelWidth={70}
+                            onChange={(e) => {
+                                setLanguage(e.target.value);
+                                Cookie.set('language', 'uz');
+                                i18n.changeLanguage(e.target.value).then();
+                            }}
+                        >
+                            {
+                                [{id: 'en', name: 'English'}, {id: 'uz', name: "O'zbek"}, {id: 'ru', name: 'Русский'}].map((d) => (
+                                    <MenuItem value={d.id} key={d.id}>{d.name}</MenuItem>
+                                ))
+                            }
+                        </Select>
+                    </FormControl>
+
                 </Grid>
+
                 <TextField
                     placeholder={props.t('auth.login')}
                     variant="outlined"
@@ -257,9 +261,11 @@ const Register = (props) => {
                             })
                             .catch(error => {
                                 setIsLoading(false);
+                                console.log(JSON.stringify(error))
+                                console.log('response', error.response)
                                 store.addNotification({
                                     title: "Ошибка при регистрации!",
-                                    message: `${error}`,
+                                    message: `${error && error.response ? error.response.data.title : error}`,
                                     type: "danger",
                                     insert: "top",
                                     container: "top-right",
