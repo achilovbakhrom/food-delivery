@@ -13,6 +13,7 @@ import {
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
+import Alert from '@material-ui/lab/Alert';
 import {
     createUser,
     fetchUserById,
@@ -39,6 +40,7 @@ const AddEditUser = props => {
     const [current, setCurrent] = useState({address: {}});
 
     const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
     const [showPassword, setShowPassword] = useState(false);
 
 
@@ -63,7 +65,7 @@ const AddEditUser = props => {
                 <Typography variant="h5" color="primary">Добавить/Редактировать Пользователя</Typography>
             </Grid>
 
-
+            {error && <Alert severity="error" style={{marginTop: 20}}>{error.title}</Alert>}
 
             <Grid container style={{marginTop: 20}}>
                 <Grid item xs={6}>
@@ -213,7 +215,12 @@ const AddEditUser = props => {
                             createUser({...current})
                                 .then(response => {
                                     setIsLoading(false);
-                                    props.history.goBack()
+                                    setError(null);
+                                    props.history.goBack();
+                                })
+                                .catch((error) => {
+                                    setIsLoading(false);
+                                    setError(error.response.data);
                                 })
                         }
 

@@ -13,6 +13,7 @@ import { withRouter } from 'react-router-dom';
 import Select from "@material-ui/core/Select/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import i18n from "../i18";
+import Alert from "@material-ui/lab/Alert/Alert";
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -51,6 +52,8 @@ const Register = (props) => {
     const [email, setEmail] = useState();
     const [username, setUsername] = useState();
     const [language, setLanguage] = useState();
+
+    const [error, setError] = useState(null);
 
     useEffect(() => {
 
@@ -94,6 +97,7 @@ const Register = (props) => {
             justify='center'
         >
             <Grid item xs={10} md={6} lg={4}>
+                {error && <Alert severity="error" style={{marginBottom: 20}}>{error.title}</Alert>}
                 <TextField
                     variant="outlined"
                     label={props.t('register.firstName')}
@@ -212,7 +216,7 @@ const Register = (props) => {
                 />
 
                 <FormControl className={classes.mt20} variant="outlined" fullWidth>
-                    <InputLabel htmlFor="outlined-adornment-password">Пароль</InputLabel>
+                    <InputLabel htmlFor="outlined-adornment-password">{props.t('register.password')}</InputLabel>
                     <OutlinedInput
                         id="outlined-adornment-password"
                         type={showPassword ? 'text' : 'password'}
@@ -257,25 +261,17 @@ const Register = (props) => {
                         })
                             .then(response => {
                                 setIsLoading(false);
-                                window.location = "/login"
+                                setError(null);
+                                login({username: response.data.username, password: response.data.password}).then(response2 => {
+                                    if (response2.data["id_token"]) {
+                                        Cookie.set('token', response2.data["id_token"]);
+                                        window.location = "/app/restaurants"
+                                    }
+                                })
                             })
                             .catch(error => {
                                 setIsLoading(false);
-                                console.log(JSON.stringify(error))
-                                console.log('response', error.response)
-                                store.addNotification({
-                                    title: "Ошибка при регистрации!",
-                                    message: `${error && error.response ? error.response.data.title : error}`,
-                                    type: "danger",
-                                    insert: "top",
-                                    container: "top-right",
-                                    animationIn: ["animated", "fadeIn"],
-                                    animationOut: ["animated", "fadeOut"],
-                                    dismiss: {
-                                        duration: 5000,
-                                        onScreen: true
-                                    }
-                                });
+                                setError(error.response.data);
                             })
                     }}
                 > {isLoading ? `${props.t('auth.loading')}...` : props.t('auth.register')} </Button>

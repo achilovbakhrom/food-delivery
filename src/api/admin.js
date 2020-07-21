@@ -124,6 +124,10 @@ export const fetchUsers = (filter) => {
     return instance.get('/api/users/list', { params: filter })
 };
 
+export const fetchUsersStatuses = () => {
+    return instance.get('/api/admin/enums/roles')
+};
+
 export const createUser = (user) => {
     return instance.post('/api/users/create', user);
 };
@@ -146,4 +150,8 @@ export const assignDriver = (orderId, driverId) => {
 
 export const changeStatus = (orderId, status) => {
     return instance.put(`/api/admin/orders/status`, { id: orderId, status });
+};
+
+export const getUserDetails = (id) => {
+    return instance.get(`/api/users/${id}`)
 };

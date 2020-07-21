@@ -30,6 +30,10 @@ import AdminUsers from '../admin/users';
 import AddEditUsers from '../admin/addEditUser';
 
 import Cookies from 'js-cookie';
+import { useStore } from "effector-react";
+import { getCurrentUserEffect } from "../model/effects";
+import { $store } from "../model/stores";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const drawerWidth = 240;
 
@@ -92,6 +96,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const AdminRoot = props => {
+    const { $currentUser } = useStore($store);
+
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = useState(false);
@@ -117,8 +123,30 @@ const AdminRoot = props => {
         } });
         setCount(counter);
         setPrice(acc);
+
+        getCurrentUserEffect();
     }, []);
 
+    if (!$currentUser.data) {
+        return (
+            <div style={{ position: "absolute", left: 0, right: 0, top: 0, bottom: 0, display: "flex", justifyContent: "center", alignItems: "center" }}>
+                <CircularProgress />
+            </div>
+        );
+    }
+
+    const isDriver = $currentUser.data.roles.indexOf('DRIVER') >= 0;
+    const isSupervisor = $currentUser.data.roles.indexOf('SUPERVISOR') >= 0;
+
+    let menuData = [];
+
+    if (!isDriver) menuData.push({name: 'Рестораны', icon: <History />});
+    if (!isDriver) menuData.push({name: 'Категории', icon: <History />});
+    if (!isDriver) menuData.push({name: 'Блюда', icon: <History />});
+    if (!isDriver) menuData.push({name: 'Меню', icon: <History />});
+    menuData.push({name: 'Заказы', icon: <History />});
+    if (!isSupervisor) menuData.push({name: 'Пользователи', icon: <History />});
+    menuData.push({name: 'Выйти', icon: <History />});
 
     return (
         <div className={classes.root}>
@@ -166,14 +194,7 @@ const AdminRoot = props => {
                 </div>
                 <Divider />
                 <List>
-                    {[
-                        {name: 'Рестораны', icon: <Restaurant />},
-                        {name: 'Категории', icon: <Category />},
-                        {name: 'Блюда', icon: <Fastfood />},
-                        {name: 'Меню', icon: <MenuBook />},
-                        {name: 'Заказы', icon: <History />},
-                        {name: 'Пользователи', icon: <People />},
-                        {name: 'Выйти', icon: <ExitToApp />}].map((obj, index) => (
+                    {menuData.map((obj, index) => (
                         <ListItem button key={obj.name} onClick={() => {
                             setOpen(false);
                             switch (index) {
@@ -212,16 +233,16 @@ const AdminRoot = props => {
             </Drawer>
             <main className={classes.content}>
                 <Switch>
-                    <Route path="/admin/restaurants" component={AdminRestaurants}/>
-                    <Route path="/admin/categories" component={AdminCategory}/>
-                    <Route path="/admin/category-add-edit" component={AddEditCategory}/>
-                    <Route path="/admin/restaurant-add-edit" component={AddEditRestaurants}/>
-                    <Route path="/admin/foods" component={AdminFoods}/>
-                    <Route path="/admin/food-add-edit" component={AddEditFoods}/>
-                    <Route path="/admin/users" component={AdminUsers}/>
-                    <Route path="/admin/user-add-edit" component={AddEditUsers}/>
-                    <Route path="/admin/menu" component={AdminMenu}/>
-                    <Route path="/admin/menu-add-edit" component={AddEditMenu}/>
+                    {!isDriver && <Route path="/admin/restaurants" component={AdminRestaurants}/>}
+                    {!isDriver && <Route path="/admin/categories" component={AdminCategory}/>}
+                    {!isDriver && <Route path="/admin/category-add-edit" component={AddEditCategory}/>}
+                    {!isDriver && <Route path="/admin/restaurant-add-edit" component={AddEditRestaurants}/>}
+                    {!isDriver && <Route path="/admin/foods" component={AdminFoods}/>}
+                    {!isDriver && <Route path="/admin/food-add-edit" component={AddEditFoods}/>}
+                    {!isDriver && <Route path="/admin/users" component={AdminUsers}/>}
+                    {!isDriver && <Route path="/admin/user-add-edit" component={AddEditUsers}/>}
+                    {!isDriver && <Route path="/admin/menu" component={AdminMenu}/>}
+                    {!isDriver && <Route path="/admin/menu-add-edit" component={AddEditMenu}/>}
                     <Route path="/admin/history" component={AdminHistory}/>
                 </Switch>
             </main>

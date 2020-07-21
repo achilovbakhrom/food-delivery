@@ -46,3 +46,13 @@
 /*.MuiIconButton-label {*/
 /*  color: #555;*/
 /*}*/
+
+.filter-block {
+  display: flex;
+  margin: 10px 0;
+}
+
+.filter-item {
+  width: 200px;
+  margin: 0 0 0 24px;
+}

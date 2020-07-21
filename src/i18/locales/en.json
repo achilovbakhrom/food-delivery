@@ -22,7 +22,13 @@
       "phoneNumber": "Phone Number",
       "currency": "Currency",
       "have_account": "Have account?",
-      "language": "Language"
+      "language": "Language",
+      "password": "Password"
+    },
+    "update_user": {
+      "update_user": "Update user",
+      "save": "Save",
+      "success": "Updated"
     },
     "main": {
       "address": "Address",
@@ -65,7 +71,9 @@
       "porch": "Porch",
       "floor": "Floor",
       "flat": "Flat",
+      "showOnMap": "Show on map",
       "purchase_order": "Purchase Order",
+      "delivery_price": "Delivery Price",
       "region": "Region",
       "district": "District",
       "cardNo": "Card Number",

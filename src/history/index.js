@@ -66,7 +66,16 @@ const History = props => {
                                         <ListItemText>
                                             <span>{props.t('history.orderNo')}&nbsp;#{ i.id}</span>&nbsp; <br />
                                             <span>{props.t('history.name')}&nbsp;{ i.client ? i.client.name : 'Unkonwn' }</span>&nbsp; <br />
-                                            <span>{props.t('history.address')}&nbsp;{ i.address ? `${i.address.region.name}, ${i.address.district.name}, ${i.address.house}, ${i.address.porch}, ${i.address.apartment}` : 'Unkonwn' }</span>&nbsp; <br />
+                                            <span>
+                                                {props.t('history.address')}&nbsp;
+                                                { i.address ? `${i.address.region.name},
+                                                ${i.address.district.name},
+                                                ${i.address.house}
+                                                ${i.address.porch ? ", "+i.address.porch : ""}
+                                                ${i.address.floor ? ", "+i.address.floor : ""}
+                                                ${i.address.apartment ? ", "+i.address.apartment : ""}` : 'Unkonwn' }
+                                            </span>
+                                            &nbsp; <br />
                                             <span>{props.t('history.restaraunt')}&nbsp;{ i.restaurant ? `${i.restaurant.name}` : 'Unkonwn' }</span>&nbsp; <br />
                                         </ListItemText>
                                         <ListItemSecondaryAction> {i.status}  </ListItemSecondaryAction>

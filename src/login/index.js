@@ -106,6 +106,8 @@ const Login = props => {
                                             console.log('current user', response.data)
                                             if (response.data.roles.indexOf('ADMIN') >= 0) {
                                                 props.history.push('/admin/restaurants')
+                                            } else if (response.data.roles.indexOf('DRIVER') >= 0) {
+                                                props.history.push('/admin/history')
                                             } else {
                                                 let orderString = Cookie.get('orders') || '[]';
                                                 let orders = JSON.parse(orderString);

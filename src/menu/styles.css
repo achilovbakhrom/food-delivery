@@ -1,0 +1,36 @@
+.menu__amount-wr {
+  position: relative;
+  font-size: 0;
+}
+
+.menu__cart-icon {
+  width: 64px !important;
+  height: 64px !important;
+}
+
+.menu__amount {
+  position: absolute;
+  right: 8px;
+  bottom: 15px;
+  text-align: center;
+  font-size: 16px;
+  line-height: 1;
+
+  background: #fff;
+  border-radius: 2px;
+  padding: 5px 7px;
+  color: #333;
+}
+
+@media (max-width: 959px) {
+  .menu__cart-icon {
+    width: 44px !important;
+    height: 44px !important;
+  }
+
+  .menu__amount {
+    bottom: 10px;
+    padding: 3px 5px;
+    font-size: 14px;
+  }
+}

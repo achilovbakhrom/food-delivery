@@ -21,6 +21,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import CreditCardInput from 'react-credit-card-input';
 import { dispatch } from 'use-bus'
 import i18n from "../i18";
+import { LongLatMap } from "../long-lat-map";
+import UpdateUserModal from "../update-user-modal";
 
 const useStyles = makeStyles((theme) => ({
     title: {
@@ -48,7 +50,6 @@ const Payment = props => {
     useEffect(() => {
         let orderString = Cookies.get('orders') || '[]';
         let orders = JSON.parse(orderString);
-        console.log(orders);
         setCost(orders.reduce((acc, o) => acc + parseFloat(o.count)*parseFloat(o.food.price), 0));
 
         fetchRegions()
@@ -79,6 +80,13 @@ const Payment = props => {
     const [number, setNumber] = useState('');
     const [description, setDescription] = useState();
 
+    const [latLongMapModalProps, setLatLongMapModalProps] = useState({
+        visible: false,
+        shouldRender: false
+    });
+
+    const [latLongCoords, setLatLongCoords] = useState(null);
+
     const isDisabled = () => {
         let type = cardType() || '';
         return !fio || !phone || !street || !houseNo ||
@@ -106,8 +114,33 @@ const Payment = props => {
         }
     };
 
+    const showLatLongMap = () => {
+        setLatLongMapModalProps({
+            visible: true,
+            shouldRender: true,
+        });
+    };
+
+    const setCoors = (coors) => {
+        setLatLongCoords(coors);
+    };
+
+    const region = regionList.find((item) => item.id === regionId);
+    const district = districtList.find((item) => item.id === districtId);
+
     return (
         <Grid container>
+            {latLongMapModalProps.shouldRender && <LongLatMap
+                modalProps={latLongMapModalProps}
+                setModalProps={setLatLongMapModalProps}
+                title={props.t('payment.showOnMap')}
+                coords={latLongCoords}
+                setCoors={setCoors}
+                region={region ? region.name : null}
+                district={district ? district.name : null}
+                street={street}
+                house={houseNo}
+            />}
             <Grid item className={classes.title} xs={12}>
                 {props.t('payment.order')}
             </Grid>
@@ -235,6 +268,12 @@ const Payment = props => {
                     />
                 </Grid>
             </Grid>
+            <div style={{marginTop: 10}}>
+                <Button variant="contained" className={classes.button} onClick={showLatLongMap}>
+                    {props.t('payment.showOnMap')}
+                </Button>
+            </div>
+
             {/*<Grid container style={{marginTop: 20}}>*/}
             {/*    <Grid item xs={12} md={9}>*/}
             {/*        <FormControl component="fieldset">*/}
@@ -287,7 +326,9 @@ const Payment = props => {
                     />
                 </Grid>
             </Grid>
-
+            <Grid container style={{marginTop: 20}}>
+                {props.t('payment.delivery_price')} 2.5$
+            </Grid>
             <Grid container style={{marginTop: 20}}>
                 <Grid item xs={12} md={9}>
                     <Button
@@ -297,6 +338,7 @@ const Payment = props => {
                         onClick={() => {
                             let orderString = Cookies.get('orders') || '[]';
                             let orders = JSON.parse(orderString);
+                            const [firstName, lastName] = fio ? fio.split(" "): [];
                             order({
                                 card: {
                                     cardNumber: number,
@@ -314,12 +356,16 @@ const Payment = props => {
                                         house: houseNo,
                                         porch: door,
                                         regionId: regionId,
-                                        street: street
+                                        street: street,
+                                        latitude: latLongCoords ? latLongCoords[0]: undefined,
+                                        longitude: latLongCoords ? latLongCoords[1]: undefined,
                                     },
-                                    firstName: fio,
-                                    lastName: fio,
+                                    firstName: firstName,
+                                    lastName: lastName,
                                     phone: phone
                                 },
+                                totalPrice: cost,
+                                deleveryPrice: 2.5,
                                 "restaurantId": Cookies.get('restaurantId') ? parseInt(Cookies.get('restaurantId')) : 0
                             }).then(response => {
                                 Cookies.remove('orders');

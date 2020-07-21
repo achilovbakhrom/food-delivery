@@ -248,6 +248,7 @@ const AdminHistory = props => {
                 }}
                 title="Заказы"
                 columns={[
+                    { title: 'Заказ', field: 'order' },
                     { title: 'Клиент', field: 'clientName' },
                     { title: 'Телефон', field: 'clientPhone' },
                     { title: 'Получатель', field: 'receiver' },
@@ -261,12 +262,20 @@ const AdminHistory = props => {
                 isLoading={isLoading}
                 data={data.map(d => ({
                     id: d.id,
+                    order: `#${d.id}`,
                     clientName: d.client.name,
                     clientPhone: d.client.phone,
                     receiver: d.receiver.name,
                     receiverPhone: d.receiver.phone,
                     restaurant: d.restaurant.name,
-                    address: `${d.address.street}`,
+                    address: `
+                        ${d.address.region ? d.address.region.name: ""}
+                        ${d.address.district ? d.address.district.name: ""}
+                        ${d.address.street ? d.address.street: ""}
+                        ${d.address.porch ? d.address.porch: ""}
+                        ${d.address.floor ? d.address.floor: ""}
+                        ${d.address.house ? d.address.house: ""}
+                    `,
                     status: d.status,
                     driver: d.driver ? `${d.driver.firstName} ${d.driver.lastName}` : 'Не назначен',
                     supervisor: d.supervisor ? `${d.supervisor.firstName} ${d.supervisor.lastName}` : 'Не назначен'

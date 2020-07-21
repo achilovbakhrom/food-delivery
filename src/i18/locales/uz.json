@@ -22,7 +22,13 @@
       "phoneNumber": "Telefon",
       "currency": "Valyuta",
       "have_account": "Akkaunt bormi?",
-      "language": "Til"
+      "language": "Til",
+      "password": "Parol"
+    },
+    "update_user": {
+      "update_user": "Ma'lumotni yangilang",
+      "save": "Saqlash",
+      "success": "Yangilandi"
     },
     "main": {
       "address": "Manzil",
@@ -65,7 +71,9 @@
       "porch": "Podyezd",
       "floor": "Etaj",
       "flat": "Xonadon",
+      "showOnMap": "Xaritada ko'rsatis",
       "purchase_order": "Buyurtmani tasdiqlash",
+      "delivery_price": "Yetkazib berish narxi",
       "region": "Region",
       "district": "Rayon",
       "cardNo": "Karta nomeri",

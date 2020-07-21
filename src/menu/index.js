@@ -9,6 +9,8 @@ import Cookies from 'js-cookie';
 import { dispatch } from 'use-bus'
 import { withTranslation } from "react-i18next";
 import {fetchRestaurantFoods} from "../api/restaurants";
+import { ShoppingCart } from "@material-ui/icons";
+import "./styles.css";
 
 const queryString = require('query-string');
 
@@ -76,7 +78,7 @@ const Menu = props => {
             return 250;
         }
         if (isWidthUp('xs', props.width)) {
-            return 120;
+            return 130;
         }
         return 1;
     })()
@@ -96,7 +98,7 @@ const Menu = props => {
                                 <ListItem key={index} cols={1}>
                                     <ListItemIcon>
                                         <img
-                                            src={item.photo ? item.photo.url : require("../assets/img/burgers.jpg")}
+                                            src={item.photo ? item.photo.url : require("../assets/img/noimage.png")}
                                             alt="burger"
                                             width={height*1.1}
                                             height={height}
@@ -158,19 +160,24 @@ const Menu = props => {
                                                     let found = false;
                                                     cookieOrders.forEach((i) => {
                                                         if (i.food.id === item.id) {
-                                                            i.count = i.count + 0.5;
+                                                            i.count = i.count + 1;
                                                             found = true
                                                         }
                                                     });
                                                     if (!found) {
-                                                        cookieOrders.push({ food: item, count: 0.5});
+                                                        cookieOrders.push({ food: item, count: 1});
                                                     }
                                                     Cookies.set('orders', cookieOrders);
                                                     setOrders([...cookieOrders]);
                                                     dispatch('order_changed');
                                                 }}
                                             > + </Button>
-                                            <div style={{flexGrow: 1, display: 'flex', alignItems: 'center', fontSize: 25, fontWeight: 'bold'}}>{count}</div>
+                                            <div style={{flexGrow: 1, display: 'flex', alignItems: 'center', fontSize: 25, fontWeight: 'bold'}}>
+                                                <div className="menu__amount-wr">
+                                                    <ShoppingCart className="menu__cart-icon" style={{ color: green.A700 }} />
+                                                    <div className="menu__amount">{count}</div>
+                                                </div>
+                                            </div>
                                             <Button
                                                 variant='outlined'
                                                 color="secondary"
@@ -190,8 +197,8 @@ const Menu = props => {
 
                                                     cookieOrders.forEach((i, index) => {
                                                         if (i.food.id === item.id) {
-                                                            if (i.count > 0.5) {
-                                                                i.count = i.count - 0.5;
+                                                            if (i.count > 1) {
+                                                                i.count = i.count - 1;
                                                             } else {
                                                                 i.count = 0;
                                                                 removeIndex = index;

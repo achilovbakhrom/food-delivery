@@ -22,7 +22,13 @@
       "phoneNumber": "Телефон номер",
       "currency": "Валюта",
       "have_account": "Есть аккаунт?",
-      "language": "Язык"
+      "language": "Язык",
+      "password": "Пароль"
+    },
+    "update_user": {
+      "update_user": "Обновить данные",
+      "save": "Сохранить",
+      "success": "Обновлено"
     },
     "main": {
       "address": "Адрес",
@@ -65,7 +71,9 @@
       "porch": "Подъезд",
       "floor": "Этаж",
       "flat": "Квартира",
+      "showOnMap": "Показать на карте",
       "purchase_order": "Оформить заказ",
+      "delivery_price": "Стоимость доставки",
       "region": "Регион",
       "district": "Район",
       "cardNo": "Номер карты",

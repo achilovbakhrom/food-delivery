@@ -1,15 +1,15 @@
 import React, {useState, useEffect, forwardRef} from 'react';
 import { withRouter } from 'react-router-dom';
-import MaterialTable, { MTablePagination } from 'material-table';
+import MaterialTable, { MTableToolbar } from 'material-table';
 import {
     Grid,
     Dialog,
     DialogActions,
     DialogContent,
     DialogContentText,
-    DialogTitle
+    DialogTitle, FormControl, InputLabel
 } from '@material-ui/core';
-import {deleteFood, deleteUser, fetchFoods, fetchUsers} from "../../api/admin";
+import {deleteFood, deleteUser, fetchFoods, fetchUsers, fetchUsersStatuses} from "../../api/admin";
 
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
@@ -27,27 +27,58 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import Button from "@material-ui/core/Button";
+import Select from "@material-ui/core/Select/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import { makeStyles } from "@material-ui/core/styles";
+import UpdateUserModal from "../../update-user-modal";
+import { useStore } from "effector-react";
+import { $store as $updateUserStore } from "../../update-user-modal/model/stores";
 
+const useStyles = makeStyles(() => ({}));
 
 const AdminUsers = props => {
-
     const [isLoading, setIsLoading] = useState(false);
     const [data, setData] = useState([]);
-    const [page, setPage] = useState(0);
     const [size, setSize] = useState(20);
     const [total, setTotal] = useState(0);
     const [deleteId, setDeleteId] = useState(false);
     const [deleteOpen, setDeleteOpen] = useState(false);
 
+    const [userStatuses, setUserStatuses] = useState([]);
+    const [filterProps, setFilterProps] = useState({});
+
+    const { $updateUser } = useStore($updateUserStore);
+
+    const [updateUserModalProps, setUpdateUserModalProps] = useState({
+        visible: false,
+        userId: null
+    });
+
     useEffect(() => {
-        updateList()
-    }, [page, size]);
+        getUserStatuses();
+    }, []);
 
+    useEffect(() => {
+        updateList({ ...filterProps, size });
+    }, [filterProps, size]);
 
+    useEffect(() => {
+        if ($updateUser.success) {
+            updateList({ ...filterProps, size });
+        }
+    }, [$updateUser.success]);
 
-    const updateList = () => {
+    const getUserStatuses = () => {
         setIsLoading(true);
-        fetchUsers({page, size})
+        fetchUsersStatuses()
+            .then(response => {
+                setUserStatuses(response.data);
+            })
+    };
+
+    const updateList = (filterProps) => {
+        setIsLoading(true);
+        fetchUsers(filterProps)
             .then(response => {
                 setIsLoading(false);
                 setData(response.data.content);
@@ -57,6 +88,47 @@ const AdminUsers = props => {
                 setIsLoading(false);
                 alert(e);
             })
+    };
+
+    const onFilterChange = (prop, value, resetPage = false) => {
+        const data = { ...filterProps, [prop]: value,  };
+        if (resetPage) {
+            delete data.page;
+        }
+        setFilterProps(data);
+    };
+
+    const onUpdateUserClick = (userId) => {
+        setUpdateUserModalProps({
+            visible: true,
+            userId
+        });
+    };
+
+    const classes = useStyles();
+
+    const renderFilter = () => {
+      return (
+          <div className="filter-block">
+            <div className="filter-item">
+                <FormControl variant="outlined" fullWidth className={classes.formControl}>
+                    <InputLabel id="language">Роль</InputLabel>
+                    <Select
+                        variant="outlined"
+                        value={filterProps.role}
+                        fullWidth
+                        labelWidth={70}
+                        onChange={(e) => onFilterChange("role", e.target.value, true)}
+                    >
+                        <MenuItem value={undefined} key={null}>Все</MenuItem>
+                        {userStatuses.map((d) => (
+                            <MenuItem value={d.code} key={d.code}>{d.name}</MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
+            </div>
+          </div>
+      );
     };
 
     return (
@@ -134,15 +206,17 @@ const AdminUsers = props => {
                             props.history.push('/admin/user-add-edit');
                         }
                     },
-                    // {
-                    //     icon: () => <Edit />,
-                    //     position: 'row',
-                    //     tooltip: 'Редактировать',
-                    //     onClick: (e, r) => {
-                    //         // localStorage.setItem('restaurant', JSON.stringify(r));
-                    //         props.history.push(`/admin/user-add-edit?user_id=${r.id}`);
-                    //     }
-                    // },
+                    {
+                        icon: () => <Edit />,
+                        position: 'row',
+                        tooltip: 'Редактировать',
+                        onClick: (e, r) => {
+                            console.log("Редактировать", e, r);
+                            // localStorage.setItem('restaurant', JSON.stringify(r));
+                            // props.history.push(`/admin/user-add-edit?user_id=${r.id}`);
+                            onUpdateUserClick(r.id);
+                        }
+                    },
                     {
                         icon: () => <DeleteOutline />,
                         position: 'row',
@@ -154,8 +228,8 @@ const AdminUsers = props => {
                     }
 
                 ]}
-                page={page}
-                onChangePage={p => {setPage(p)}}
+                page={filterProps.page || 0}
+                onChangePage={p => onFilterChange("page", p)}
                 onChangeRowsPerPage={(s) => {
                     setSize(s)
                 }}
@@ -167,7 +241,16 @@ const AdminUsers = props => {
                     pageSize: size
 
                 }}
+                components={{
+                    Toolbar: props => (
+                        <div>
+                            <MTableToolbar {...props} />
+                            <div>{renderFilter()}</div>
+                        </div>
+                    ),
+                }}
             />
+            <UpdateUserModal modalProps={updateUserModalProps} setModalProps={setUpdateUserModalProps} />
         </Grid>
     )
 };
