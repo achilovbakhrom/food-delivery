@@ -250,10 +250,6 @@ const UpdateUserModal = (props) => {
                                     getOptionLabel={(option) => option.title}
                                     onChange={(event, newInputValue) => {
                                         const f = countryList.find(c => c.id === newInputValue.value);
-                                        console.log("newInputValue", newInputValue, f);
-
-                                        // onFormFieldChange("country", newInputValue);
-                                        // onFormFieldChange("phonePrefix", f.telCode);
                                         setFormFields({
                                             ...formFields,
                                             country: newInputValue,

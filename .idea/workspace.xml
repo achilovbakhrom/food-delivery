@@ -2,27 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4c1cc787-1446-497d-a874-fac755bc5a71" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin/addEditUser/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/addEditUser/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin/history/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/history/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin/users/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/users/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/admin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/history/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/history/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/i18/locales/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/i18/locales/en.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/i18/locales/ru.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/i18/locales/ru.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/i18/locales/uz.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/i18/locales/uz.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/login/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/login/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/menu/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/menu/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/payment/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/payment/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/profile/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/profile/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/register/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/register/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/update-user-modal/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/update-user-modal/index.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -45,10 +29,13 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/assets/img" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../uzkassa/smartpos-admin" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.standard" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.standard" value="" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.JavaScript" />
@@ -56,15 +43,16 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\projects\fl\food-delivery\src\assets\img" />
       <recent name="D:\projects\fl\food-delivery\src" />
       <recent name="$PROJECT_DIR$/src/assets/img" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\projects\fl\food-delivery\src\assets\img" />
       <recent name="D:\projects\fl\food-delivery\src\ya-map" />
       <recent name="D:\projects\fl\food-delivery\src\update-user-modal" />
       <recent name="D:\projects\fl\food-delivery\src" />
       <recent name="D:\projects\fl\food-delivery\src\admin" />
-      <recent name="$PROJECT_DIR$/src/i18" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -135,7 +123,8 @@
       <workItem from="1595074683296" duration="404000" />
       <workItem from="1595243920881" duration="1428000" />
       <workItem from="1595247478570" duration="22980000" />
-      <workItem from="1595308627711" duration="40204000" />
+      <workItem from="1595308627711" duration="41024000" />
+      <workItem from="1595415809474" duration="2133000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <created>1593888871329</created>

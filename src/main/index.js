@@ -32,7 +32,6 @@ import {withTranslation} from "react-i18next";
 import Profile from "../profile";
 import Contacts  from '../contacts';
 import History from '../history';
-import { getCurrentUserEffect } from "../model/effects";
 
 const drawerWidth = 240;
 
@@ -122,7 +121,6 @@ const Main = props => {
         } });
         setCount(counter);
         setPrice(acc);
-        getCurrentUserEffect();
     }, []);
 
     useBus('order_changed', () => {

@@ -25,13 +25,17 @@ const Profile = props => {
         userId: null
     });
 
-    const isClient = current ? current.roles.indexOf('CLIENT') >= 0: false;
+    useEffect(() => {
+        getCurrentUserEffect();
+    }, []);
 
     useEffect(() => {
         if ($updateUser.success) {
             getCurrentUserEffect();
         }
     }, [$updateUser.success]);
+
+    const isClient = current ? current.roles.indexOf('CLIENT') >= 0: false;
 
     const onUpdateUserClick = (userId) => {
         setUpdateUserModalProps({
