@@ -33,8 +33,10 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import Button from "@material-ui/core/Button";
 import { Assignment, DriveEta } from '@material-ui/icons';
-import {fetchMyOrders, fetchOrderById} from "../../api/restaurants";
+import {fetchAdminOrders, fetchAdminOrderById} from "../../api/restaurants";
 import {assignDriver, changeStatus, fetchUsers} from "../../api/admin";
+import { useStore } from "effector-react";
+import { $store } from "../../model/stores";
 
 
 let status = [
@@ -71,6 +73,7 @@ let status = [
 ];
 
 const AdminHistory = props => {
+    const { $currentUser } = useStore($store);
 
     const [isLoading, setIsLoading] = useState(false);
     const [data, setData] = useState([]);
@@ -95,7 +98,7 @@ const AdminHistory = props => {
 
     const updateList = () => {
         setIsLoading(true);
-        fetchMyOrders({page, size})
+        fetchAdminOrders({page, size})
             .then(response => {
                 setIsLoading(false);
                 setData(response.data.content);
@@ -106,6 +109,30 @@ const AdminHistory = props => {
                 alert(e);
             })
     };
+
+    const actions = [];
+
+    if ($currentUser.isSupervisor) {
+        actions.push({
+            icon: () => <DriveEta />,
+            position: 'row',
+            tooltip: 'Назначить водителя',
+            onClick: (e, r) => {
+                setAssignId(r.id);
+                setDriverDialog(true);
+            }
+        });
+    }
+
+    actions.push({
+        icon: () => <Assignment />,
+        position: 'row',
+        tooltip: 'Сменить статус',
+        onClick: (e, r) => {
+            setAssignId(r.id);
+            setStatusDialog(true);
+        }
+    });
 
     return (
         <Grid container style={{marginTop: 50}}>
@@ -277,30 +304,10 @@ const AdminHistory = props => {
                         ${d.address.house ? d.address.house: ""}
                     `,
                     status: d.status,
-                    driver: d.driver ? `${d.driver.firstName} ${d.driver.lastName}` : 'Не назначен',
-                    supervisor: d.supervisor ? `${d.supervisor.firstName} ${d.supervisor.lastName}` : 'Не назначен'
+                    driver: d.driver ? d.driver.name : 'Не назначен',
+                    supervisor: d.supervisor ? d.supervisor.name : 'Не назначен'
                 }))}
-                actions={[
-                    {
-                        icon: () => <DriveEta />,
-                        position: 'row',
-                        tooltip: 'Назначить водителя',
-                        onClick: (e, r) => {
-                            setAssignId(r.id);
-                            setDriverDialog(true);
-                        }
-                    },
-                    {
-                        icon: () => <Assignment />,
-                        position: 'row',
-                        tooltip: 'Сменить статус',
-                        onClick: (e, r) => {
-                            setAssignId(r.id);
-                            setStatusDialog(true);
-                        }
-                    }
-
-                ]}
+                actions={actions}
                 page={page}
                 onChangePage={p => {setPage(p)}}
                 onChangeRowsPerPage={(s) => {
@@ -308,7 +315,7 @@ const AdminHistory = props => {
                 }}
                 totalCount={total}
                 onRowClick={(row, data) => {
-                    fetchOrderById(data.id)
+                    fetchAdminOrderById(data.id)
                         .then(response => {
                             setClient(response.data);
                             setClientDialog(true)

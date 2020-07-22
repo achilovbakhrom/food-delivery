@@ -3,27 +3,31 @@ import * as effects from "./effects";
 
 const $currentUser = createStore({ loading: false, data: null, error: null })
     .on(effects.getCurrentUserEffect.pending, (params, pending) => {
-      return {
-        ...params,
-        loading: pending,
-      };
+        return {
+            ...params,
+            loading: pending,
+        };
     })
     .on(effects.getCurrentUserEffect.finally, (params, response) => {
-      if (response.error) {
-        return {
-          ...params,
-          data: null,
-          error: response.error.response
-        };
-      } else {
-        return {
-          ...params,
-          data: response.result.data,
-          error: null
-        };
-      }
+        if (response.error) {
+            return {
+                ...params,
+                data: null,
+                error: response.error.response
+            };
+        } else {
+            const data = response.result.data;
+            return {
+                ...params,
+                data,
+                isSupervisor: data.roles.indexOf('SUPERVISOR') >= 0,
+                isDriver: data.roles.indexOf('DRIVER') >= 0,
+                isClient: data.roles.indexOf('CLIENT') >= 0,
+                error: null
+            };
+        }
     });
 
 export const $store = combine({
-  $currentUser
+    $currentUser
 });

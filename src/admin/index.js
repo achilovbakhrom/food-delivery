@@ -135,18 +135,23 @@ const AdminRoot = props => {
         );
     }
 
-    const isDriver = $currentUser.data.roles.indexOf('DRIVER') >= 0;
-    const isSupervisor = $currentUser.data.roles.indexOf('SUPERVISOR') >= 0;
+    if ($currentUser.isClient) {
+        return (
+            <div></div>
+        );
+    }
 
+    const isSupervisor = $currentUser.isSupervisor;
+    const isDriver = $currentUser.isDriver;
     let menuData = [];
 
-    if (!isDriver) menuData.push({name: 'Рестораны', icon: <History />});
-    if (!isDriver) menuData.push({name: 'Категории', icon: <History />});
-    if (!isDriver) menuData.push({name: 'Блюда', icon: <History />});
-    if (!isDriver) menuData.push({name: 'Меню', icon: <History />});
-    menuData.push({name: 'Заказы', icon: <History />});
-    if (!isSupervisor) menuData.push({name: 'Пользователи', icon: <History />});
-    menuData.push({name: 'Выйти', icon: <History />});
+    if (!isDriver) menuData.push({name: 'Рестораны', icon: <History />, path: "/admin/restaurants"});
+    if (!isDriver) menuData.push({name: 'Категории', icon: <History />, path: "/admin/categories"});
+    if (!isDriver) menuData.push({name: 'Блюда', icon: <History />, path: "/admin/foods"});
+    if (!isDriver) menuData.push({name: 'Меню', icon: <History />, path: "/admin/menu"});
+    menuData.push({name: 'Заказы', icon: <History />, path: "/admin/history"});
+    if (!isDriver && !isSupervisor) menuData.push({name: 'Пользователи', icon: <History />, path: "/admin/users"});
+    menuData.push({name: 'Выйти', icon: <History />, logout: true});
 
     return (
         <div className={classes.root}>
@@ -194,35 +199,17 @@ const AdminRoot = props => {
                 </div>
                 <Divider />
                 <List>
-                    {menuData.map((obj, index) => (
+                    {menuData.map((obj) => (
                         <ListItem button key={obj.name} onClick={() => {
                             setOpen(false);
-                            switch (index) {
-                                case 0:
-                                    props.history.push('/admin/restaurants');
-                                    break;
-                                case 1:
-                                    props.history.push('/admin/categories');
-                                    break;
-                                case 2:
-                                    props.history.push('/admin/foods');
-                                    break;
-                                case 3:
-                                    props.history.push('/admin/menu');
-                                    break;
-                                case 4:
-                                    props.history.push('/admin/history');
-                                    break;
-                                case 5:
-                                    props.history.push('/admin/users');
-                                    break;
-                                case 6:
-                                    Cookies.remove('token');
-                                    Cookies.remove('orders');
-                                    props.history.push('/login');
-                                    break;
-                                default:
-                                    break
+                            if (obj.path) {
+                                props.history.push(obj.path);
+                            }
+
+                            if (obj.logout) {
+                                Cookies.remove('token');
+                                Cookies.remove('orders');
+                                props.history.push('/login');
                             }
                         }}>
                             <ListItemIcon>{obj.icon}</ListItemIcon>
@@ -239,8 +226,8 @@ const AdminRoot = props => {
                     {!isDriver && <Route path="/admin/restaurant-add-edit" component={AddEditRestaurants}/>}
                     {!isDriver && <Route path="/admin/foods" component={AdminFoods}/>}
                     {!isDriver && <Route path="/admin/food-add-edit" component={AddEditFoods}/>}
-                    {!isDriver && <Route path="/admin/users" component={AdminUsers}/>}
-                    {!isDriver && <Route path="/admin/user-add-edit" component={AddEditUsers}/>}
+                    {!isDriver && !isSupervisor && <Route path="/admin/users" component={AdminUsers}/>}
+                    {!isDriver && !isSupervisor && <Route path="/admin/user-add-edit" component={AddEditUsers}/>}
                     {!isDriver && <Route path="/admin/menu" component={AdminMenu}/>}
                     {!isDriver && <Route path="/admin/menu-add-edit" component={AddEditMenu}/>}
                     <Route path="/admin/history" component={AdminHistory}/>

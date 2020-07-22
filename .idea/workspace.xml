@@ -2,10 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4c1cc787-1446-497d-a874-fac755bc5a71" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/profile/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/profile/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/admin/history/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/history/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/admin/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/restaurants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/restaurants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/history/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/history/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/login/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/login/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/stores.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/stores.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/update-user-modal/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/update-user-modal/index.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -124,7 +127,7 @@
       <workItem from="1595243920881" duration="1428000" />
       <workItem from="1595247478570" duration="22980000" />
       <workItem from="1595308627711" duration="41024000" />
-      <workItem from="1595415809474" duration="2133000" />
+      <workItem from="1595415809474" duration="9154000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <created>1593888871329</created>

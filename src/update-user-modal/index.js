@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from "react";
 
-import { Grid, TextField, Button, FormControl, InputLabel, withStyles, Paper } from "@material-ui/core";
+import {
+    Grid,
+    TextField,
+    Button,
+    FormControl,
+    InputLabel,
+    withStyles,
+    Paper,
+    OutlinedInput,
+    InputAdornment
+} from "@material-ui/core";
 import { Autocomplete } from '@material-ui/lab';
 import { makeStyles } from '@material-ui/core/styles';
 import { green } from "@material-ui/core/colors";
@@ -24,6 +34,7 @@ import CircularProgress from "@material-ui/core/CircularProgress/CircularProgres
 import { resetUpdateUserEvent, resetUserDetailsEvent } from "./model/events";
 import { store } from "react-notifications-component";
 import Alert from "@material-ui/lab/Alert/Alert";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -90,6 +101,7 @@ const UpdateUserModal = (props) => {
     const { data: currencyList } = $currencies;
 
     const [formFields, setFormFields] = useState(null);
+    const [showPassword, setShowPassword] = useState(false);
 
     useEffect(() => {
         if (modalProps.userId) {
@@ -161,6 +173,7 @@ const UpdateUserModal = (props) => {
             currencyId: formFields.currency.value,
             language: formFields.language,
             username: formFields.username,
+            password: formFields.password,
         };
 
         updateUserEffect(data);
@@ -328,6 +341,31 @@ const UpdateUserModal = (props) => {
                             className={classes.mt20}
                             onChange={(e) => onFormFieldChange("username", e.target.value)}
                         />
+                        <FormControl className={classes.mt20} variant="outlined" fullWidth>
+                            <InputLabel htmlFor="outlined-adornment-password">{props.t('register.password')}</InputLabel>
+                            <OutlinedInput
+                                id="outlined-adornment-password"
+                                type={showPassword ? 'text' : 'password'}
+                                value={formFields.password}
+                                fullWidth
+                                onChange={(e) => onFormFieldChange("password", e.target.value)}
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            aria-label="toggle password visibility"
+                                            onClick={() => {
+                                                setShowPassword(!showPassword)
+                                            }}
+                                            onMouseDown={(event) => {event.preventDefault();}}
+                                            edge="end"
+                                        >
+                                            {showPassword ? <Visibility /> : <VisibilityOff />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                }
+                                labelWidth={70}
+                            />
+                        </FormControl>
 
                         <Button
                             variant="contained"

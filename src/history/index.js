@@ -1,10 +1,25 @@
 import React, {useState, useEffect} from 'react';
 import { withRouter } from 'react-router-dom';
-import { Grid, Paper, List, ListItem, ListItemText, ListItemSecondaryAction, CircularProgress, Button } from '@material-ui/core';
+import {
+    Grid,
+    Paper,
+    List,
+    ListItem,
+    ListItemText,
+    ListItemSecondaryAction,
+    CircularProgress,
+    Button,
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogContentText,
+    DialogActions,
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { fetchMyOrders } from "../api/restaurants";
+import { fetchOrderById, fetchMyOrders } from "../api/restaurants";
 import {withTranslation} from "react-i18next";
 import {currentUser} from "../api/auth";
+import MaterialTable from "material-table";
 
 const useStyles = makeStyles((theme) => ({
     title: {
@@ -37,6 +52,10 @@ const History = props => {
     const [isLoading, setIsLoading] = useState(false);
     const [isEnd, setIsEnd] = useState(false);
     const [orders, setOrders] = useState([]);
+
+    const [client, setClient] = useState();
+    const [clientDialog, setClientDialog] = useState(false);
+    
     useEffect(() => {
         setIsLoading(true);
         currentUser()
@@ -62,7 +81,18 @@ const History = props => {
                         <Grid item>
                             <List>
                                 { orders.map((i, index) => (
-                                    <ListItem button key={index}>
+                                    <ListItem
+                                        key={index}
+                                        button
+                                        onClick={() => {
+                                            fetchOrderById(i.id)
+                                                .then(response => {
+                                                    setClient(response.data);
+                                                    setClientDialog(true)
+                                                })
+
+                                        }}
+                                    >
                                         <ListItemText>
                                             <span>{props.t('history.orderNo')}&nbsp;#{ i.id}</span>&nbsp; <br />
                                             <span>{props.t('history.name')}&nbsp;{ i.client ? i.client.name : 'Unkonwn' }</span>&nbsp; <br />
@@ -113,6 +143,51 @@ const History = props => {
                 </Grid>
 
             </Grid>
+            <Dialog
+                open={clientDialog}
+                onClose={() => {
+                    setClientDialog(false);
+                    setClient(undefined);
+                }}
+                fullWidth
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">{"Заказ клиента"}</DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        <Grid container style={{padding: 10}}>
+                            <Grid item xs={12}>
+                                Заказ:
+                            </Grid>
+                            <div  style={{width: '100%', height: 1, backgroundColor: '#eee'}}/>
+                            <Grid item xs={12}>
+                                {client && client.items.map(i => (
+                                    <List>
+                                        <ListItem>
+                                            <ListItemText>{i.name} - {i.quantity || 0} x {i.price}</ListItemText>
+                                            <ListItemSecondaryAction>{(i.quantity || 0)*parseFloat(i.price)}</ListItemSecondaryAction>
+                                        </ListItem>
+                                    </List>
+                                ))}
+
+                            </Grid>
+                            <div  style={{width: '100%', height: 1, backgroundColor: '#eee'}}/>
+                            <Grid item xs={12}>
+                                Сумма: { client ? client.items.reduce((acc, i) => acc + parseFloat(i.price)*(i.quantity || 0), 0): 0 }
+                            </Grid>
+                        </Grid>
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => {
+                        setClientDialog(false);
+                        setClient(undefined);
+                    }} color="primary">
+                        Закрыть
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </Grid>
     )
 };
