@@ -25,6 +25,7 @@ code {
 
 #root {
   min-height: 100%;
+  display: flex;
 }
 
 .App {
@@ -32,8 +33,10 @@ code {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  min-height: 100vh;
+  /*min-height: 100vh;*/
   box-shadow:inset 0 0 0 2000px rgba(0, 0, 0, 0.6);
+  width: 100%;
+  flex-grow: 1;
 }
 
 a {

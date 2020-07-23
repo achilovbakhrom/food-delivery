@@ -3,15 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4c1cc787-1446-497d-a874-fac755bc5a71" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin/history/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/history/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin/users/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/users/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/basket/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/basket/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/forgot/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/forgot/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/login/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/login/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/menu/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/menu/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/menu/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/menu/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/register/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/register/index.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -130,7 +121,7 @@
       <workItem from="1595247478570" duration="22980000" />
       <workItem from="1595308627711" duration="41024000" />
       <workItem from="1595415809474" duration="10173000" />
-      <workItem from="1595486037527" duration="5155000" />
+      <workItem from="1595486037527" duration="5945000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <created>1593888871329</created>
