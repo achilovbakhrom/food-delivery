@@ -16,6 +16,7 @@ import {green} from "@material-ui/core/colors";
 import Cookies from 'js-cookie';
 import {dispatch} from "use-bus";
 import {withTranslation} from "react-i18next";
+import { ShoppingCart } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
     title: {
@@ -152,7 +153,7 @@ const Basket = props => {
                                             onClick={() => {
                                                 foods.forEach((i) => {
                                                     if (i.food.id === item.food.id) {
-                                                        i.count = i.count + 0.5;
+                                                        i.count = i.count + 1;
                                                     }
                                                 });
                                                 Cookies.set('orders', foods);
@@ -160,7 +161,13 @@ const Basket = props => {
                                                 dispatch('order_changed');
                                             }}
                                         > + </Button>
-                                        <div style={{flexGrow: 1, display: 'flex', alignItems: 'center', fontSize: 25, fontWeight: 'bold'}}>{item.count}</div>
+                                        {/*<div style={{flexGrow: 1, display: 'flex', alignItems: 'center', fontSize: 25, fontWeight: 'bold'}}>{item.count}</div>*/}
+                                        <div style={{flexGrow: 1, display: 'flex', alignItems: 'center', fontSize: 25, fontWeight: 'bold'}}>
+                                            <div className="menu__amount-wr">
+                                                <ShoppingCart className="menu__cart-icon" style={{ color: green.A700 }} />
+                                                <div className="menu__amount">{item.count}</div>
+                                            </div>
+                                        </div>
                                         <Button
                                             variant='outlined'
                                             color="secondary"
@@ -177,7 +184,7 @@ const Basket = props => {
                                                 foods.forEach((i, index) => {
                                                     if (i.food.id === item.food.id) {
                                                         if (i.count > 0.5) {
-                                                            i.count = i.count - 0.5;
+                                                            i.count = i.count - 1;
                                                         } else {
                                                             foods.splice(index, 1);
                                                         }

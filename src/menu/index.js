@@ -145,7 +145,7 @@ const Menu = props => {
                                             <Button
                                                 variant='outlined'
                                                 color="inherit"
-                                                style={{fontSize: 25, height: (() => {
+                                                style={{fontSize: 25, lineHeight: 1, height: (() => {
                                                         if (isWidthUp('md', props.width)) {
                                                             return 60;
                                                         }
@@ -181,7 +181,7 @@ const Menu = props => {
                                             <Button
                                                 variant='outlined'
                                                 color="secondary"
-                                                style={{fontSize: 25, height: (() => {
+                                                style={{fontSize: 25, lineHeight: 1, height: (() => {
                                                         if (isWidthUp('md', props.width)) {
                                                             return 60;
                                                         }

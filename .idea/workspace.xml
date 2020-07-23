@@ -4,12 +4,14 @@
     <list default="true" id="4c1cc787-1446-497d-a874-fac755bc5a71" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/admin/history/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/history/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/restaurants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/restaurants.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/history/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/history/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/admin/users/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/users/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/basket/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/basket/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/forgot/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/forgot/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/login/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/login/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/stores.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/stores.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/update-user-modal/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/update-user-modal/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/menu/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/menu/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/menu/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/menu/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/register/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/register/index.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,7 +34,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../uzkassa/smartpos-admin" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -127,7 +129,8 @@
       <workItem from="1595243920881" duration="1428000" />
       <workItem from="1595247478570" duration="22980000" />
       <workItem from="1595308627711" duration="41024000" />
-      <workItem from="1595415809474" duration="9154000" />
+      <workItem from="1595415809474" duration="10173000" />
+      <workItem from="1595486037527" duration="5155000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <created>1593888871329</created>

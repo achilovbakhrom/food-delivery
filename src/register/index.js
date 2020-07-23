@@ -17,7 +17,7 @@ import Alert from "@material-ui/lab/Alert/Alert";
 
 const useStyles = makeStyles(() => ({
     root: {
-        height: '100%',
+        height: '100vh',
         overflow: 'auto',
         zIndex: 1000
     },

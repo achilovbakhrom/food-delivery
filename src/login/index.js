@@ -20,7 +20,7 @@ import {withTranslation} from "react-i18next";
 
 const useStyles = makeStyles(() => ({
     root: {
-        height: '100%',
+        height: '100vh',
         overflow: 'auto',
         zIndex: 1000
     },

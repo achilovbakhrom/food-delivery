@@ -1,6 +1,6 @@
 import React, {useState, useEffect, forwardRef} from 'react';
 import { withRouter } from 'react-router-dom';
-import MaterialTable, { MTablePagination } from 'material-table';
+import MaterialTable, { MTablePagination, MTableToolbar } from 'material-table';
 import {
     Grid,
     Dialog,
@@ -133,6 +133,18 @@ const AdminHistory = props => {
             setStatusDialog(true);
         }
     });
+
+    const renderFilter = () => {
+        return (
+            <div className="filter-block">
+                <div className="filter-item" style={{ width: "auto" }}>
+                    <Button variant="contained" color="secondary" onClick={updateList}>
+                        Обновить
+                    </Button>
+                </div>
+            </div>
+        );
+    };
 
     return (
         <Grid container style={{marginTop: 50}}>
@@ -326,7 +338,14 @@ const AdminHistory = props => {
                 options={{
                     pageSizeOptions: [10, 20, 40],
                     pageSize: size
-
+                }}
+                components={{
+                    Toolbar: props => (
+                        <div>
+                            <MTableToolbar {...props} />
+                            <div>{renderFilter()}</div>
+                        </div>
+                    ),
                 }}
             />
         </Grid>

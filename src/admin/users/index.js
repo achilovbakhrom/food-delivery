@@ -211,7 +211,6 @@ const AdminUsers = props => {
                         position: 'row',
                         tooltip: 'Редактировать',
                         onClick: (e, r) => {
-                            console.log("Редактировать", e, r);
                             // localStorage.setItem('restaurant', JSON.stringify(r));
                             // props.history.push(`/admin/user-add-edit?user_id=${r.id}`);
                             onUpdateUserClick(r.id);

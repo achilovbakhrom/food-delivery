@@ -1,3 +1,8 @@
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -18,13 +23,16 @@ code {
   box-sizing: border-box;
 }
 
+#root {
+  min-height: 100%;
+}
+
 .App {
   background-image: url("./assets/img/food-delivery-bg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  height: 100vh;
-  overflow: auto;
+  min-height: 100vh;
   box-shadow:inset 0 0 0 2000px rgba(0, 0, 0, 0.6);
 }
 
