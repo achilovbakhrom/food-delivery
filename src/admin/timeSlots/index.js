@@ -121,7 +121,7 @@ const AdminTimeSlots = props => {
           ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
           ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
         }}
-        title="Даты"
+        title="Даты доставки"
         columns={[
           { title: 'Ресторан', field: 'restaurant' },
           { title: 'Дата', field: 'timeslotDate' },

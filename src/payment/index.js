@@ -146,8 +146,6 @@ const Payment = props => {
     const region = regionList.find((item) => item.id === regionId);
     const district = districtList.find((item) => item.id === districtId);
 
-  console.log("selectedDeliveryTime", selectedDeliveryTime);
-
   return (
         <Grid container>
             {latLongMapModalProps.shouldRender && <LongLatMap
@@ -402,8 +400,7 @@ const Payment = props => {
                                 },
                                 totalPrice: cost,
                                 deleveryPrice: 2.5,
-                                timeslot_id: selectedDeliveryTime ? selectedDeliveryTime.timeslotId: undefined,
-                                timeslot_item_id: selectedDeliveryTime ? selectedDeliveryTime.timeslotItemId: undefined,
+                                timeslotItemId: selectedDeliveryTime ? selectedDeliveryTime.timeslotItemId: undefined,
                                 "restaurantId": Cookies.get('restaurantId') ? parseInt(Cookies.get('restaurantId')) : 0
                             }).then(response => {
                                 Cookies.remove('orders');

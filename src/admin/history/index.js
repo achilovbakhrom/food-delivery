@@ -37,6 +37,7 @@ import {fetchAdminOrders, fetchAdminOrderById} from "../../api/restaurants";
 import {assignDriver, changeStatus, fetchUsers} from "../../api/admin";
 import { useStore } from "effector-react";
 import { $store } from "../../model/stores";
+import Moment from "react-moment";
 
 
 let status = [
@@ -296,7 +297,8 @@ const AdminHistory = props => {
                     { title: 'Адрес', field: 'address' },
                     { title: 'Статус', field: 'status' },
                     { title: 'Водитель', field: 'driver' },
-                    { title: 'Супервайзер', field: 'supervisor' }
+                    { title: 'Супервайзер', field: 'supervisor' },
+                    { title: 'Дата доставки', field: 'deliveryDate' }
                 ]}
                 isLoading={isLoading}
                 data={data.map(d => ({
@@ -317,7 +319,13 @@ const AdminHistory = props => {
                     `,
                     status: d.status,
                     driver: d.driver ? d.driver.name : 'Не назначен',
-                    supervisor: d.supervisor ? d.supervisor.name : 'Не назначен'
+                    supervisor: d.supervisor ? d.supervisor.name : 'Не назначен',
+                    deliveryDate: (<>
+                        {d.timeslotItem ? <div>
+                            <div><Moment format="DD.MM.YYYY" date={d.timeslotItem.startDate} /></div>
+                            <Moment format="HH:mm" date={d.timeslotItem.startDate} /> - <Moment format="HH:mm" date={d.timeslotItem.endDate} />
+                        </div>: ""}
+                    </>)
                 }))}
                 actions={actions}
                 page={page}

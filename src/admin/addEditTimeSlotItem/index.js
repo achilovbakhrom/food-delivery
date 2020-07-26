@@ -116,7 +116,7 @@ const AddEditTimeSlot = props => {
 
         <Grid item xs={4} style={{ paddingLeft: 10 }}>
           <FormControl variant="outlined" fullWidth>
-            <InputLabel id="timeslot-label">Даты</InputLabel>
+            <InputLabel id="timeslot-label">Дата доставки</InputLabel>
             <Select
               id="timeslot"
               labelId="timeslot-label"
@@ -238,7 +238,7 @@ const AddEditTimeSlot = props => {
                 description
               }).then(response => {
                 setIsLoading(false);
-                props.history.goBack();
+                props.history.push(`/admin/time-slot-items?timeslot_id=${timeslotId}`);
               })
             }
           }}

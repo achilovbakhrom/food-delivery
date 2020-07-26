@@ -157,7 +157,7 @@ const AdminRoot = props => {
     if (!isDriver) menuData.push({name: 'Меню', icon: <History />, path: "/admin/menu"});
     menuData.push({name: 'Заказы', icon: <History />, path: "/admin/history"});
     if (!isDriver && !isSupervisor) menuData.push({name: 'Пользователи', icon: <History />, path: "/admin/users"});
-    if (!isDriver) menuData.push({name: 'Даты', icon: <History />, path: "/admin/time-slots"});
+    if (!isDriver) menuData.push({name: 'Даты доставки', icon: <History />, path: "/admin/time-slots"});
     menuData.push({name: 'Выйти', icon: <History />, logout: true});
 
     return (
