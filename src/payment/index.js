@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import {
-    Grid,
-    TextField,
-    Button,
-    FormControl,
-    FormLabel,
-    RadioGroup,
-    FormControlLabel,
-    Radio,
-    InputLabel
+  Grid,
+  TextField,
+  Button,
+  FormControl,
+  FormLabel,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  InputLabel, Paper
 } from '@material-ui/core';
 import {makeStyles} from "@material-ui/core/styles";
 import Cookies from "js-cookie";
@@ -23,6 +23,9 @@ import { dispatch } from 'use-bus'
 import i18n from "../i18";
 import { LongLatMap } from "../long-lat-map";
 import UpdateUserModal from "../update-user-modal";
+import Checkbox from "@material-ui/core/Checkbox/Checkbox";
+import PaymentOneTimeModal from "../admin/payment-on-time-modal";
+import Moment from "react-moment";
 
 const useStyles = makeStyles((theme) => ({
     title: {
@@ -86,6 +89,21 @@ const Payment = props => {
     });
 
     const [latLongCoords, setLatLongCoords] = useState(null);
+    const [deliveryTime, setDeliveryTime] = useState(false);
+    const [selectedDeliveryTime, setSelectedDeliveryTime] = useState(null);
+
+    const [deliveryTimeModalProps, setDeliveryTimeModalProps] = useState({
+      visible: false,
+      shouldRender: false
+    });
+
+    useEffect(() => {
+      if (deliveryTime) {
+        setDeliveryTimeModalProps({ ...deliveryTimeModalProps, visible: true });
+      } else {
+        setSelectedDeliveryTime(null);
+      }
+    }, [deliveryTime]);
 
     const isDisabled = () => {
         let type = cardType() || '';
@@ -128,7 +146,9 @@ const Payment = props => {
     const region = regionList.find((item) => item.id === regionId);
     const district = districtList.find((item) => item.id === districtId);
 
-    return (
+  console.log("selectedDeliveryTime", selectedDeliveryTime);
+
+  return (
         <Grid container>
             {latLongMapModalProps.shouldRender && <LongLatMap
                 modalProps={latLongMapModalProps}
@@ -140,6 +160,12 @@ const Payment = props => {
                 district={district ? district.name : null}
                 street={street}
                 house={houseNo}
+            />}
+            {deliveryTime && <PaymentOneTimeModal
+              modalProps={deliveryTimeModalProps}
+              setModalProps={setDeliveryTimeModalProps}
+              restaurantId={Cookies.get('restaurantId')}
+              setDeliveryTime={setSelectedDeliveryTime}
             />}
             <Grid item className={classes.title} xs={12}>
                 {props.t('payment.order')}
@@ -170,10 +196,6 @@ const Payment = props => {
             <Grid container style={{marginTop: 20, color: 'white', fontWeight: 'bold', fontSize: 20}}>
                 {props.t('payment.delivery_address')}
             </Grid>
-
-            {/*<Grid container style={{marginTop: 20, color: 'white', height: 50}}>*/}
-            {/*    <Button variant="contained" fullWidth style={{borderRadius: 1000}}> Показать на карте </Button>*/}
-            {/*</Grid>*/}
 
             <Grid container style={{marginTop: 20}}>
                 <Grid item xs={6} md={4}>
@@ -268,11 +290,25 @@ const Payment = props => {
                     />
                 </Grid>
             </Grid>
-            <div style={{marginTop: 10}}>
-                <Button variant="contained" className={classes.button} onClick={showLatLongMap}>
-                    {props.t('payment.showOnMap')}
-                </Button>
-            </div>
+            <Grid container direction="row" style={{marginTop: 15}}>
+              <Button variant="contained" className={classes.button} onClick={showLatLongMap}>
+                  {props.t('payment.showOnMap')}
+              </Button>
+            </Grid>
+
+            <Grid container direction="row" style={{marginTop: 10}}>
+              <div style={{ textAlign: "left", margin: "10px 0 0", display: "flex", alignItems: "center" }}>
+                <FormControlLabel
+                  control={<Checkbox checked={deliveryTime} onChange={(event) => setDeliveryTime(event.target.checked)} />}
+                  label={props.t('payment.deliveryTime')}
+                  style={{ color: "#fff" }}
+                />
+                {!!selectedDeliveryTime && <div>
+                  <Moment format="DD.MM.YYYY" date={selectedDeliveryTime.timeslotDate} />&nbsp;
+                  <Moment format="HH:mm" date={selectedDeliveryTime.timeslotItem.startDate} /> - <Moment format="HH:mm" date={selectedDeliveryTime.timeslotItem.endDate} />
+                </div>}
+              </div>
+            </Grid>
 
             {/*<Grid container style={{marginTop: 20}}>*/}
             {/*    <Grid item xs={12} md={9}>*/}
@@ -366,6 +402,8 @@ const Payment = props => {
                                 },
                                 totalPrice: cost,
                                 deleveryPrice: 2.5,
+                                timeslot_id: selectedDeliveryTime ? selectedDeliveryTime.timeslotId: undefined,
+                                timeslot_item_id: selectedDeliveryTime ? selectedDeliveryTime.timeslotItemId: undefined,
                                 "restaurantId": Cookies.get('restaurantId') ? parseInt(Cookies.get('restaurantId')) : 0
                             }).then(response => {
                                 Cookies.remove('orders');

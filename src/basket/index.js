@@ -94,7 +94,7 @@ const Basket = props => {
                             <ListItem key={index} cols={1} >
                                 <ListItemIcon>
                                     <img
-                                        src={item.food.photo ? item.food.photo.url : require("../assets/img/burgers.jpg")}
+                                        src={item.food.photo ? item.food.photo.url : require("../assets/img/noimage.png")}
                                         alt="burger"
                                         width={height*1.1}
                                         height={height}

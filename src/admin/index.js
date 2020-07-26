@@ -29,6 +29,12 @@ import AddEditCategory from '../admin/addEditCategory';
 import AdminUsers from '../admin/users';
 import AddEditUsers from '../admin/addEditUser';
 
+import AdminTimeSlots from '../admin/timeSlots';
+import AddEditTimeSlot from '../admin/addEditTimeSlot';
+
+import AdminTimeSlotItems from '../admin/timeSlotItems';
+import AddEditTimeSlotItem from '../admin/addEditTimeSlotItem';
+
 import Cookies from 'js-cookie';
 import { useStore } from "effector-react";
 import { getCurrentUserEffect } from "../model/effects";
@@ -151,6 +157,7 @@ const AdminRoot = props => {
     if (!isDriver) menuData.push({name: 'Меню', icon: <History />, path: "/admin/menu"});
     menuData.push({name: 'Заказы', icon: <History />, path: "/admin/history"});
     if (!isDriver && !isSupervisor) menuData.push({name: 'Пользователи', icon: <History />, path: "/admin/users"});
+    if (!isDriver) menuData.push({name: 'Даты', icon: <History />, path: "/admin/time-slots"});
     menuData.push({name: 'Выйти', icon: <History />, logout: true});
 
     return (
@@ -230,6 +237,10 @@ const AdminRoot = props => {
                     {!isDriver && !isSupervisor && <Route path="/admin/user-add-edit" component={AddEditUsers}/>}
                     {!isDriver && <Route path="/admin/menu" component={AdminMenu}/>}
                     {!isDriver && <Route path="/admin/menu-add-edit" component={AddEditMenu}/>}
+                    {!isDriver && <Route path="/admin/time-slots" component={AdminTimeSlots}/>}
+                    {!isDriver && <Route path="/admin/time-slot-add-edit" component={AddEditTimeSlot}/>}
+                    {!isDriver && <Route path="/admin/time-slot-items" component={AdminTimeSlotItems}/>}
+                    {!isDriver && <Route path="/admin/time-slot-item-add-edit" component={AddEditTimeSlotItem}/>}
                     <Route path="/admin/history" component={AdminHistory}/>
                 </Switch>
             </main>

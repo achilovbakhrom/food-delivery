@@ -3,6 +3,19 @@
   <component name="ChangeListManager">
     <list default="true" id="4c1cc787-1446-497d-a874-fac755bc5a71" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/admin/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/admin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/restaurants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/restaurants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/basket/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/basket/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/i18/locales/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/i18/locales/en.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/i18/locales/ru.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/i18/locales/ru.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/i18/locales/uz.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/i18/locales/uz.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/long-lat-map/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/long-lat-map/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/payment/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/payment/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,7 +38,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../uzkassa/cto-admin2" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -38,17 +51,17 @@
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\projects\fl\food-delivery\src\assets\img" />
-      <recent name="D:\projects\fl\food-delivery\src" />
-      <recent name="$PROJECT_DIR$/src/assets/img" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\projects\fl\food-delivery\src\admin" />
       <recent name="D:\projects\fl\food-delivery\src\assets\img" />
       <recent name="D:\projects\fl\food-delivery\src\ya-map" />
       <recent name="D:\projects\fl\food-delivery\src\update-user-modal" />
       <recent name="D:\projects\fl\food-delivery\src" />
-      <recent name="D:\projects\fl\food-delivery\src\admin" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\projects\fl\food-delivery\src\assets\img" />
+      <recent name="D:\projects\fl\food-delivery\src" />
+      <recent name="$PROJECT_DIR$/src/assets/img" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -121,7 +134,10 @@
       <workItem from="1595247478570" duration="22980000" />
       <workItem from="1595308627711" duration="41024000" />
       <workItem from="1595415809474" duration="10173000" />
-      <workItem from="1595486037527" duration="5945000" />
+      <workItem from="1595486037527" duration="7087000" />
+      <workItem from="1595578447457" duration="246000" />
+      <workItem from="1595670886129" duration="27708000" />
+      <workItem from="1595753368804" duration="15702000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <created>1593888871329</created>

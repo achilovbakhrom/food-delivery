@@ -155,3 +155,47 @@ export const changeStatus = (orderId, status) => {
 export const getUserDetails = (id) => {
     return instance.get(`/api/users/${id}`)
 };
+
+export const fetchTimeSlots = (filter) => {
+    return instance.get('/api/admin/timeslots', { params: filter })
+};
+
+export const createTimeSlot = (data) => {
+    return instance.post('/api/admin/timeslots', data)
+};
+
+export const updateTimeSlot = (data) => {
+    return instance.put('/api/admin/timeslots', data)
+};
+
+export const deleteTimeSlotById = (id) => {
+    return instance.delete(`/api/admin/timeslots/${id}`)
+};
+
+export const fetchTimeSlotById = (id) => {
+    return instance.get(`/api/admin/timeslots/${id}`)
+};
+
+export const fetchTimeSlotStatuses = () => {
+    return instance.get('/api/enums/timeslot/statuses')
+};
+
+export const fetchTimeSlotItems = (filter) => {
+    return instance.get('/api/admin/timeslot/items', { params: filter })
+};
+
+export const createTimeSlotItem = (data) => {
+    return instance.post('/api/admin/timeslot/items', data)
+};
+
+export const updateTimeSlotItem = (data) => {
+    return instance.put('/api/admin/timeslot/items', data)
+};
+
+export const deleteTimeSlotItemById = (id) => {
+    return instance.delete(`/api/admin/timeslot/items/${id}`)
+};
+
+export const fetchTimeSlotItemById = (id) => {
+    return instance.get(`/api/admin/timeslot/items/${id}`)
+};

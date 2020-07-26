@@ -47,3 +47,7 @@ export const fetchMyOrders = (filter) => {
 export const fetchOrderById = (id) => {
     return instance.get(`/api/orders/${id}`);
 };
+
+export const fetchTimeSlots = (params) => {
+    return instance.get("/api/timeslots", { params });
+};

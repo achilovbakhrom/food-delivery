@@ -104,7 +104,7 @@ export const LongLatMap = (props) => {
           {title}
         </DialogTitle>
         <div style={{ position: "relative", minHeight: 600 }}>
-          <YMaps query={{ apikey: '847fc0ac-d17a-4e99-9fb7-5cb6b393643b' }}>
+          <YMaps>
             <Map
                 modules={['geocode']}
                 state={{
