@@ -19,6 +19,11 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 import { Restaurant, MenuBook, ExitToApp, Fastfood, History, Category, People } from '@material-ui/icons';
 import AdminRestaurants from "../admin/restaurants";
 import AddEditRestaurants from '../admin/addEditRestaurant';
+
+import AdminRestaurantCategories from "../admin/restaurant-categories";
+import AddEditRestaurantCategory from "../admin/addEditRestaurantCategory";
+
+
 import AdminFoods from '../admin/foods';
 import AddEditFoods from '../admin/addEditFood';
 import AdminMenu from '../admin/menu';
@@ -153,6 +158,7 @@ const AdminRoot = props => {
 
     if (!isDriver) menuData.push({name: 'Рестораны', icon: <History />, path: "/admin/restaurants"});
     if (!isDriver) menuData.push({name: 'Категории', icon: <History />, path: "/admin/categories"});
+    if (!isDriver) menuData.push({name: 'Категории ресторанов', icon: <History />, path: "/admin/restaurant-categories"});
     if (!isDriver) menuData.push({name: 'Блюда', icon: <History />, path: "/admin/foods"});
     if (!isDriver) menuData.push({name: 'Меню', icon: <History />, path: "/admin/menu"});
     menuData.push({name: 'Заказы', icon: <History />, path: "/admin/history"});
@@ -231,6 +237,10 @@ const AdminRoot = props => {
                     {!isDriver && <Route path="/admin/categories" component={AdminCategory}/>}
                     {!isDriver && <Route path="/admin/category-add-edit" component={AddEditCategory}/>}
                     {!isDriver && <Route path="/admin/restaurant-add-edit" component={AddEditRestaurants}/>}
+
+                    {!isDriver && <Route path="/admin/restaurant-categories" component={AdminRestaurantCategories}/>}
+                    {!isDriver && <Route path="/admin/restaurant-categories-add-edit" component={AddEditRestaurantCategory}/>}
+
                     {!isDriver && <Route path="/admin/foods" component={AdminFoods}/>}
                     {!isDriver && <Route path="/admin/food-add-edit" component={AddEditFoods}/>}
                     {!isDriver && !isSupervisor && <Route path="/admin/users" component={AdminUsers}/>}

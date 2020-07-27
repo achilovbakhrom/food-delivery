@@ -110,6 +110,29 @@ export const deleteCategory = (id) => {
     return instance.delete(`/api/admin/categories/${id}`);
 };
 
+
+
+export const fetchRestaurantCategories = (filter) => {
+    return instance.get('/api/admin/restaurant/categories', { params: filter })
+};
+
+export const createRestaurantCategory = (food) => {
+    return instance.post('/api/admin/restaurant/categories', food);
+};
+
+export const updateRestaurantCategory = (category) => {
+    return instance.put('/api/admin/restaurant/categories', category);
+};
+
+export const fetchRestaurantCategoryById = (id) => {
+    return instance.get(`/api/admin/restaurant/categories/${id}`);
+};
+
+export const deleteRestaurantCategory = (id) => {
+    return instance.delete(`/api/admin/restaurant/categories/${id}`);
+};
+
+
 export const uploadPhotoCategory = (id, photo) => {
     let formData = new FormData();
     formData.append('file', photo);

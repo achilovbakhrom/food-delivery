@@ -71,11 +71,12 @@ const Restaurants = props => {
     // const parsed = queryString.parse(props.location.search);
     setIsLoading(true);
     setIsEnd(false);
+    setPage(0);
 
-    fetchRestaurants({ ...filterProps, size, page })
+    fetchRestaurants({ ...filterProps, size, page: 0 })
       .then(response => {
         setIsLoading(false);
-        setRestaurants([...restaurants, ...response.data.content]);
+        setRestaurants(response.data.content);
         setIsEnd(response.data.content.length < size)
       })
       .catch(error => {
