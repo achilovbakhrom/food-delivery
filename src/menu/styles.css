@@ -1,3 +1,11 @@
+.product__details {
+  display: flex;
+  flex-flow: row;
+  flex-grow: 1;
+  height: 100%;
+  padding: 15px;
+}
+
 .menu__amount-wr {
   position: relative;
   font-size: 0;
@@ -46,5 +54,11 @@
     width: 20px;
     font-size: 11px;
     font-weight: normal;
+  }
+}
+
+@media (max-width: 480px) {
+  .product__details {
+    padding: 10px;
   }
 }

@@ -81,7 +81,17 @@ const Menu = props => {
             return 130;
         }
         return 1;
-    })()
+    })();
+
+    let imgWidth = (() => {
+        if (isWidthUp('md', props.width)) {
+            return 250;
+        }
+        if (isWidthUp('xs', props.width)) {
+            return 120;
+        }
+        return 1;
+    })();
 
     return (
         <Grid container >
@@ -100,7 +110,7 @@ const Menu = props => {
                                         <img
                                             src={item.photo ? item.photo.url : require("../assets/img/noimage.png")}
                                             alt="burger"
-                                            width={height*1.1}
+                                            width={imgWidth}
                                             height={height}
                                             style={{
                                                 borderBottomLeftRadius: 10,
@@ -117,15 +127,10 @@ const Menu = props => {
                                                 objectFit: "cover"
                                             }} />
                                     </ListItemIcon>
-                                    <div style={{
-                                        height: '100%',
+                                    <div className="product__details" style={{
                                         backgroundColor: '#0007',
-                                        flexGrow: 1,
                                         borderTopRightRadius: 10,
                                         borderBottomRightRadius: 10,
-                                        padding: 15,
-                                        display: 'flex',
-                                        flexFlow: 'row',
                                         borderRightColor: borderColor,
                                         borderRightWidth: 1,
                                         borderRightStyle: "solid",
@@ -145,7 +150,7 @@ const Menu = props => {
                                             <Button
                                                 variant='outlined'
                                                 color="inherit"
-                                                style={{fontSize: 25, lineHeight: 1, height: (() => {
+                                                style={{fontSize: 25, lineHeight: 1, width: "100%", minWidth: 0, padding: 0, height: (() => {
                                                         if (isWidthUp('md', props.width)) {
                                                             return 60;
                                                         }
@@ -181,7 +186,7 @@ const Menu = props => {
                                             <Button
                                                 variant='outlined'
                                                 color="secondary"
-                                                style={{fontSize: 25, lineHeight: 1, height: (() => {
+                                                style={{fontSize: 25, lineHeight: 1, width: "100%", minWidth: 0, padding: 0, height: (() => {
                                                         if (isWidthUp('md', props.width)) {
                                                             return 60;
                                                         }

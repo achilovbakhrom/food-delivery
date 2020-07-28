@@ -174,7 +174,7 @@ const Restaurants = props => {
             </Select>
           </FormControl>
         </Grid>
-        <Grid item xs={6} md={5} style={{ paddingLeft: 10 }}>
+        <Grid item xs={6} md={5} style={{ paddingLeft: 10, display: "none" }}>
           <FormControl variant="outlined" fullWidth className={classes.formControl}>
             <InputLabel id="district">{props.t('payment.district')}</InputLabel>
             <Select
