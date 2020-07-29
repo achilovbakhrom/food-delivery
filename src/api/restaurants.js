@@ -32,14 +32,6 @@ export const order = (order) => {
     return instance.post('/api/admin/orders', order);
 };
 
-export const fetchAdminOrders = (filter) => {
-    return instance.get('/api/admin/orders', {params: filter});
-};
-
-export const fetchAdminOrderById = (id) => {
-    return instance.get(`/api/admin/orders/${id}`);
-};
-
 export const fetchMyOrders = (filter) => {
     return instance.get('/api/orders', {params: filter});
 };

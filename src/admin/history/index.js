@@ -33,8 +33,7 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import Button from "@material-ui/core/Button";
 import { Assignment, DriveEta } from '@material-ui/icons';
-import {fetchAdminOrders, fetchAdminOrderById} from "../../api/restaurants";
-import {assignDriver, changeStatus, fetchUsers} from "../../api/admin";
+import { assignDriver, changeStatus, deleteOrder, fetchUsers, fetchAdminOrders, fetchAdminOrderById } from "../../api/admin";
 import { useStore } from "effector-react";
 import { $store } from "../../model/stores";
 import Moment from "react-moment";
@@ -88,6 +87,8 @@ const AdminHistory = props => {
     const [statusDialog, setStatusDialog] = useState(false);
     const [drivers, setDrivers] = useState([]);
     const [assignId, setAssignId] = useState();
+    const [deleteId, setDeleteId] = useState(false);
+    const [deleteOpen, setDeleteOpen] = useState(false);
 
     useEffect(() => {
         updateList()
@@ -134,6 +135,20 @@ const AdminHistory = props => {
             setStatusDialog(true);
         }
     });
+
+    console.log("$currentUser", $currentUser);
+
+    if ($currentUser.isSupervisor || $currentUser.isAdmin) {
+        actions.push({
+            icon: () => <DeleteOutline />,
+            position: 'row',
+            tooltip: 'Удалить',
+            onClick: (e, r) => {
+                setDeleteId(r.id);
+                setDeleteOpen(true);
+            }
+        });
+    }
 
     const renderFilter = () => {
         return (
@@ -263,6 +278,41 @@ const AdminHistory = props => {
                         setClient(undefined);
                     }} color="primary">
                         Закрыть
+                    </Button>
+                </DialogActions>
+            </Dialog>
+            <Dialog
+              open={deleteOpen}
+              onClose={() => {
+                  setDeleteOpen(false);
+                  setDeleteId(undefined);
+              }}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">{"Осторожно!"}</DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        Вы действиетльно хотите удалить заказ?
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => {
+                        setDeleteOpen(false);
+                        setDeleteId(undefined);
+                    }} color="primary">
+                        Нет
+                    </Button>
+                    <Button onClick={() => {
+                        if (deleteId !== undefined) {
+                            setDeleteOpen(false);
+                            deleteOrder(deleteId)
+                              .then(response => {
+                                  updateList()
+                              })
+                        }
+                    }} color="primary" autoFocus>
+                        Да
                     </Button>
                 </DialogActions>
             </Dialog>

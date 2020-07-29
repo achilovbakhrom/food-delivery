@@ -69,6 +69,20 @@ export const uploadPhotoFood = (id, photo) => {
     })
 };
 
+
+export const fetchAdminOrders = (filter) => {
+    return instance.get('/api/admin/orders', {params: filter});
+};
+
+export const fetchAdminOrderById = (id) => {
+    return instance.get(`/api/admin/orders/${id}`);
+};
+
+export const deleteOrder = (id) => {
+    return instance.delete(`/api/admin/orders/${id}`);
+};
+
+
 export const fetchRestaurantFoods = (filter) => {
     return instance.get('/api/admin/restaurant/foods', { params: filter })
 };

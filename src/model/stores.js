@@ -20,6 +20,7 @@ const $currentUser = createStore({ loading: false, data: null, error: null })
             return {
                 ...params,
                 data,
+                isAdmin: data.roles.indexOf('ADMIN') >= 0,
                 isSupervisor: data.roles.indexOf('SUPERVISOR') >= 0,
                 isDriver: data.roles.indexOf('DRIVER') >= 0,
                 isClient: data.roles.indexOf('CLIENT') >= 0,
