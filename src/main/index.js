@@ -16,7 +16,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Badge from "@material-ui/core/Badge";
-import { Switch, Route, withRouter } from 'react-router-dom';
+import { Switch, Route, withRouter, Link } from 'react-router-dom';
 import { Restaurant, LocationCity, Memory, Contacts as ContactIcon, Language, Person, ExitToApp, ShoppingBasket } from '@material-ui/icons';
 import Restaurants from "../restaurants";
 import Categories from '../categories';
@@ -32,12 +32,16 @@ import {withTranslation} from "react-i18next";
 import Profile from "../profile";
 import Contacts  from '../contacts';
 import History from '../history';
+import TermsAndConditions from '../terms-and-conditions';
+import PrivacyPolicy from '../privacy-policy';
+import { Paper } from "@material-ui/core";
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
+        minHeight: "100%"
     },
     appBar: {
         transition: theme.transitions.create(['margin', 'width'], {
@@ -76,6 +80,8 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'flex-end',
     },
     content: {
+        display: "flex",
+        flexDirection: "column",
         padding: 20,
         position: 'relative',
         width: '100%',
@@ -90,6 +96,18 @@ const useStyles = makeStyles((theme) => ({
             duration: theme.transitions.duration.enteringScreen,
         }),
         marginLeft: 0,
+    },
+    middle: {
+        flexGrow: 1
+    },
+    footer: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        margin: "30px 0 0",
+        padding: 20,
+        width: '100%',
+        backgroundColor: 'white'
     },
 }));
 
@@ -291,19 +309,31 @@ const Main = props => {
                 </List>
             </Drawer>
             <main className={classes.content}>
-                <Switch>
-                    {/*<Route path="/app/address" component={Address}/>*/}
-                    {/*<Route path="/app/districts" component={District}/>*/}
-                    <Route path="/app/restaurants" component={Restaurants}/>
-                    <Route path="/app/categories" component={Categories}/>
-                    <Route path="/app/menu" component={Menu}/>
-                    <Route path="/app/basket" component={Basket}/>
-                    <Route path="/app/payment" component={Payment}/>
-                    <Route path="/app/languages" component={Languages}/>
-                    <Route path="/app/profile" component={Profile}/>
-                    <Route path="/app/contacts" component={Contacts}/>
-                    <Route path="/app/history" component={History}/>
-                </Switch>
+                <div className={classes.middle}>
+                    <Switch>
+                        {/*<Route path="/app/address" component={Address}/>*/}
+                        {/*<Route path="/app/districts" component={District}/>*/}
+                        <Route path="/app/restaurants" component={Restaurants}/>
+                        <Route path="/app/categories" component={Categories}/>
+                        <Route path="/app/menu" component={Menu}/>
+                        <Route path="/app/basket" component={Basket}/>
+                        <Route path="/app/payment" component={Payment}/>
+                        <Route path="/app/languages" component={Languages}/>
+                        <Route path="/app/profile" component={Profile}/>
+                        <Route path="/app/contacts" component={Contacts}/>
+                        <Route path="/app/history" component={History}/>
+                        <Route path="/app/terms-and-conditions" component={TermsAndConditions}/>
+                        <Route path="/app/privacy-policy" component={PrivacyPolicy}/>
+                    </Switch>
+                </div>
+                <Paper className={classes.footer}>
+                    <div style={{ margin: "5px 10px" }}>
+                        <Link to={"/app/terms-and-conditions"}>{props.t('main.terms')}</Link>
+                    </div>
+                    <div style={{ margin: "5px 10px" }}>
+                        <Link to={"/app/privacy-policy"}>{props.t('main.privacy')}</Link>
+                    </div>
+                </Paper>
             </main>
         </div>
     );

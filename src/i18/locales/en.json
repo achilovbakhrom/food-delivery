@@ -39,7 +39,9 @@
       "profile": "Profile",
       "signOut": "Logout",
       "login": "Login",
-      "uzchef": "Welcome to UZCHEF.COM"
+      "uzchef": "Welcome to UZCHEF.COM",
+      "terms": "Terms and Conditions",
+      "privacy": "Privacy Policy"
     },
     "basket": {
       "total": "Total:",
