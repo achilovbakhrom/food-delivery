@@ -27,6 +27,8 @@ import Checkbox from "@material-ui/core/Checkbox/Checkbox";
 import PaymentOneTimeModal from "../admin/payment-on-time-modal";
 import Moment from "react-moment";
 
+const deliveryPrice = 2.5;
+
 const useStyles = makeStyles((theme) => ({
     title: {
         marginTop: '80px',
@@ -145,6 +147,7 @@ const Payment = props => {
 
     const region = regionList.find((item) => item.id === regionId);
     const district = districtList.find((item) => item.id === districtId);
+    const showPrice = cost + deliveryPrice;
 
   return (
         <Grid container>
@@ -399,7 +402,7 @@ const Payment = props => {
                                     phone: phone
                                 },
                                 totalPrice: cost,
-                                deleveryPrice: 2.5,
+                                deliveryPrice,
                                 timeslotItemId: selectedDeliveryTime ? selectedDeliveryTime.timeslotItemId: undefined,
                                 "restaurantId": Cookies.get('restaurantId') ? parseInt(Cookies.get('restaurantId')) : 0
                             }).then(response => {
@@ -411,7 +414,7 @@ const Payment = props => {
                                 alert(error);
                             })
                         }}
-                    > {props.t('payment.purchase_order')} ({cost.toFixed(2)}$) </Button>
+                    > {props.t('payment.purchase_order')} ({showPrice.toFixed(2)}$) </Button>
                 </Grid>
             </Grid>
         </Grid>
