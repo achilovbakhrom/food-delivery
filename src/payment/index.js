@@ -26,6 +26,12 @@ import UpdateUserModal from "../update-user-modal";
 import Checkbox from "@material-ui/core/Checkbox/Checkbox";
 import PaymentOneTimeModal from "../admin/payment-on-time-modal";
 import Moment from "react-moment";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import StripeCard from "./stripe";
+
+
+const promise = loadStripe("pk_test_51GvHjAEuBsy49TLwUXKCDWLnnRwfIsiIdXiUr0wZJGc8QO36bNVpivNvgqhNwMyQBow6Jq44rcDE3YLAbGVCk8Fh005KUDe0VA");
 
 const deliveryPrice = 2.5;
 
@@ -336,14 +342,18 @@ const Payment = props => {
             {/*    </Grid>*/}
             {/*</Grid>*/}
             <Grid container direction="row" style={{marginTop: 20}}>
-                <Grid item xs={12} md={9}>
-                    <CreditCardInput
-                        cardNumberInputProps={{ value: number, onChange: (e) => { setNumber(e.target.value) } }}
-                        cardExpiryInputProps={{ value: expiry, onChange: (e) => { setExpiry(e.target.value) } }}
-                        cardCVCInputProps={{ value: cvc, onChange: (e) => { setCvc(e.target.value) } }}
+                <Grid className="stripe-card" item xs={12} md={9}>
+                    {/*<CreditCardInput*/}
+                    {/*    cardNumberInputProps={{ value: number, onChange: (e) => { setNumber(e.target.value) } }}*/}
+                    {/*    cardExpiryInputProps={{ value: expiry, onChange: (e) => { setExpiry(e.target.value) } }}*/}
+                    {/*    cardCVCInputProps={{ value: cvc, onChange: (e) => { setCvc(e.target.value) } }}*/}
 
-                        fieldClassName="input"
-                    />
+                    {/*    fieldClassName="input"*/}
+                    {/*/>*/}
+
+                  <Elements stripe={promise}>
+                    <StripeCard />
+                  </Elements>
                 </Grid>
 
             </Grid>

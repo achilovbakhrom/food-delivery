@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="4c1cc787-1446-497d-a874-fac755bc5a71" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/i18/locales/uz.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/i18/locales/uz.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/payment/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/payment/index.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,7 +28,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/payment/stripe" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -40,17 +41,17 @@
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\projects\fl\food-delivery\src\assets\documents" />
-      <recent name="D:\projects\fl\food-delivery\src" />
-      <recent name="D:\projects\fl\food-delivery\src\admin" />
-      <recent name="D:\projects\fl\food-delivery\src\assets\img" />
-      <recent name="D:\projects\fl\food-delivery\src\ya-map" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\projects\fl\food-delivery\src\assets\img" />
       <recent name="D:\projects\fl\food-delivery\src" />
       <recent name="$PROJECT_DIR$/src/assets/img" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\projects\fl\food-delivery\src\payment\stripe" />
+      <recent name="D:\projects\fl\food-delivery\src\assets\documents" />
+      <recent name="D:\projects\fl\food-delivery\src" />
+      <recent name="D:\projects\fl\food-delivery\src\admin" />
+      <recent name="D:\projects\fl\food-delivery\src\assets\img" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -134,7 +135,8 @@
       <workItem from="1596095502724" duration="579000" />
       <workItem from="1596532662061" duration="12441000" />
       <workItem from="1596613442072" duration="23000" />
-      <workItem from="1597740542330" duration="801000" />
+      <workItem from="1597740542330" duration="1228000" />
+      <workItem from="1597998400598" duration="2105000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <created>1593888871329</created>
