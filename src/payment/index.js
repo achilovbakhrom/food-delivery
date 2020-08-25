@@ -26,13 +26,7 @@ import UpdateUserModal from "../update-user-modal";
 import Checkbox from "@material-ui/core/Checkbox/Checkbox";
 import PaymentOneTimeModal from "../admin/payment-on-time-modal";
 import Moment from "react-moment";
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
-import StripeCard from "./stripe";
 import StripeButton from "./stripe/stripebutton.component";
-
-
-const promise = loadStripe("pk_test_51GvHjAEuBsy49TLwUXKCDWLnnRwfIsiIdXiUr0wZJGc8QO36bNVpivNvgqhNwMyQBow6Jq44rcDE3YLAbGVCk8Fh005KUDe0VA");
 
 const deliveryPrice = 2.5;
 
@@ -115,31 +109,30 @@ const Payment = props => {
     }, [deliveryTime]);
 
     const isDisabled = () => {
-        let type = cardType() || '';
         return !fio || !phone || !street || !houseNo ||
-            regionId === undefined || districtId === undefined || !cvc || !expiry || (type.toUpperCase() !== 'VISA' && type.toUpperCase() !== 'MASTERCARD' && type.toUpperCase() !== 'AMERICAN_EXPRESS')
+            regionId === undefined || districtId === undefined
     };
 
-    const cardType = () => {
-        var cards = {
-            electron: /^(4026|417500|4405|4508|4844|4913|4917)\d+$/,
-            maestro: /^(5018|5020|5038|5612|5893|6304|6759|6761|6762|6763|0604|6390)\d+$/,
-            dankort: /^(5019)\d+$/,
-            interpayment: /^(636)\d+$/,
-            unionpay: /^(62|88)\d+$/,
-            visa: /^4[0-9]{12}(?:[0-9]{3})?$/,
-            mastercard: /^5[1-5][0-9]{14}$/,
-            american_express: /^3[47][0-9]{13}$/,
-            diners: /^3(?:0[0-5]|[68][0-9])[0-9]{11}$/,
-            discover: /^6(?:011|5[0-9]{2})[0-9]{12}$/,
-            jcb: /^(?:2131|1800|35\d{3})\d{11}$/
-        };
-        for (let card in cards) {
-            if (cards[card].test(number.replace(/ /g,''))) {
-                return card;
-            }
-        }
-    };
+    // const cardType = () => {
+    //     var cards = {
+    //         electron: /^(4026|417500|4405|4508|4844|4913|4917)\d+$/,
+    //         maestro: /^(5018|5020|5038|5612|5893|6304|6759|6761|6762|6763|0604|6390)\d+$/,
+    //         dankort: /^(5019)\d+$/,
+    //         interpayment: /^(636)\d+$/,
+    //         unionpay: /^(62|88)\d+$/,
+    //         visa: /^4[0-9]{12}(?:[0-9]{3})?$/,
+    //         mastercard: /^5[1-5][0-9]{14}$/,
+    //         american_express: /^3[47][0-9]{13}$/,
+    //         diners: /^3(?:0[0-5]|[68][0-9])[0-9]{11}$/,
+    //         discover: /^6(?:011|5[0-9]{2})[0-9]{12}$/,
+    //         jcb: /^(?:2131|1800|35\d{3})\d{11}$/
+    //     };
+    //     for (let card in cards) {
+    //         if (cards[card].test(number.replace(/ /g,''))) {
+    //             return card;
+    //         }
+    //     }
+    // };
 
     const showLatLongMap = () => {
         setLatLongMapModalProps({
@@ -420,54 +413,54 @@ const Payment = props => {
             </Grid>
             <Grid container style={{marginTop: 20}}>
               <Grid className="stripe-card" item xs={12} md={9}>
-                  <StripeButton price={showPrice} getOrder={getOrder} afterOrder={afterOrder} label={`${props.t('payment.purchase_order')} (${showPrice.toFixed(2)}$)`} />
-                    <Button
-                        variant="contained"
-                        fullWidth style={{borderRadius: 1000, color: 'white', height: 50}}
-                        disabled={isDisabled()}
-                        onClick={() => {
-                            let orderString = Cookies.get('orders') || '[]';
-                            let orders = JSON.parse(orderString);
-                            const [firstName, lastName] = fio ? fio.split(" "): [];
-                            order({
-                                card: {
-                                    cardNumber: number,
-                                    cardType: value,
-                                    expiryDate: expiry
+                  <StripeButton price={showPrice} getOrder={getOrder} afterOrder={afterOrder} isDisabled={isDisabled()} label={`${props.t('payment.purchase_order')} (${showPrice.toFixed(2)}$)`} />
+                    {/*<Button*/}
+                    {/*    variant="contained"*/}
+                    {/*    fullWidth style={{borderRadius: 1000, color: 'white', height: 50}}*/}
+                    {/*    disabled={isDisabled()}*/}
+                    {/*    onClick={() => {*/}
+                    {/*        let orderString = Cookies.get('orders') || '[]';*/}
+                    {/*        let orders = JSON.parse(orderString);*/}
+                    {/*        const [firstName, lastName] = fio ? fio.split(" "): [];*/}
+                    {/*        order({*/}
+                    {/*            card: {*/}
+                    {/*                cardNumber: number,*/}
+                    {/*                cardType: value,*/}
+                    {/*                expiryDate: expiry*/}
 
-                                },
-                                items: orders.map(o => ({ id: o.food.food.id, price: o.food.price, quantity: o.count })),
-                                description,
-                                receiver: {
-                                    address: {
-                                        apartment: flatNo,
-                                        districtId: districtId,
-                                        floor: floor,
-                                        house: houseNo,
-                                        porch: door,
-                                        regionId: regionId,
-                                        street: street,
-                                        latitude: latLongCoords ? latLongCoords[0]: undefined,
-                                        longitude: latLongCoords ? latLongCoords[1]: undefined,
-                                    },
-                                    firstName: firstName,
-                                    lastName: lastName,
-                                    phone: phone
-                                },
-                                totalPrice: cost,
-                                deliveryPrice,
-                                timeslotItemId: selectedDeliveryTime ? selectedDeliveryTime.timeslotItemId: undefined,
-                                "restaurantId": Cookies.get('restaurantId') ? parseInt(Cookies.get('restaurantId')) : 0
-                            }).then(response => {
-                                Cookies.remove('orders');
-                                Cookies.remove('restaurantId');
-                                dispatch('order_changed');
-                                props.history.push('/app/history')
-                            }).catch(error => {
-                                alert(error);
-                            })
-                        }}
-                    > {props.t('payment.purchase_order')} ({showPrice.toFixed(2)}$) </Button>
+                    {/*            },*/}
+                    {/*            items: orders.map(o => ({ id: o.food.food.id, price: o.food.price, quantity: o.count })),*/}
+                    {/*            description,*/}
+                    {/*            receiver: {*/}
+                    {/*                address: {*/}
+                    {/*                    apartment: flatNo,*/}
+                    {/*                    districtId: districtId,*/}
+                    {/*                    floor: floor,*/}
+                    {/*                    house: houseNo,*/}
+                    {/*                    porch: door,*/}
+                    {/*                    regionId: regionId,*/}
+                    {/*                    street: street,*/}
+                    {/*                    latitude: latLongCoords ? latLongCoords[0]: undefined,*/}
+                    {/*                    longitude: latLongCoords ? latLongCoords[1]: undefined,*/}
+                    {/*                },*/}
+                    {/*                firstName: firstName,*/}
+                    {/*                lastName: lastName,*/}
+                    {/*                phone: phone*/}
+                    {/*            },*/}
+                    {/*            totalPrice: cost,*/}
+                    {/*            deliveryPrice,*/}
+                    {/*            timeslotItemId: selectedDeliveryTime ? selectedDeliveryTime.timeslotItemId: undefined,*/}
+                    {/*            "restaurantId": Cookies.get('restaurantId') ? parseInt(Cookies.get('restaurantId')) : 0*/}
+                    {/*        }).then(response => {*/}
+                    {/*            Cookies.remove('orders');*/}
+                    {/*            Cookies.remove('restaurantId');*/}
+                    {/*            dispatch('order_changed');*/}
+                    {/*            props.history.push('/app/history')*/}
+                    {/*        }).catch(error => {*/}
+                    {/*            alert(error);*/}
+                    {/*        })*/}
+                    {/*    }}*/}
+                    {/*> {props.t('payment.purchase_order')} ({showPrice.toFixed(2)}$) </Button>*/}
               </Grid>
             </Grid>
         </Grid>
