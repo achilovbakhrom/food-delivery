@@ -209,6 +209,10 @@ export const deleteTimeSlotById = (id) => {
     return instance.delete(`/api/admin/timeslots/${id}`)
 };
 
+export const addToDateTimeSlot = (data) => {
+    return instance.post('/api/admin/timeslots/clone', data)
+};
+
 export const fetchTimeSlotById = (id) => {
     return instance.get(`/api/admin/timeslots/${id}`)
 };

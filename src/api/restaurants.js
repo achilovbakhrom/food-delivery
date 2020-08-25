@@ -32,6 +32,10 @@ export const order = (order) => {
     return instance.post('/api/admin/orders', order);
 };
 
+export const stripePayment = (data) => {
+    return instance.post('/api/stripe/payment', data);
+};
+
 export const fetchMyOrders = (filter) => {
     return instance.get('/api/orders', {params: filter});
 };

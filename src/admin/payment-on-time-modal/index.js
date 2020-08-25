@@ -146,7 +146,7 @@ const PaymentOneTimeModal = (props) => {
   };
 
   const onChooseCLick = () => {
-    setDeliveryTime(timeData);
+    setDeliveryTime(Object.keys(timeData).length ? timeData : null);
     setModalProps({ ...modalProps, visible: false });
   };
 
@@ -230,7 +230,7 @@ const PaymentOneTimeModal = (props) => {
             </TabPanel>)}
           </>}
 
-          {loaded && !timeSlotsFormatted.length && <div>
+          {loaded && !timeSlotsFormatted.length && <div className={classes.close}>
             {props.t('payment.noData')}
           </div>}
 

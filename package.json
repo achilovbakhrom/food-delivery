@@ -35,6 +35,7 @@
     "react-pdf": "^4.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
+    "react-stripe-checkout": "^2.6.3",
     "react-yandex-maps": "^4.4.0",
     "styled-components": "^5.1.1",
     "use-bus": "^2.3.1"

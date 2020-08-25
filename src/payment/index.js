@@ -29,6 +29,7 @@ import Moment from "react-moment";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import StripeCard from "./stripe";
+import StripeButton from "./stripe/stripebutton.component";
 
 
 const promise = loadStripe("pk_test_51GvHjAEuBsy49TLwUXKCDWLnnRwfIsiIdXiUr0wZJGc8QO36bNVpivNvgqhNwMyQBow6Jq44rcDE3YLAbGVCk8Fh005KUDe0VA");
@@ -154,6 +155,44 @@ const Payment = props => {
     const region = regionList.find((item) => item.id === regionId);
     const district = districtList.find((item) => item.id === districtId);
     const showPrice = cost + deliveryPrice;
+
+  const getOrder = () => {
+    let orderString = Cookies.get('orders') || '[]';
+    let orders = JSON.parse(orderString);
+    const [firstName, lastName] = fio ? fio.split(" "): [];
+
+    return {
+      items: orders.map(o => ({ id: o.food.food.id, price: o.food.price, quantity: o.count })),
+      description,
+      receiver: {
+        address: {
+          apartment: flatNo,
+          districtId: districtId,
+          floor: floor,
+          house: houseNo,
+          porch: door,
+          regionId: regionId,
+          street: street,
+          latitude: latLongCoords ? latLongCoords[0] : undefined,
+          longitude: latLongCoords ? latLongCoords[1] : undefined,
+        },
+        firstName: firstName,
+        lastName: lastName,
+        phone: phone
+      },
+      totalPrice: cost,
+      deliveryPrice,
+      timeslotItemId: selectedDeliveryTime ? selectedDeliveryTime.timeslotItemId : undefined,
+      restaurantId: Cookies.get('restaurantId') ? parseInt(Cookies.get('restaurantId')) : 0
+    }
+  };
+
+  const afterOrder = () => {
+    Cookies.remove('orders');
+    Cookies.remove('restaurantId');
+    dispatch('order_changed');
+    props.history.push('/app/history')
+  };
 
   return (
         <Grid container>
@@ -341,22 +380,25 @@ const Payment = props => {
             {/*        </FormControl>*/}
             {/*    </Grid>*/}
             {/*</Grid>*/}
-            <Grid container direction="row" style={{marginTop: 20}}>
-                <Grid className="stripe-card" item xs={12} md={9}>
-                    {/*<CreditCardInput*/}
-                    {/*    cardNumberInputProps={{ value: number, onChange: (e) => { setNumber(e.target.value) } }}*/}
-                    {/*    cardExpiryInputProps={{ value: expiry, onChange: (e) => { setExpiry(e.target.value) } }}*/}
-                    {/*    cardCVCInputProps={{ value: cvc, onChange: (e) => { setCvc(e.target.value) } }}*/}
 
-                    {/*    fieldClassName="input"*/}
-                    {/*/>*/}
+            {/*<Grid container direction="row" style={{marginTop: 20}}>*/}
+            {/*    <Grid className="stripe-card" item xs={12} md={9}>*/}
+            {/*        <CreditCardInput*/}
+            {/*            cardNumberInputProps={{ value: number, onChange: (e) => { setNumber(e.target.value) } }}*/}
+            {/*            cardExpiryInputProps={{ value: expiry, onChange: (e) => { setExpiry(e.target.value) } }}*/}
+            {/*            cardCVCInputProps={{ value: cvc, onChange: (e) => { setCvc(e.target.value) } }}*/}
 
-                  <Elements stripe={promise}>
-                    <StripeCard />
-                  </Elements>
-                </Grid>
+            {/*            fieldClassName="input"*/}
+            {/*        />*/}
 
-            </Grid>
+            {/*      <Elements stripe={promise}>*/}
+            {/*        <StripeCard />*/}
+            {/*      </Elements>*/}
+
+
+            {/*    </Grid>*/}
+
+            {/*</Grid>*/}
 
             <Grid container direction="row" style={{marginTop: 15}}>
                 <Grid item xs={9}>
@@ -377,7 +419,8 @@ const Payment = props => {
                 {props.t('payment.delivery_price')} 2.5$
             </Grid>
             <Grid container style={{marginTop: 20}}>
-                <Grid item xs={12} md={9}>
+              <Grid className="stripe-card" item xs={12} md={9}>
+                  <StripeButton price={showPrice} getOrder={getOrder} afterOrder={afterOrder} label={`${props.t('payment.purchase_order')} (${showPrice.toFixed(2)}$)`} />
                     <Button
                         variant="contained"
                         fullWidth style={{borderRadius: 1000, color: 'white', height: 50}}
@@ -425,7 +468,7 @@ const Payment = props => {
                             })
                         }}
                     > {props.t('payment.purchase_order')} ({showPrice.toFixed(2)}$) </Button>
-                </Grid>
+              </Grid>
             </Grid>
         </Grid>
     )

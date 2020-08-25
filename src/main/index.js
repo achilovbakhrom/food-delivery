@@ -105,9 +105,8 @@ const useStyles = makeStyles((theme) => ({
         flexWrap: 'wrap',
         justifyContent: 'center',
         margin: "30px 0 0",
-        padding: 20,
+        padding: 5,
         width: '100%',
-        backgroundColor: 'white'
     },
 }));
 

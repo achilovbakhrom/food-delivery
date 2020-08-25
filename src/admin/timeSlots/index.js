@@ -7,9 +7,10 @@ import {
   DialogActions,
   DialogContent,
   DialogContentText,
-  DialogTitle
+  DialogTitle, TextField, FormControl
 } from '@material-ui/core';
 import {
+  addToDateTimeSlot,
   deleteTimeSlotById,
   fetchTimeSlots
 } from "../../api/admin";
@@ -21,6 +22,7 @@ import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import ChevronRight from '@material-ui/icons/ChevronRight';
 import Clear from '@material-ui/icons/Clear';
 import DeleteOutline from '@material-ui/icons/DeleteOutline';
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import Edit from '@material-ui/icons/Edit';
 import FilterList from '@material-ui/icons/FilterList';
 import FirstPage from '@material-ui/icons/FirstPage';
@@ -41,6 +43,10 @@ const AdminTimeSlots = props => {
   const [total, setTotal] = useState(0);
   const [deleteId, setDeleteId] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
+
+  const [dateId, setDateId] = useState(null);
+  const [toDate, setToDate] = useState(null);
+
   const [search, setSearch] = useState();
 
   useEffect(() => {
@@ -99,6 +105,54 @@ const AdminTimeSlots = props => {
           </Button>
         </DialogActions>
       </Dialog>
+      <Dialog
+        open={!!dateId}
+        onClose={() => {
+          setDateId(null);
+          setToDate(null);
+        }}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Выберите дату"}</DialogTitle>
+        <DialogContent>
+          <TextField
+            variant="outlined"
+            id="date"
+            label="До"
+            type="datetime-local"
+            // value={startDate}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            onChange={(e) => setToDate(e.target.value)}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => {
+            setDateId(null);
+            setToDate(null);
+          }} color="primary">
+            Отмена
+          </Button>
+          <Button onClick={() => {
+            if (dateId) {
+              addToDateTimeSlot({
+                id: dateId.id,
+                restaurantId: dateId.restaurantId,
+                untilDate: toDate
+              })
+                .then(response => {
+                  setDateId(null);
+                  setToDate(null);
+                  updateList()
+                })
+            }
+          }} color="primary" autoFocus>
+            Сохранить
+          </Button>
+        </DialogActions>
+      </Dialog>
       <MaterialTable
         icons={{
           Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} onClick={() => {
@@ -130,6 +184,7 @@ const AdminTimeSlots = props => {
         data={data.map(m => ({
           id: m.id,
           restaurant: m.restaurant.name,
+          restaurantId: m.restaurant.id,
           timeslotDate: <Link to={`/admin/time-slot-items?timeslot_id=${m.id}`}>{m.timeslotDate}</Link>,
         }))}
         actions={[
@@ -158,8 +213,16 @@ const AdminTimeSlots = props => {
               setDeleteId(r.id);
               setDeleteOpen(true);
             }
-          }
-
+          },
+          {
+            icon: () => <CalendarTodayIcon />,
+            position: 'row',
+            tooltip: 'Дата до',
+            onClick: (e, r) => {
+              console.log("Дата до", e, r);
+              setDateId({ id: r.id, restaurantId: r.restaurantId });
+            }
+          },
         ]}
         page={page}
         onChangePage={p => {
