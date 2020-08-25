@@ -120,8 +120,7 @@ const AdminTimeSlots = props => {
             variant="outlined"
             id="date"
             label="До"
-            type="datetime-local"
-            // value={startDate}
+            type="date"
             InputLabelProps={{
               shrink: true,
             }}
