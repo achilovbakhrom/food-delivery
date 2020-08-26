@@ -60,7 +60,8 @@
       "reload": "Reload"
     },
     "menu": {
-      "menu": "Menu"
+      "menu": "Menu",
+      "different_restaurants": "You are trying to order from different restaurants"
     },
     "payment": {
       "order": "Order",

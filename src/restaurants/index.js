@@ -206,7 +206,6 @@ const Restaurants = props => {
               {
                 restaurants && restaurants.length ? restaurants.map((item, index) => (
                   <ListItem key={index} cols={1} style={{ pointer: 'cursor' }} onClick={() => {
-                    Cookies.set('restaurantId', item.id);
                     props.history.push(`/app/categories?restaurantId=${item.id}`)
                   }}>
                     <ListItemIcon>

@@ -60,7 +60,8 @@
       "reload": "Qayta yuklash"
     },
     "menu": {
-      "menu": "Menyu"
+      "menu": "Menyu",
+      "different_restaurants": "Siz turli restoranlardan buyurtma berishga harakat qilyapsiz"
     },
     "payment": {
       "order": "Buyurtma",

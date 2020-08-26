@@ -11,6 +11,7 @@ import { withTranslation } from "react-i18next";
 import {fetchRestaurantFoods} from "../api/restaurants";
 import { ShoppingCart } from "@material-ui/icons";
 import "./styles.css";
+import { store } from "react-notifications-component";
 
 const queryString = require('query-string');
 
@@ -170,6 +171,29 @@ const Menu = props => {
                                                         }
                                                     });
                                                     if (!found) {
+                                                        if (cookieOrders.length) {
+                                                            const prevRestaurantId = cookieOrders[0].food.restaurant.id;
+
+                                                            if (prevRestaurantId !== item.restaurant.id) {
+                                                                store.addNotification({
+                                                                    title: "Ошибка!",
+                                                                    message: props.t('menu.different_restaurants'),
+                                                                    type: "danger",
+                                                                    insert: "top",
+                                                                    container: "top-right",
+                                                                    animationIn: ["animated", "fadeIn"],
+                                                                    animationOut: ["animated", "fadeOut"],
+                                                                    dismiss: {
+                                                                        duration: 5000,
+                                                                        onScreen: true
+                                                                    }
+                                                                });
+
+                                                                return false;
+                                                            }
+                                                        }
+
+                                                        Cookies.set('restaurantId', item.restaurant.id);
                                                         cookieOrders.push({ food: item, count: 1});
                                                     }
                                                     Cookies.set('orders', cookieOrders);

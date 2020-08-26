@@ -4,7 +4,7 @@ import { stripePayment } from "../../api/restaurants";
 import { Button } from "@material-ui/core";
 
 const StripeButton = ({ price, getOrder, afterOrder, label, isDisabled }) => {
-  const publishableKey = "pk_test_51GvHjAEuBsy49TLwUXKCDWLnnRwfIsiIdXiUr0wZJGc8QO36bNVpivNvgqhNwMyQBow6Jq44rcDE3YLAbGVCk8Fh005KUDe0VA";
+  const publishableKey = "pk_live_1Pks961nEPNkTNdYFLCaKPlH00W3tEYVrm";
   const stripePrice = price * 100;
 
   console.log("isDisabled", isDisabled)
