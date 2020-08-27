@@ -56,26 +56,14 @@ const Register = (props) => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-
-        setIsLoading(true);
-
-        login({username: 'admin', password: 'admin'})
-            .then(response => {
-                let token = response.data["id_token"];
-                Cookie.set('token', token);
-                setIsLoading(false);
-                fetchCountries({page: 0, size: 10000})
-                    .then(response => {
-                        setCountryList(response.data);
-                    });
-                fetchCurrencies({page: 0, size: 10000})
-                    .then(response => {
-                        setCurrencyList(response.data)
-                    });
-
-            })
-
-
+        fetchCountries({page: 0, size: 10000})
+          .then(response => {
+              setCountryList(response.data);
+          });
+        fetchCurrencies({page: 0, size: 10000})
+          .then(response => {
+              setCurrencyList(response.data)
+          });
     }, []);
 
     const classes = useStyles();
