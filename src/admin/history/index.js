@@ -348,7 +348,9 @@ const AdminHistory = props => {
                     { title: 'Статус', field: 'status' },
                     { title: 'Водитель', field: 'driver' },
                     { title: 'Супервайзер', field: 'supervisor' },
-                    { title: 'Дата доставки', field: 'deliveryDate' }
+                    { title: 'Дата доставки', field: 'deliveryDate' },
+                    { title: 'Описание', field: 'description' },
+                    { title: 'Дата заказа', field: 'orderDate' }
                 ]}
                 isLoading={isLoading}
                 data={data.map(d => ({
@@ -374,6 +376,12 @@ const AdminHistory = props => {
                         {d.timeslotItem ? <div>
                             <div><Moment format="DD.MM.YYYY" date={d.timeslotItem.startDate} /></div>
                             <Moment format="HH:mm" date={d.timeslotItem.startDate} /> - <Moment format="HH:mm" date={d.timeslotItem.endDate} />
+                        </div>: ""}
+                    </>),
+                    description: d.description,
+                    orderDate: (<>
+                        {d.orderDate ? <div>
+                            <div><Moment format="DD.MM.YYYY HH:mm" date={d.orderDate} /></div>
                         </div>: ""}
                     </>)
                 }))}

@@ -27,6 +27,7 @@ import Checkbox from "@material-ui/core/Checkbox/Checkbox";
 import PaymentOneTimeModal from "../admin/payment-on-time-modal";
 import Moment from "react-moment";
 import StripeButton from "./stripe/stripebutton.component";
+import InputMask from 'react-input-mask';
 
 const deliveryPrice = 2.5;
 
@@ -113,7 +114,7 @@ const Payment = props => {
             regionId === undefined || districtId === undefined
     };
 
-    // const cardType = () => {
+  // const cardType = () => {
     //     var cards = {
     //         electron: /^(4026|417500|4405|4508|4844|4913|4917)\d+$/,
     //         maestro: /^(5018|5020|5038|5612|5893|6304|6759|6761|6762|6763|0604|6390)\d+$/,
@@ -142,7 +143,7 @@ const Payment = props => {
     };
 
     const setCoors = (coors) => {
-        setLatLongCoords(coors);
+      setLatLongCoords(coors);
     };
 
     const region = regionList.find((item) => item.id === regionId);
@@ -222,14 +223,25 @@ const Payment = props => {
                     />
                 </Grid>
                 <Grid item xs={6} md={5} style={{paddingLeft: 10}}>
-                    <TextField
-                        variant="outlined"
-                        fullWidth
-                        label={props.t('payment.phone')}
-                        onChange={(e) => {
-                            setPhone(e.target.value)
-                        }}
-                    />
+                  <InputMask mask="+999 99 999 99 99" maskChar=" " onChange={(e) => {
+                    setPhone(e.target.value)
+                  }}>
+                    {() => <TextField
+                      variant="outlined"
+                      fullWidth
+                      label={props.t('payment.phone')}
+                    />}
+                  </InputMask>
+                  {/*<TextField*/}
+                  {/*    variant="outlined"*/}
+                  {/*    fullWidth*/}
+                  {/*    label={props.t('payment.phone')}*/}
+                  {/*    onChange={(e) => {*/}
+                  {/*        setPhone(e.target.value)*/}
+                  {/*    }}*/}
+                  {/*>*/}
+
+                  {/*</TextField>*/}
                 </Grid>
             </Grid>
             <Grid container style={{marginTop: 20, color: 'white', fontWeight: 'bold', fontSize: 20}}>
@@ -414,53 +426,6 @@ const Payment = props => {
             <Grid container style={{marginTop: 20}}>
               <Grid className="stripe-card" item xs={12} md={9}>
                   <StripeButton price={showPrice} getOrder={getOrder} afterOrder={afterOrder} isDisabled={isDisabled()} label={`${props.t('payment.purchase_order')} (${showPrice.toFixed(2)}$)`} />
-                    {/*<Button*/}
-                    {/*    variant="contained"*/}
-                    {/*    fullWidth style={{borderRadius: 1000, color: 'white', height: 50}}*/}
-                    {/*    disabled={isDisabled()}*/}
-                    {/*    onClick={() => {*/}
-                    {/*        let orderString = Cookies.get('orders') || '[]';*/}
-                    {/*        let orders = JSON.parse(orderString);*/}
-                    {/*        const [firstName, lastName] = fio ? fio.split(" "): [];*/}
-                    {/*        order({*/}
-                    {/*            card: {*/}
-                    {/*                cardNumber: number,*/}
-                    {/*                cardType: value,*/}
-                    {/*                expiryDate: expiry*/}
-
-                    {/*            },*/}
-                    {/*            items: orders.map(o => ({ id: o.food.food.id, price: o.food.price, quantity: o.count })),*/}
-                    {/*            description,*/}
-                    {/*            receiver: {*/}
-                    {/*                address: {*/}
-                    {/*                    apartment: flatNo,*/}
-                    {/*                    districtId: districtId,*/}
-                    {/*                    floor: floor,*/}
-                    {/*                    house: houseNo,*/}
-                    {/*                    porch: door,*/}
-                    {/*                    regionId: regionId,*/}
-                    {/*                    street: street,*/}
-                    {/*                    latitude: latLongCoords ? latLongCoords[0]: undefined,*/}
-                    {/*                    longitude: latLongCoords ? latLongCoords[1]: undefined,*/}
-                    {/*                },*/}
-                    {/*                firstName: firstName,*/}
-                    {/*                lastName: lastName,*/}
-                    {/*                phone: phone*/}
-                    {/*            },*/}
-                    {/*            totalPrice: cost,*/}
-                    {/*            deliveryPrice,*/}
-                    {/*            timeslotItemId: selectedDeliveryTime ? selectedDeliveryTime.timeslotItemId: undefined,*/}
-                    {/*            "restaurantId": Cookies.get('restaurantId') ? parseInt(Cookies.get('restaurantId')) : 0*/}
-                    {/*        }).then(response => {*/}
-                    {/*            Cookies.remove('orders');*/}
-                    {/*            Cookies.remove('restaurantId');*/}
-                    {/*            dispatch('order_changed');*/}
-                    {/*            props.history.push('/app/history')*/}
-                    {/*        }).catch(error => {*/}
-                    {/*            alert(error);*/}
-                    {/*        })*/}
-                    {/*    }}*/}
-                    {/*> {props.t('payment.purchase_order')} ({showPrice.toFixed(2)}$) </Button>*/}
               </Grid>
             </Grid>
         </Grid>

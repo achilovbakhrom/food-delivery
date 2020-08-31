@@ -28,6 +28,7 @@
     "react-credit-card-input": "^1.1.5",
     "react-dom": "^16.13.1",
     "react-i18next": "^10.13.1",
+    "react-input-mask": "^2.0.4",
     "react-moment": "^0.9.7",
     "react-notifications-component": "^2.4.0",
     "react-pdf": "^4.2.0",

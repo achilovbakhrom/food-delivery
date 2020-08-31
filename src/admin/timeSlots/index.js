@@ -32,6 +32,7 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import Button from "@material-ui/core/Button";
+import { store } from "react-notifications-component";
 
 
 const AdminTimeSlots = props => {
@@ -96,8 +97,35 @@ const AdminTimeSlots = props => {
             if (deleteId !== undefined) {
               setDeleteOpen(false);
               deleteTimeSlotById(deleteId)
-                .then(response => {
-                  updateList()
+                .then((response) => {
+                  updateList();
+                  store.addNotification({
+                    title: "Успешно",
+                    message: "Удалено",
+                    type: "success",
+                    insert: "top",
+                    container: "top-right",
+                    animationIn: ["animated", "fadeIn"],
+                    animationOut: ["animated", "fadeOut"],
+                    dismiss: {
+                      duration: 1000,
+                      onScreen: true
+                    }
+                  });
+                }, (error) => {
+                  store.addNotification({
+                    title: "Ошибка",
+                    message: error.response.data.detail,
+                    type: "danger",
+                    insert: "top",
+                    container: "top-right",
+                    animationIn: ["animated", "fadeIn"],
+                    animationOut: ["animated", "fadeOut"],
+                    dismiss: {
+                      duration: 5000,
+                      onScreen: true
+                    }
+                  });
                 })
             }
           }} color="primary" autoFocus>

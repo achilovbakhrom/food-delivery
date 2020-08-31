@@ -7,20 +7,8 @@ const StripeButton = ({ price, getOrder, afterOrder, label, isDisabled }) => {
   const publishableKey = "pk_live_1Pks961nEPNkTNdYFLCaKPlH00W3tEYVrm";
   const stripePrice = price * 100;
 
-  console.log("isDisabled", isDisabled)
-
   const onToken = (token, smt) => {
-    console.log("onToken", token, smt);
     const order = getOrder();
-
-    console.log("order", JSON.stringify({
-      amount: stripePrice,
-      token,
-      currency: "USD",
-      description: order.description,
-      stripeEmail: token.email,
-      order
-    }));
 
     stripePayment({
         amount: stripePrice,
@@ -31,12 +19,10 @@ const StripeButton = ({ price, getOrder, afterOrder, label, isDisabled }) => {
         order
       })
       .then((response) => {
-        console.log(response);
         afterOrder();
         alert("payment success");
       })
       .catch((error) => {
-        console.log(error);
         alert("Payment failed");
       });
   };

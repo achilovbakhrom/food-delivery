@@ -30,6 +30,7 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import Button from "@material-ui/core/Button";
 import Moment from "react-moment";
+import { store } from "react-notifications-component";
 
 const queryString = require('query-string');
 
@@ -92,8 +93,35 @@ const AdminTimeSlotItems = props => {
             if (deleteId !== undefined) {
               setDeleteOpen(false);
               deleteTimeSlotItemById(deleteId)
-                .then(response => {
+                .then((response) => {
                   updateList()
+                  store.addNotification({
+                    title: "Успешно",
+                    message: "Удалено",
+                    type: "success",
+                    insert: "top",
+                    container: "top-right",
+                    animationIn: ["animated", "fadeIn"],
+                    animationOut: ["animated", "fadeOut"],
+                    dismiss: {
+                      duration: 5000,
+                      onScreen: true
+                    }
+                  });
+                }, (error) => {
+                  store.addNotification({
+                    title: "Ошибка",
+                    message: error.response.data.detail,
+                    type: "danger",
+                    insert: "top",
+                    container: "top-right",
+                    animationIn: ["animated", "fadeIn"],
+                    animationOut: ["animated", "fadeOut"],
+                    dismiss: {
+                      duration: 5000,
+                      onScreen: true
+                    }
+                  });
                 })
             }
           }} color="primary" autoFocus>

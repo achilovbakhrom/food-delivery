@@ -3,7 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="4c1cc787-1446-497d-a874-fac755bc5a71" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/register/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/register/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/admin/history/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/history/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/admin/timeSlotItems/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/timeSlotItems/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/admin/timeSlots/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/timeSlots/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/long-lat-map/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/long-lat-map/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/payment/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/payment/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/payment/stripe/stripebutton.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/payment/stripe/stripebutton.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,7 +33,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../uzkassa/cto-admin2" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -141,7 +148,9 @@
       <workItem from="1598381072090" duration="2578000" />
       <workItem from="1598428145051" duration="309000" />
       <workItem from="1598454396548" duration="1858000" />
-      <workItem from="1598516868823" duration="639000" />
+      <workItem from="1598516868823" duration="893000" />
+      <workItem from="1598810517310" duration="604000" />
+      <workItem from="1598867913443" duration="5678000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <created>1593888871329</created>
