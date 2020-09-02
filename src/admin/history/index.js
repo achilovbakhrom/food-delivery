@@ -350,7 +350,8 @@ const AdminHistory = props => {
                     { title: 'Супервайзер', field: 'supervisor' },
                     { title: 'Дата доставки', field: 'deliveryDate' },
                     { title: 'Описание', field: 'description' },
-                    { title: 'Дата заказа', field: 'orderDate' }
+                    { title: 'Дата заказа', field: 'orderDate' },
+                    { title: 'Дата заказа (Uzb)', field: 'localOrderDate' }
                 ]}
                 isLoading={isLoading}
                 data={data.map(d => ({
@@ -382,6 +383,11 @@ const AdminHistory = props => {
                     orderDate: (<>
                         {d.orderDate ? <div>
                             <div><Moment format="DD.MM.YYYY HH:mm" date={d.orderDate} /></div>
+                        </div>: ""}
+                    </>),
+                    localOrderDate: (<>
+                        {d.localOrderDate ? <div>
+                            <div><Moment format="DD.MM.YYYY HH:mm" date={d.localOrderDate} /></div>
                         </div>: ""}
                     </>)
                 }))}

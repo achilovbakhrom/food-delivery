@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
+import moment from 'moment';
 import {
   Grid,
   TextField,
@@ -177,7 +178,8 @@ const Payment = props => {
       totalPrice: cost,
       deliveryPrice,
       timeslotItemId: selectedDeliveryTime ? selectedDeliveryTime.timeslotItemId : undefined,
-      restaurantId: Cookies.get('restaurantId') ? parseInt(Cookies.get('restaurantId')) : 0
+      restaurantId: Cookies.get('restaurantId') ? parseInt(Cookies.get('restaurantId')) : 0,
+      orderData: moment().format('YYYY-MM-DDTHH:mm:ss')
     }
   };
 
