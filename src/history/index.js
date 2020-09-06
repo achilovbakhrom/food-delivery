@@ -100,6 +100,7 @@ const History = props => {
                                                 {props.t('history.address')}&nbsp;
                                                 { i.address ? `${i.address.region.name},
                                                 ${i.address.district.name},
+                                                ${i.address.street},
                                                 ${i.address.house}
                                                 ${i.address.porch ? ", "+i.address.porch : ""}
                                                 ${i.address.floor ? ", "+i.address.floor : ""}
