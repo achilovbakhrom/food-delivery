@@ -362,14 +362,14 @@ const AdminHistory = props => {
                     receiver: d.receiver.name,
                     receiverPhone: d.receiver.phone,
                     restaurant: d.restaurant.name,
-                    address: `
-                        ${d.address.region ? d.address.region.name: ""}
-                        ${d.address.district ? d.address.district.name: ""}
-                        ${d.address.street ? d.address.street: ""}
-                        ${d.address.porch ? d.address.porch: ""}
-                        ${d.address.floor ? d.address.floor: ""}
-                        ${d.address.house ? d.address.house: ""}
-                    `,
+                    address: <div>
+                        {d.address.region ? d.address.region.name: ""}&nbsp;{d.address.district ? d.address.district.name: ""}
+                        {d.address.street ? <div>Улица: {d.address.street}</div>: ""}
+                        {d.address.porch ? <div>Подъезд: {d.address.porch}</div>: ""}
+                        {d.address.floor ?  <div>Етаж: {d.address.floor}</div>: ""}
+                        {d.address.house ?  <div>Дом: {d.address.house}</div>: ""}
+                        {d.address.apartment ?  <div>Квартира: {d.address.apartment}</div>: ""}
+                    </div>,
                     status: d.status,
                     driver: d.driver ? d.driver.name : 'Не назначен',
                     supervisor: d.supervisor ? d.supervisor.name : 'Не назначен',

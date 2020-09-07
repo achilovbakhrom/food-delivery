@@ -115,6 +115,11 @@
       "orderNo": "Order Number:",
       "name": "Name:",
       "address": "Address:",
+      "street": "St",
+      "house": "Hour",
+      "porch": "Porch",
+      "floor": "Floor",
+      "apartment": "Apartment",
       "restaraunt": "Restaurant"
     }
 
