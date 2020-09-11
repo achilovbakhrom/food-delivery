@@ -115,6 +115,11 @@
       "orderNo": "Buyurtma raqami:",
       "name": "Ism:",
       "address": "Adres:",
+      "street": "Ko'cha",
+      "house": "Uy",
+      "porch": "Podyezd",
+      "floor": "Qavat",
+      "apartment": "Xonadon",
       "restaraunt": "Restoran"
     }
   }

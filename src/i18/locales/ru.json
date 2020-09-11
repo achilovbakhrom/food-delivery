@@ -115,6 +115,11 @@
       "orderNo": "Номер заказа:",
       "name": "Имя:",
       "address": "Адрес:",
+      "street": "Улица",
+      "house": "Дом",
+      "porch": "Подъезд",
+      "floor": "Етаж",
+      "apartment": "Квартира",
       "restaraunt": "Ресторан"
     }
   }

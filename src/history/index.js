@@ -41,6 +41,9 @@ const useStyles = makeStyles((theme) => ({
         marginTop: 20,
         marginBottom: 20,
         textAlign: 'center'
+    },
+    details: {
+        paddingRight: 135
     }
 }));
 
@@ -76,12 +79,13 @@ const History = props => {
                 <Grid className={classes.title} xs={12} md={6}> {props.t('history.desc')}</Grid>
             </Grid>
             <Grid container justify="center">
-                <Grid item xs={12} md={6}>
+                <Grid item xs={12} md={7}>
                     <Paper className={classes.content}>
                         <Grid item>
                             <List>
                                 { orders.map((i, index) => (
                                     <ListItem
+                                      className={classes.details}
                                         key={index}
                                         button
                                         onClick={() => {
@@ -98,12 +102,14 @@ const History = props => {
                                             <span>{props.t('history.name')}&nbsp;{ i.client ? i.client.name : 'Unkonwn' }</span>&nbsp; <br />
                                             <span>
                                                 {props.t('history.address')}&nbsp;
-                                                { i.address ? `${i.address.region.name},
-                                                ${i.address.district.name},
-                                                ${i.address.house}
-                                                ${i.address.porch ? ", "+i.address.porch : ""}
-                                                ${i.address.floor ? ", "+i.address.floor : ""}
-                                                ${i.address.apartment ? ", "+i.address.apartment : ""}` : 'Unkonwn' }
+                                                {i.address ? <span>
+                                                  {i.address.region.name},&nbsp;{i.address.district.name},&nbsp;
+                                                  {i.address.street ? `${props.t('history.street')}: ${i.address.street}, `: ""}
+                                                  {i.address.house ? `${props.t('history.house')}: ${i.address.house}, `: ""}
+                                                  {i.address.porch ? `${props.t('history.porch')}: ${i.address.porch}, `: ""}
+                                                  {i.address.floor ? `${props.t('history.floor')}: ${i.address.floor}, `: ""}
+                                                  {i.address.apartment ? `${props.t('history.apartment')}: ${i.address.apartment}`: ""}
+                                                </span>: 'Unkonwn'}
                                             </span>
                                             &nbsp; <br />
                                             <span>{props.t('history.restaraunt')}&nbsp;{ i.restaurant ? `${i.restaurant.name}` : 'Unkonwn' }</span>&nbsp; <br />
