@@ -7,8 +7,13 @@ import {
     Typography,
     Button,
     FormControl,
-    Select
+    Select,
 } from '@material-ui/core';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
 
 import InputLabel from "@material-ui/core/InputLabel";
 
@@ -82,19 +87,22 @@ const AddEditTimeSlot = props => {
                 </Grid>
                 <Grid item xs={4} style={{paddingLeft: 10}}>
                     <FormControl variant="outlined" fullWidth>
-                        <TextField
-                          variant="outlined"
-                          id="date"
-                          placeholder="Дата"
-                          type="date"
-                          value={timeslotDate}
-                          InputLabelProps={{
-                              shrink: true,
+                      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                        <KeyboardDatePicker
+                          disableToolbar
+                          inputVariant="outlined"
+                          format="yyyy-MM-dd"
+                          id="date-picker-inline"
+                          label="Дата"
+                          value={timeslotDate ? new Date(timeslotDate): undefined}
+                          onChange={(date, value) => {
+                            setTimeslotDate(value);
                           }}
-                          onChange={(e) => {
-                              setTimeslotDate(e.target.value)
+                          KeyboardButtonProps={{
+                            'aria-label': 'change date',
                           }}
                         />
+                      </MuiPickersUtilsProvider>
                     </FormControl>
                 </Grid>
             </Grid>
@@ -113,7 +121,7 @@ const AddEditTimeSlot = props => {
                     disabled={
                         isLoading ||
                         !timeslotDate ||
-                        restaurantId === undefined
+                        restaurantId === ''
                     }
                     onClick={() => {
                         let parsed = queryString.parse(props.history.location.search);

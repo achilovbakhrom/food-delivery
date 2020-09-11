@@ -40,7 +40,7 @@ const AdminTimeSlots = props => {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState([]);
   const [page, setPage] = useState(0);
-  const [size, setSize] = useState(20);
+  const [size, setSize] = useState(40);
   const [total, setTotal] = useState(0);
   const [deleteId, setDeleteId] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);

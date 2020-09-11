@@ -21,6 +21,8 @@ import {
   createTimeSlotItem,
   updateTimeSlotItem,
 } from "../../api/admin";
+import DateFnsUtils from "@date-io/date-fns";
+import {MuiPickersUtilsProvider, KeyboardTimePicker} from "@material-ui/pickers";
 
 const queryString = require('query-string');
 
@@ -93,159 +95,166 @@ const AddEditTimeSlot = props => {
       <Grid container>
         <Typography variant="h5" color="primary">Добавить/Редактировать дату</Typography>
       </Grid>
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <Grid container style={{ marginTop: 20 }}>
+          <Grid item xs={4}>
+            <FormControl variant="outlined" fullWidth>
+              <InputLabel id="region-label">Ресторан</InputLabel>
+              <Select
+                id="region"
+                labelId="region-label"
+                labelWidth={80}
+                value={restaurantId}
+                onChange={restaurantChange}
+              >
+                {
+                  restaurants.map((r) => (
+                    <MenuItem value={r.id} key={r.id}>{r.name}</MenuItem>
+                  ))
+                }
+              </Select>
+            </FormControl>
+          </Grid>
 
-      <Grid container style={{ marginTop: 20 }}>
-        <Grid item xs={4}>
-          <FormControl variant="outlined" fullWidth>
-            <InputLabel id="region-label">Ресторан</InputLabel>
-            <Select
-              id="region"
-              labelId="region-label"
-              labelWidth={80}
-              value={restaurantId}
-              onChange={restaurantChange}
-            >
-              {
-                restaurants.map((r) => (
-                  <MenuItem value={r.id} key={r.id}>{r.name}</MenuItem>
-                ))
-              }
-            </Select>
-          </FormControl>
+          <Grid item xs={4} style={{ paddingLeft: 10 }}>
+            <FormControl variant="outlined" fullWidth>
+              <InputLabel id="timeslot-label">Дата доставки</InputLabel>
+              <Select
+                id="timeslot"
+                labelId="timeslot-label"
+                labelWidth={80}
+                value={timeslotId}
+                onChange={(e) => setTimeslotId(e.target.value)}
+              >
+                {
+                  timeSlots.map((r) => (
+                    <MenuItem value={r.id} key={r.id}>{r.timeslotDate}</MenuItem>
+                  ))
+                }
+              </Select>
+            </FormControl>
+          </Grid>
         </Grid>
 
-        <Grid item xs={4} style={{ paddingLeft: 10 }}>
-          <FormControl variant="outlined" fullWidth>
-            <InputLabel id="timeslot-label">Дата доставки</InputLabel>
-            <Select
-              id="timeslot"
-              labelId="timeslot-label"
-              labelWidth={80}
-              value={timeslotId}
-              onChange={(e) => setTimeslotId(e.target.value)}
-            >
-              {
-                timeSlots.map((r) => (
-                  <MenuItem value={r.id} key={r.id}>{r.timeslotDate}</MenuItem>
-                ))
-              }
-            </Select>
-          </FormControl>
-        </Grid>
-      </Grid>
+        <Grid container style={{ marginTop: 20 }}>
+          <Grid item xs={4}>
+            <FormControl variant="outlined" fullWidth>
+              <KeyboardTimePicker
+                inputVariant="outlined"
+                id="time-picker"
+                label="От"
+                ampm={false}
+                value={startDate ? new Date(`1995-12-17T${startDate}:00`): undefined}
+                onChange={(date, value) => {
+                  setStartDate(value);
+                }}
+                KeyboardButtonProps={{
+                  'aria-label': 'change time',
+                }}
+              />
+            </FormControl>
+          </Grid>
 
-      <Grid container style={{ marginTop: 20 }}>
-        <Grid item xs={4}>
-          <FormControl variant="outlined" fullWidth>
-            <TextField
-              variant="outlined"
-              id="date"
-              label="От"
-              type="datetime-local"
-              value={startDate}
-              InputLabelProps={{
-                shrink: true,
-              }}
-              onChange={(e) => setStartDate(e.target.value)}
-            />
-          </FormControl>
+          <Grid item xs={4} style={{ paddingLeft: 10 }}>
+            <FormControl variant="outlined" fullWidth>
+              <KeyboardTimePicker
+                inputVariant="outlined"
+                id="time-picker"
+                label="До"
+                ampm={false}
+                value={endDate ? new Date(`1995-12-17T${endDate}:00`): undefined}
+                onChange={(date, value) => {
+                  setEndDate(value);
+                }}
+                KeyboardButtonProps={{
+                  'aria-label': 'change time',
+                }}
+              />
+            </FormControl>
+          </Grid>
+
+          <Grid item xs={4} style={{ paddingLeft: 10 }}>
+            <FormControl variant="outlined" fullWidth>
+              <InputLabel id="demo-simple-select-status-label">Статус</InputLabel>
+              <Select
+                id="status"
+                labelId="status-label"
+                labelWidth={80}
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+              >
+                {
+                  statuses.map((r) => (
+                    <MenuItem value={r.code} key={r.code}>{r.name}</MenuItem>
+                  ))
+                }
+              </Select>
+            </FormControl>
+          </Grid>
         </Grid>
 
-        <Grid item xs={4} style={{ paddingLeft: 10 }}>
-          <FormControl variant="outlined" fullWidth>
-            <TextField
-              variant="outlined"
-              id="date"
-              label="До"
-              type="datetime-local"
-              value={endDate}
-              InputLabelProps={{
-                shrink: true,
-              }}
-              onChange={(e) => setEndDate(e.target.value)}
-            />
-          </FormControl>
-        </Grid>
+        <div style={{ marginTop: 20 }}>
+          <Grid item xs={4}>
+            <FormControl variant="outlined" fullWidth>
+              <TextField
+                variant="outlined"
+                label="Описание"
+                multiline
+                rows={4}
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+            </FormControl>
+          </Grid>
+        </div>
 
-        <Grid item xs={4} style={{ paddingLeft: 10 }}>
-          <FormControl variant="outlined" fullWidth>
-            <InputLabel id="demo-simple-select-status-label">Статус</InputLabel>
-            <Select
-              id="status"
-              labelId="status-label"
-              labelWidth={80}
-              value={status}
-              onChange={(e) => setStatus(e.target.value)}
-            >
-              {
-                statuses.map((r) => (
-                  <MenuItem value={r.code} key={r.code}>{r.name}</MenuItem>
-                ))
-              }
-            </Select>
-          </FormControl>
-        </Grid>
-      </Grid>
-
-      <div style={{ marginTop: 20 }}>
-        <Grid item xs={4}>
-          <FormControl variant="outlined" fullWidth>
-            <TextField
-              variant="outlined"
-              label="Описание"
-              multiline
-              rows={4}
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-          </FormControl>
-        </Grid>
-      </div>
-
-      <Grid container style={{ marginTop: 30 }} justify="flex-end">
-        <Button
-          variant="contained"
-          disabled={
-            isLoading ||
-            !timeslotId ||
-            !startDate ||
-            !endDate ||
-            !status ||
-            !description
-          }
-          onClick={() => {
-            let parsed = queryString.parse(props.history.location.search);
-            setIsLoading(true);
-            if (parsed['timeslot_item_id']) {
-              updateTimeSlotItem({
-                id: parsed['timeslot_item_id'],
-                timeslotId,
-                startDate,
-                endDate,
-                status,
-                description
-              }).then(response => {
-                setIsLoading(false);
-                props.history.goBack()
-              })
-            } else {
-              setIsLoading(true);
-              createTimeSlotItem({
-                timeslotId,
-                startDate,
-                endDate,
-                status,
-                description
-              }).then(response => {
-                setIsLoading(false);
-                props.history.push(`/admin/time-slot-items?timeslot_id=${timeslotId}`);
-              })
+        <Grid container style={{ marginTop: 30 }} justify="flex-end">
+          <Button
+            variant="contained"
+            disabled={
+              isLoading ||
+              !timeslotId ||
+              !startDate ||
+              !endDate ||
+              !status ||
+              !description
             }
-          }}
-        >
-          Сохранить
-        </Button>
-      </Grid>
+            onClick={() => {
+              let parsed = queryString.parse(props.history.location.search);
+              setIsLoading(true);
+              const findTimeSlot = timeSlots.find((item) => item.id === timeslotId);
+              if (parsed['timeslot_item_id']) {
+
+                updateTimeSlotItem({
+                  id: parsed['timeslot_item_id'],
+                  timeslotId,
+                  startDate: `${findTimeSlot.timeslotDate}T${startDate}:00`,
+                  endDate: `${findTimeSlot.timeslotDate}T${endDate}:00`,
+                  status,
+                  description
+                }).then(response => {
+                  setIsLoading(false);
+                  props.history.goBack()
+                })
+              } else {
+                setIsLoading(true);
+                createTimeSlotItem({
+                  timeslotId,
+                  startDate: `${findTimeSlot.timeslotDate}T${startDate}:00`,
+                  endDate: `${findTimeSlot.timeslotDate}T${endDate}:00`,
+                  status,
+                  description
+                }).then(response => {
+                  setIsLoading(false);
+                  props.history.push(`/admin/time-slot-items?timeslot_id=${timeslotId}`);
+                })
+              }
+            }}
+          >
+            Сохранить
+          </Button>
+        </Grid>
+      </MuiPickersUtilsProvider>
     </Paper>
 
   )
