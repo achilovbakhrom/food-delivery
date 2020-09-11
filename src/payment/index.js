@@ -179,7 +179,7 @@ const Payment = props => {
       deliveryPrice,
       timeslotItemId: selectedDeliveryTime ? selectedDeliveryTime.timeslotItemId : undefined,
       restaurantId: Cookies.get('restaurantId') ? parseInt(Cookies.get('restaurantId')) : 0,
-      orderData: moment().format('YYYY-MM-DDTHH:mm:ss')
+      orderDate: moment().format('YYYY-MM-DDTHH:mm:ss')
     }
   };
 
