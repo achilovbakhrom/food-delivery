@@ -1,7 +1,7 @@
 {
   "translations": {
     "auth": {
-      "login": "Login",
+      "login": "Username",
       "password": "Parol",
       "invalid_credentials": "Login yoki parol xato",
       "error": "Xato",
@@ -10,7 +10,8 @@
       "no_account": "Akkaunt yo'qmi?",
       "forgot": "Parolni unutdingizmi?",
       "restore": "Akkauntni tiklash!",
-      "enter_email": "Loginingizni kiriting",
+      "enter": "Kirish",
+      "enter_email": "Username kiriting",
       "send": "Jo'natish",
       "sent_success": "Pochtangizga ma'lumotlar jo'natildi, iltimos tekshiring!",
       "wrong_email": "Noto'g'ri login!"
@@ -21,7 +22,7 @@
       "code": "Kod",
       "phoneNumber": "Telefon",
       "currency": "Valyuta",
-      "have_account": "Akkaunt bormi?",
+      "have_account": "Ro'yxatdan o'tganmisiz?",
       "language": "Til",
       "password": "Parol"
     },

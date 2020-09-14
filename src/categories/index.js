@@ -15,14 +15,17 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Info } from '@material-ui/icons';
 import {fetchRestaurantCategories} from "../api/restaurants";
 import {withTranslation} from "react-i18next";
+import Cookies from 'js-cookie';
+
 
 const queryString = require('query-string');
 
 const useStyles = makeStyles((theme) => ({
     title: {
         marginTop: '80px',
+        marginBottom: '15px',
         fontSize: '18px',
-        color: 'white'
+        color: 'white',
     },
     icon: {
         color: 'white',
@@ -45,7 +48,13 @@ const Menu = props => {
     const [categoryList, setCategoryList] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
+    const restaurantName = Cookies.get('restaurantName') || "";
+
     useEffect(() => {
+        if (restaurantName) {
+            document.title = "Food delivery | "+restaurantName;
+        }
+
         setIsLoading(true)
         const parsed = queryString.parse(props.location.search);
         fetchRestaurantCategories({page: 0, size: 100, restaurantId: parsed['restaurantId']})
@@ -58,7 +67,7 @@ const Menu = props => {
     return (
         <Grid container >
             <Grid item className={classes.title} xs={12}>
-                <Typography> {props.t('categories.categories')} </Typography>
+                <Typography>{restaurantName} {props.t('categories.categories')}</Typography>
             </Grid>
             <Grid item>
                 <GridList spacing={15} cellHeight={(() => {

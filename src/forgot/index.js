@@ -93,7 +93,7 @@ const Forgot = props => {
                     <div style={{marginTop: 10, color: 'red'}}> { props.t("auth.wrong_email") }  </div>
                 ) : undefined}
                 <div style={{marginTop: 30, color: 'white', textAlign: 'center'}}>
-                    {props.t("auth.have_account")} <Link to="/login">{props.t("auth.login")}</Link>
+                    {props.t("register.have_account")} <Link to="/login">{props.t("auth.enter")}</Link>
                 </div>
             </Grid>
 

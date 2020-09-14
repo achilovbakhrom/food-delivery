@@ -18,6 +18,7 @@ const queryString = require('query-string');
 const useStyles = makeStyles((theme) => ({
     title: {
         marginTop: '80px',
+        marginBottom: '15px',
         fontSize: '24px',
         color: 'white',
         fontWeight: 'bold'
@@ -43,7 +44,13 @@ const Menu = props => {
     const [isLoading, setIsLoading] = useState(false);
     const [orders, setOrders] = useState([]);
 
+    const restaurantName = Cookies.get('restaurantName') || "";
+
     useEffect(() => {
+        if (restaurantName) {
+            document.title = "Food delivery | "+restaurantName;
+        }
+
         const parsed = queryString.parse(props.location.search);
         if (parsed['categoryId'] && parsed['restaurantId']) {
             // fetchFoods({categoryId: parsed['categoryId'], restaurantId: parsed['restaurantId'], page: 0, size: 500})
@@ -97,7 +104,7 @@ const Menu = props => {
     return (
         <Grid container >
             <Grid item className={classes.title} xs={12}>
-                <div> {props.t('menu.menu')} </div>
+                <div>{restaurantName} {props.t('menu.menu')} </div>
             </Grid>
             <Grid item>
                 <GridList spacing={10} cellHeight={height} cols={getGridListCols()}>

@@ -265,7 +265,7 @@ const Register = (props) => {
                 > {isLoading ? `${props.t('auth.loading')}...` : props.t('auth.register')} </Button>
 
                 <div style={{marginTop: 30, color: 'white', textAlign: 'center'}}>
-                    {props.t('register.have_account')} <Link to="/login">{props.t('auth.login')}</Link>
+                    {props.t('register.have_account')} <Link to="/login">{props.t('auth.enter')}</Link>
                 </div>
             </Grid>
         </Grid>
