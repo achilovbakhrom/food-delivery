@@ -249,7 +249,7 @@ const AdminHistory = props => {
                 <DialogTitle id="alert-dialog-title">{"Заказ клиента"}</DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        <Grid container style={{padding: 10}}>
+                        <Grid container>
                             <Grid item xs={12}>
                                 Заказ:
                             </Grid>
@@ -257,9 +257,9 @@ const AdminHistory = props => {
                             <Grid item xs={12}>
                                 {client && client.items.map(i => (
                                     <List>
-                                        <ListItem>
+                                        <ListItem style={{ paddingLeft: 0 }}>
                                             <ListItemText>{i.name} - {i.quantity || 0} x {i.price}</ListItemText>
-                                            <ListItemSecondaryAction>{(i.quantity || 0)*parseFloat(i.price)}</ListItemSecondaryAction>
+                                            <ListItemSecondaryAction style={{ right: 0 }}>{((i.quantity || 0)*parseFloat(i.price)).toFixed(2)}</ListItemSecondaryAction>
                                         </ListItem>
                                     </List>
                                 ))}
@@ -267,7 +267,7 @@ const AdminHistory = props => {
                             </Grid>
                             <div  style={{width: '100%', height: 1, backgroundColor: '#eee'}}/>
                             <Grid item xs={12}>
-                                Сумма: { client ? client.items.reduce((acc, i) => acc + parseFloat(i.price)*(i.quantity || 0), 0): 0 }
+                                Сумма: { client ? client.items.reduce((acc, i) => acc + parseFloat(i.price)*(i.quantity || 0), 0).toFixed(): 0 }
                             </Grid>
                         </Grid>
                     </DialogContentText>
