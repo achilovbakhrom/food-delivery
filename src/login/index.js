@@ -154,7 +154,7 @@ const Login = props => {
                                 });
                             })
                     }}
-                > { isLoading ? `${props.t("auth.register")}...` : props.t("auth.login") } </Button>
+                > { isLoading ? `${props.t("auth.register")}...` : props.t("auth.enter") } </Button>
                 <div style={{marginTop: 30, color: 'white', textAlign: 'center'}}>
                     {props.t("auth.no_account")} <Link to="/register">{props.t("auth.register")}</Link>
                 </div>
