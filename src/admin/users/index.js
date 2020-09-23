@@ -2,12 +2,12 @@ import React, {useState, useEffect, forwardRef} from 'react';
 import { withRouter } from 'react-router-dom';
 import MaterialTable, { MTableToolbar } from 'material-table';
 import {
-    Grid,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    DialogTitle, FormControl, InputLabel
+  Grid,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle, FormControl, InputLabel, TextField
 } from '@material-ui/core';
 import {deleteFood, deleteUser, fetchFoods, fetchUsers, fetchUsersStatuses} from "../../api/admin";
 
@@ -33,6 +33,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import UpdateUserModal from "../../update-user-modal";
 import { useStore } from "effector-react";
 import { $store as $updateUserStore } from "../../update-user-modal/model/stores";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import SearchIcon from "@material-ui/core/SvgIcon/SvgIcon";
 
 const useStyles = makeStyles(() => ({}));
 
@@ -126,6 +128,14 @@ const AdminUsers = props => {
                         ))}
                     </Select>
                 </FormControl>
+            </div>
+            <div className="filter-item">
+              <TextField
+                placeholder="Поиск"
+                variant="outlined"
+                value={filterProps.search}
+                onChange={(e) => onFilterChange("search", e.target.value, true)}
+              />
             </div>
           </div>
       );
@@ -237,7 +247,8 @@ const AdminUsers = props => {
                 style={{width: '100%'}}
                 options={{
                     pageSizeOptions: [10, 20, 40],
-                    pageSize: size
+                    pageSize: size,
+                  search: false,
 
                 }}
                 components={{
