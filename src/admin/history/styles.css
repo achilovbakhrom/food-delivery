@@ -1,0 +1,11 @@
+.order-details__sum {
+  padding: 10px 0 0;
+}
+
+.order-details__sum__item {
+  padding: 5px 0 0;
+}
+
+.MuiTableCell-root {
+  padding: 10px !important;
+}

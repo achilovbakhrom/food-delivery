@@ -60,3 +60,15 @@
 .MuiTable-root a {
   color: #bc6363;
 }
+
+.green {
+  color: #22b04a;
+}
+
+.red {
+  color: #d50000;
+}
+
+.w-s-n {
+  white-space: nowrap;
+}

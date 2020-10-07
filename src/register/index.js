@@ -85,7 +85,7 @@ const Register = (props) => {
             justify='center'
         >
             <Grid item xs={10} md={6} lg={4}>
-                {error && <Alert severity="error" style={{marginBottom: 20}}>{error.title}</Alert>}
+                {error && <Alert severity="error" style={{marginBottom: 20}}>{error.detail || error.title}</Alert>}
                 <TextField
                     variant="outlined"
                     label={props.t('register.firstName')}

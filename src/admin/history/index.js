@@ -37,7 +37,7 @@ import { assignDriver, changeStatus, deleteOrder, fetchUsers, fetchAdminOrders, 
 import { useStore } from "effector-react";
 import { $store } from "../../model/stores";
 import Moment from "react-moment";
-
+import "./styles.css";
 
 let status = [
     {
@@ -266,9 +266,11 @@ const AdminHistory = props => {
 
                             </Grid>
                             <div  style={{width: '100%', height: 1, backgroundColor: '#eee'}}/>
-                            <Grid item xs={12}>
-                                Сумма: { client ? client.items.reduce((acc, i) => acc + parseFloat(i.price)*(i.quantity || 0), 0).toFixed(): 0 }
-                            </Grid>
+                            {client && <Grid item xs={12} className="order-details__sum">
+                                <div className="order-details__sum__item">Сумма: ${client.totalPrice}</div>
+                                <div className="order-details__sum__item">Стоимость доставки: ${client.deliveryPrice}</div>
+                                <div className="order-details__sum__item">Общая сумма: ${(client.totalPrice+client.deliveryPrice).toFixed(2)}</div>
+                            </Grid>}
                         </Grid>
                     </DialogContentText>
                 </DialogContent>
@@ -339,10 +341,10 @@ const AdminHistory = props => {
                 title="Заказы"
                 columns={[
                     { title: 'Заказ', field: 'order' },
-                    { title: 'Клиент', field: 'clientName' },
-                    { title: 'Телефон', field: 'clientPhone' },
+                    { title: 'Сумма', field: 'totalPrice' },
+                    { title: 'Статус платежа', field: 'paymentStatus' },
+                    { title: 'Клиент', field: 'client' },
                     { title: 'Получатель', field: 'receiver' },
-                    { title: 'Телефон Получателя', field: 'receiverPhone' },
                     { title: 'Ресторан', field: 'restaurant' },
                     { title: 'Адрес', field: 'address' },
                     { title: 'Статус', field: 'status' },
@@ -357,10 +359,16 @@ const AdminHistory = props => {
                 data={data.map(d => ({
                     id: d.id,
                     order: `#${d.id}`,
-                    clientName: d.client.name,
-                    clientPhone: d.client.phone,
-                    receiver: d.receiver.name,
-                    receiverPhone: d.receiver.phone,
+                    totalPrice: (d.totalPrice+d.deliveryPrice).toFixed(2),
+                    paymentStatus: <div className={d.paymentStatus === "Paid" ? "green": d.paymentStatus === "Failed" ? "red": ""}>{d.paymentStatus}</div>,
+                    client: <div>
+                        <div>{d.client.name}</div>
+                        <div className="w-s-n">{d.client.phone}</div>
+                    </div>,
+                    receiver: <div>
+                        <div>{d.receiver.name}</div>
+                        <div className="w-s-n">{d.receiver.phone}</div>
+                    </div>,
                     restaurant: d.restaurant.name,
                     address: <div>
                         {d.address.region ? d.address.region.name: ""}&nbsp;{d.address.district ? d.address.district.name: ""}
