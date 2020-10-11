@@ -200,8 +200,8 @@ const AdminUsers = props => {
                 }}
                 title="Пользователи"
                 columns={[
-                    { title: 'Имя', field: 'lastName' },
-                    { title: 'Фамилия', field: 'firstName' },
+                    { title: 'Имя', field: 'firstName' },
+                    { title: 'Фамилия', field: 'lastName' },
                     { title: 'Телефон', field: 'phone' },
                     { title: 'Роль', field: 'role' }
                 ]}
