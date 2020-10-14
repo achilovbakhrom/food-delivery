@@ -112,7 +112,7 @@ const Payment = props => {
 
     const isDisabled = () => {
         return !fio || !phone || !street || !houseNo ||
-            regionId === undefined || districtId === undefined
+            regionId === undefined || districtId === undefined  || !selectedDeliveryTime
     };
 
   // const cardType = () => {
